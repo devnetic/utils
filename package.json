@@ -1,0 +1,72 @@
+{
+  "name": "@devnetic/utils",
+  "version": "1.0.0",
+  "description": "Common utils for every single day tasks",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "build:watch": "npm run build -- -w",
+    "clean": "rm -rf lib",
+    "coverage": "nyc ava",
+    "lint": "eslint src/* --ext .ts",
+    "prepublishOnly": "npm run build && npm run lint && npm run coverage",
+    "release": "standard-version",
+    "test": "ava",
+    "test:watch": "ava --watch"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devnetic/utils.git"
+  },
+  "keywords": [
+    "utils",
+    "camelCase",
+    "camel case",
+    "kebab-case",
+    "kebab case",
+    "snake_case",
+    "Snake Case",
+    "match all",
+    "matchAll",
+    "dateFormat",
+    "isEqual",
+    "msToTime",
+    "time format",
+    "uuid",
+    "setValue"
+  ],
+  "files": [
+    "lib/**/*"
+  ],
+  "author": "Álvaro José Agámez Licha",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devnetic/utils/issues"
+  },
+  "homepage": "https://github.com/devnetic/utils#readme",
+  "devDependencies": {
+    "@ava/typescript": "^1.1.1",
+    "@types/node": "^13.13.2",
+    "@typescript-eslint/eslint-plugin": "^2.29.0",
+    "ava": "^3.7.1",
+    "eslint": "^6.8.0",
+    "eslint-config-standard-with-typescript": "^16.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "nyc": "^15.0.1",
+    "standard-version": "^7.1.0",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  }
+}
