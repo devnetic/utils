@@ -1,0 +1,10 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## 1.1.0 (2020-04-27)
+
+
+### Features
+
+* initial commit of utils functions ([1648e51](https://github.com/devnetic/utils/commit/1648e5130b69ace0fb5f30171aaa82cda3a066df))

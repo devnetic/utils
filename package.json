@@ -1,6 +1,6 @@
 {
   "name": "@devnetic/utils",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Common utils for every single day tasks",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -22,6 +22,11 @@
     "require": [
       "ts-node/register"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "repository": {
     "type": "git",
@@ -55,6 +60,8 @@
   "homepage": "https://github.com/devnetic/utils#readme",
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@types/node": "^13.13.2",
     "@typescript-eslint/eslint-plugin": "^2.29.0",
     "ava": "^3.7.1",
@@ -64,6 +71,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
     "nyc": "^15.0.1",
     "standard-version": "^7.1.0",
     "ts-node": "^8.9.0",
