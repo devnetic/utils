@@ -3,6 +3,20 @@ import crypto from 'crypto'
 import { bytesToUuid } from './bytes-to-uuid'
 
 /**
+ * Transforms a list of key-value pairs into an object.
+ *
+ * @param {*} iterable An iterable such as Array or Map or other objects
+ * implementing the iterable protocol.
+ * @returns A new object whose properties are given by the entries of the
+ * iterable.
+ */
+export const fromEntries = (entries: IterableIterator<[string, string]>): Object => {
+  return Array.from(entries).reduce((result: Object, [key, value]: [string, string]) => {
+    return { ...result, [key]: value }
+  }, {})
+}
+
+/**
  * Returns the type of the given parameter
  *
  * @param {*} value

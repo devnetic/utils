@@ -105,6 +105,20 @@ utils.titleCase('SOME VALUE')  // Some Value
 
 ---
 
+## fromEntries(entries: IterableIterator<[string, string]>): Object
+
+This function transforms a list of key-value pairs into an object.
+
+```javascript
+utils.fromEntries([['0', 'a'], ['1', 'b'], ['2', 'c']])  // { 0: 'a', 1: 'b', 2: 'c' }
+
+const entries = new Map([
+  ['foo', 'bar'],
+  ['baz', 42]
+])
+utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
+```
+
 ## getType(value: any): string
 
 This function returns the value type, but this function is not just a typeof wrapper, because actually can determinate a more detailed data type. The data type is always a string starting with capital letter.

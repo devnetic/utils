@@ -2,8 +2,23 @@ import test from 'ava'
 
 import * as utils from './../src'
 
+test('should returns the object created from entries', t => {
+  const arrayEntries: any = [['0', 'a'], ['1', 'b'], ['2', 'c']]
+  const mapEntries: any = new Map([
+    ['foo', 'bar'],
+    ['baz', '42']
+  ])
+  mapEntries.set('key', 123)
+
+  t.deepEqual(utils.fromEntries(arrayEntries), { 0: 'a', 1: 'b', 2: 'c' })
+  t.deepEqual(utils.fromEntries(mapEntries), { foo: 'bar', baz: '42', key: 123 })
+})
+
 test('should returns the correct type', t => {
   t.is(utils.getType({}), 'Object')
+  t.is(utils.getType(Object.create(null)), 'Object')
+  t.is(utils.getType([]), 'Array')
+  t.is(utils.getType(new Array()), 'Array')
   t.is(utils.getType(new Date()), 'Date')
   t.is(utils.getType(String()), 'String')
   t.is(utils.getType(''), 'String')
@@ -13,6 +28,8 @@ test('should returns the correct type', t => {
   t.is(utils.getType(true), 'Boolean')
   t.is(utils.getType(false), 'Boolean')
   t.is(utils.getType(BigInt(1)), 'BigInt')
+  t.is(utils.getType(() => {}), 'Function')
+  t.is(utils.getType(BigInt), 'Function')
 })
 
 test('should verify equality', t => {
