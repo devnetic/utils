@@ -1,10 +1,10 @@
-import test from 'ava'
+const test = require('ava')
 
-import * as utils from './../src'
+const utils = require('../lib')
 
 test('should returns the object created from entries', t => {
-  const arrayEntries: any = [['0', 'a'], ['1', 'b'], ['2', 'c']]
-  const mapEntries: any = new Map([
+  const arrayEntries = [['0', 'a'], ['1', 'b'], ['2', 'c']]
+  const mapEntries = new Map([
     ['foo', 'bar'],
     ['baz', '42']
   ])
@@ -30,6 +30,11 @@ test('should returns the correct type', t => {
   t.is(utils.getType(BigInt(1)), 'BigInt')
   t.is(utils.getType(() => {}), 'Function')
   t.is(utils.getType(BigInt), 'Function')
+  t.is(utils.getType(undefined), 'Undefined')
+  t.is(utils.getType(), 'Undefined')
+
+  Date.prototype[Symbol.toStringTag] = '-'
+  t.is(utils.getType(new Date()), 'Undefined')
 })
 
 test('should verify equality', t => {
@@ -63,16 +68,45 @@ test('should validate if an object is json', t => {
 
 test('should validate if a value is float', t => {
   t.true(utils.isFloat(123.4))
+  t.true(utils.isFloat('123.4'))
   t.true(utils.isFloat(-123.4))
+  t.true(utils.isFloat('-123.4'))
   t.true(utils.isFloat(Math.PI))
+  t.false(utils.isFloat(0.0))
   t.false(utils.isFloat('123'))
   t.false(utils.isFloat(123))
   t.false(utils.isFloat(-123))
   t.false(utils.isFloat('-123'))
+  t.false(utils.isFloat('4e2a'))
   t.false(utils.isFloat('a'))
   t.false(utils.isFloat({}))
   t.false(utils.isFloat(''))
   t.false(utils.isFloat([]))
+  t.false(utils.isFloat(null))
+  t.false(utils.isFloat(undefined))
+  t.false(utils.isFloat(NaN))
+})
+
+test('should validate if a value is integer', t => {
+  t.true(utils.isInteger(42))
+  t.true(utils.isInteger('42'))
+  t.true(utils.isInteger(4e2))
+  t.true(utils.isInteger('4e2'))
+  t.true(utils.isInteger(' 1 '))
+  t.true(utils.isInteger(0.0))
+  t.false(utils.isInteger(Math.PI))
+  t.false(utils.isInteger(''))
+  t.false(utils.isInteger(' '))
+  t.false(utils.isInteger('a'))
+  t.false(utils.isInteger(42.1))
+  t.false(utils.isInteger('1a'))
+  t.false(utils.isInteger('4e2a'))
+  t.false(utils.isInteger({}))
+  t.false(utils.isInteger(''))
+  t.false(utils.isInteger([]))
+  t.false(utils.isInteger(null))
+  t.false(utils.isInteger(undefined))
+  t.false(utils.isInteger(NaN))
 })
 
 test('should validate if a value is numeric', t => {
@@ -90,26 +124,26 @@ test('should validate if a value is numeric', t => {
 })
 
 test('should returns all matches', t => {
-  const first: RegExpMatchArray = []
+  const first = []
   first[0] = 'o',
     first.index = 1,
     first.input = 'Lorem',
     first.groups = undefined
 
-  const second: RegExpMatchArray = []
+  const second = []
   second[0] = 'e',
     second.index = 3,
     second.input = 'Lorem',
     second.groups = undefined
 
-  const expected: RegExpMatchArray[] = [first, second]
+  const expected = [first, second]
 
   t.deepEqual(utils.matchAll('Lorem', /[aeiou]/g), expected)
   t.deepEqual(utils.matchAll('Lorem', /[abcd]/g), [])
 })
 
 test('should returns a zero-with match result', t => {
-  const match: RegExpMatchArray = []
+  const match = []
   match.index = 0,
     match.input = 'Lorem',
     match.groups = undefined

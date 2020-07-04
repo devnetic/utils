@@ -37,89 +37,33 @@ export const dateFormat = (time: Date, format: string, monthNames: string[] = []
 
   const formatRegex = /(YYYY|YY|MMMM|MMM|MM|dddd|ddd|dd|hh|HH|mm|m|ss|s|a|A|u)/gi
 
-  return format.replace(formatRegex, (match: string): string => {
-    // A full numeric representation of a year, 4 digits. 1999 or 2003
-    if (match === 'YYYY') {
-      return time.getFullYear().toString()
-    }
-
-    if (match === 'YY') {
-      return time.getFullYear().toString().slice(2)
-    }
-
-    // A full textual representation of a month, such as January or March. January through December
-    if (match === 'MMMM') {
-      return monthNames[time.getMonth()]
-    }
-
-    if (match === 'MMM') {
-      return monthNames[time.getMonth()].substr(0, 3)
-    }
-
-    if (match === 'MM') {
-      return String(time.getMonth() + 1).padStart(2, '0')
-    }
-
-    // ISO-8601 numeric representation of the day of the week. 1 (for Monday) through 7 (for Sunday)
-    if (match === 'dddd') {
-      return dayNames[time.getDay()]
-    }
-
-    if (match === 'ddd') {
-      return dayNames[time.getDay()].substr(0, 3)
-    }
-
-    if (match === 'dd') {
-      return String(time.getDate()).padStart(2, '0')
-    }
-
-    // 12-hour format of an hour with leading zeros. 01 through 12
-    if (match === 'hh') {
+  const matches: Record<string, string> = {
+    YYYY: time.getFullYear().toString(),
+    YY: time.getFullYear().toString().slice(2),
+    MMMM: monthNames[time.getMonth()],
+    MMM: monthNames[time.getMonth()].substr(0, 3),
+    MM: String(time.getMonth() + 1).padStart(2, '0'),
+    dddd: dayNames[time.getDay()],
+    ddd: dayNames[time.getDay()].substr(0, 3),
+    dd: String(time.getDate()).padStart(2, '0'),
+    hh: (() => {
       const hour = time.getUTCHours() - (time.getTimezoneOffset() / 60)
-
       return String(hour > 12 ? hour - 12 : hour).padStart(2, '0')
-    }
-
-    // 24-hour format of an hour with leading zeros. 00 through 23
-    if (match === 'HH') {
+    })(),
+    HH: (() => {
       const hours = time.getUTCHours()
-
       return String((hours < 12 ? 24 + hours : hours) - (time.getTimezoneOffset() / 60)).padStart(2, '0')
-    }
+    })(),
+    mm: String(time.getMinutes()).padStart(2, '0'),
+    m: String(time.getMinutes()),
+    ss: String(time.getSeconds()).padStart(2, '0'),
+    s: String(time.getSeconds()),
+    a: time.getHours() < 12 ? 'am' : 'pm',
+    A: time.getHours() < 12 ? 'AM' : 'PM',
+    u: String(time.getMilliseconds())
+  }
 
-    if (match === 'mm') {
-      return String(time.getMinutes()).padStart(2, '0')
-    }
-
-    if (match === 'm') {
-      return String(time.getMinutes())
-    }
-
-    // Seconds, with leading zeros. 00 through 59
-    if (match === 'ss') {
-      return String(time.getSeconds()).padStart(2, '0')
-    }
-
-    if (match === 's') {
-      return String(time.getSeconds())
-    }
-
-    // Lowercase Ante meridiem and Post meridiem. am or pm
-    if (match === 'a') {
-      return time.getHours() < 12 ? 'am' : 'pm'
-    }
-
-    // Uppercase Ante meridiem and Post meridiem. AM or PM
-    if (match === 'A') {
-      return time.getHours() < 12 ? 'AM' : 'PM'
-    }
-
-    if (match === 'u') {
-      return String(time.getMilliseconds())
-    }
-
-    return match
-  })
+  return format.replace(formatRegex, (match) => matches[match])
 }
 
 /**

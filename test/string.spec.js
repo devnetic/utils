@@ -1,6 +1,6 @@
-import test from 'ava'
+const test = require('ava')
 
-import * as utils from './../src'
+const utils = require('../lib')
 
 test('should convert the value to came case', t => {
   const expected = 'someValue'

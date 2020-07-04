@@ -23,9 +23,9 @@ export const fromEntries = (entries: IterableIterator<[string, string]>): Object
  * @returns {string}
  */
 export const getType = (value: any): string => {
-  const typeRegex = /\[.*\s(.*)\]/g
+  const typeRegex = /\[.*\s(\w*)\]/g
 
-  return (typeRegex.exec(Object.prototype.toString.call(value)) ?? [])[1]
+  return (typeRegex.exec(Object.prototype.toString.call(value)) ?? ['', 'Undefined'])[1]
 }
 
 /**
@@ -94,7 +94,27 @@ export const isJSON = (value: any): boolean => {
  * @memberOf utils
  */
 export const isFloat = (value: any): boolean => {
-  return value === +value && value !== (value | 0)
+  const parsedValue = parseFloat(value)
+
+  return parsedValue === +parsedValue && parsedValue !== (parsedValue | 0)
+}
+
+/**
+ * Check if a value is a float number
+ *
+ * @param {*} value
+ * @returns {boolean}
+ *
+ * @memberOf utils
+ */
+export const isInteger = (value: any): boolean => {
+  if (isNaN(value)) {
+    return false
+  }
+
+  const parsedValue = parseFloat(value)
+
+  return (parsedValue | 0) === parsedValue
 }
 
 export const isNumeric = (value: any): boolean => {

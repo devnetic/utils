@@ -9,18 +9,23 @@
     "build:watch": "npm run build -- -w",
     "clean": "rm -rf lib",
     "coverage": "nyc ava",
-    "lint": "eslint src/* --ext .ts",
+    "lint": "ts-standard",
+    "lint:fix": "ts-standard --fix",
     "prepublishOnly": "npm run build && npm run lint && npm run coverage",
     "release": "standard-version",
     "test": "ava",
     "test:watch": "ava --watch"
   },
   "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register"
+    "files": [
+      "test/**/*.spec.js"
+    ]
+  },
+  "ts-standard": {
+    "ignore": [
+      "lib",
+      "examples",
+      "test"
     ]
   },
   "husky": {
@@ -59,22 +64,15 @@
   },
   "homepage": "https://github.com/devnetic/utils#readme",
   "devDependencies": {
-    "@ava/typescript": "^1.1.1",
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@types/node": "^13.13.2",
-    "@typescript-eslint/eslint-plugin": "^2.29.0",
-    "ava": "^3.7.1",
-    "eslint": "^6.8.0",
-    "eslint-config-standard-with-typescript": "^16.0.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-conventional": "^9.0.1",
+    "@types/node": "^14.0.14",
+    "ava": "^3.9.0",
     "husky": "^4.2.5",
-    "nyc": "^15.0.1",
-    "standard-version": "^7.1.0",
-    "ts-node": "^8.9.0",
-    "typescript": "^3.8.3"
-  }
+    "nyc": "^15.1.0",
+    "standard-version": "^8.0.0",
+    "ts-standard": "^8.0.1",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {}
 }
