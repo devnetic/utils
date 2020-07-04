@@ -2,6 +2,7 @@
 
 Common utils for every single day tasks.
 
+![Node CI](https://github.com/devnetic/utils/workflows/Node%20CI/badge.svg)
 ![npm (scoped)](https://img.shields.io/npm/v/@devnetic/utils)
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@devnetic/utils?color=red)
 ![npm](https://img.shields.io/npm/dt/@devnetic/utils)
@@ -159,23 +160,7 @@ utils.isEqual(true, 1)  // false
 utils.isEqual({ foo: 'bar' }, {})  // false
 ```
 
-## isJSON(value: any): boolean
-
-This function check is a value is a valid JSON value.
-
-```javascript
-utils.isJSON({})  // true
-utils.isJSON({ foo: 'bar' })  // true
-utils.isJSON(true)  // false
-utils.isJSON(false)  // false
-utils.isJSON(new Date())  // false
-utils.isJSON('')  // false
-utils.isJSON(1)  // false
-utils.isJSON(1.23)  // false
-utils.isJSON({ foo: BigInt(9007199254740991) })  // false
-```
-
-## isFloat(va: any): boolean
+## isFloat(value: any): boolean
 
 This function check is a value is a valid float value.
 
@@ -191,6 +176,48 @@ utils.isFloat('a')  // false
 utils.isFloat({})  // false
 utils.isFloat('')  // false
 utils.isFloat([])  // false
+```
+
+## isInteger(value: any): boolean
+
+This function check is a value is a valid float value.
+
+```javascript
+utils.isInteger(42) // true
+utils.isInteger('42') // true
+utils.isInteger(4e2)  // true
+utils.isInteger('4e2')  // true
+utils.isInteger(' 1 ')  // true
+utils.isInteger(0.0)  // true
+utils.isInteger(Math.PI)  // false
+utils.isInteger('') // false
+utils.isInteger(' ')  // false
+utils.isInteger('a')  // false
+utils.isInteger(42.1) // false
+utils.isInteger('1a') // false
+utils.isInteger('4e2a') // false
+utils.isInteger({}) // false
+utils.isInteger('') // false
+utils.isInteger([]) // false
+utils.isInteger(null) // false
+utils.isInteger(undefined)  // false
+utils.isInteger(NaN)  // false
+```
+
+## isJSON(value: any): boolean
+
+This function check is a value is a valid JSON value.
+
+```javascript
+utils.isJSON({})  // true
+utils.isJSON({ foo: 'bar' })  // true
+utils.isJSON(true)  // false
+utils.isJSON(false)  // false
+utils.isJSON(new Date())  // false
+utils.isJSON('')  // false
+utils.isJSON(1)  // false
+utils.isJSON(1.23)  // false
+utils.isJSON({ foo: BigInt(9007199254740991) })  // false
 ```
 
 ## isNumeric(value: any): boolean
