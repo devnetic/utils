@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/devnetic/utils/compare/v1.0.2...v1.2.0) (2020-07-04)
+
+
+### Features
+
+* add `isInteger` function ([62825e2](https://github.com/devnetic/utils/commit/62825e2384b449a63254f3f4b6193646aca5c9a7))
+* add fromEntries function ([4a33790](https://github.com/devnetic/utils/commit/4a3379014213610a7ca227543badd0dd71c3d8bd))
+
 ## [1.1.0](https://github.com/devnetic/utils/compare/v1.0.2...v1.1.0) (2020-07-04)
 
 
