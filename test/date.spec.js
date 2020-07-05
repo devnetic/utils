@@ -66,8 +66,8 @@ test('should returns the correct time', t => {
 })
 
 test('should returns the correct time string', t => {
-  const milliseconds = 1587871603551
-  const expected = '22:26:43'
+  const milliseconds = 1593830862000
+  const expected = '02:47:42'
 
   t.is(utils.msToTime(milliseconds), expected)
 })

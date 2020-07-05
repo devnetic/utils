@@ -51,8 +51,10 @@ export const dateFormat = (time: Date, format: string, monthNames: string[] = []
       return String(hour > 12 ? hour - 12 : hour).padStart(2, '0')
     })(),
     HH: (() => {
-      const hours = time.getUTCHours()
-      return String((hours < 12 ? 24 + hours : hours) - (time.getTimezoneOffset() / 60)).padStart(2, '0')
+      let hours = time.getUTCHours()
+      hours = (hours < 12 ? 24 + hours : hours) - (time.getTimezoneOffset() / 60)
+
+      return String(hours > 24 ? hours - 24 : hours).padStart(2, '0')
     })(),
     mm: String(time.getMinutes()).padStart(2, '0'),
     m: String(time.getMinutes()),
@@ -73,5 +75,7 @@ export const dateFormat = (time: Date, format: string, monthNames: string[] = []
  * @returns {string}
  */
 export const msToTime = (milliseconds: number, format = 'HH:mm:ss'): string => {
-  return dateFormat(new Date(milliseconds), format)
+  const timezoneOffset = (new Date().getTimezoneOffset() / 60) * 3600 * 1000
+
+  return dateFormat(new Date(milliseconds + timezoneOffset), format)
 }
