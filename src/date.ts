@@ -80,9 +80,9 @@ export const msToTime = (duration: number): string => {
   const minutes = Math.floor((duration / (1000 * 60)) % 60)
   const hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
 
-  const hoursFormated = (hours < 10) ? '0' + hours : hours
-  const minutesFormated = (minutes < 10) ? '0' + minutes : minutes
-  const secondsFormated = (seconds < 10) ? '0' + seconds : seconds
+  const hoursFormated = (hours < 10) ? `0${hours}` : hours
+  const minutesFormated = (minutes < 10) ? `0${minutes}` : minutes
+  const secondsFormated = (seconds < 10) ? `0${seconds}` : seconds
 
   return `${hoursFormated}:${minutesFormated}:${secondsFormated}.${milliseconds}`
 }
