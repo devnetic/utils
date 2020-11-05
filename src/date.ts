@@ -74,8 +74,15 @@ export const dateFormat = (time: Date, format: string, monthNames: string[] = []
  * @param {number} duration
  * @returns {string}
  */
-export const msToTime = (milliseconds: number, format = 'HH:mm:ss'): string => {
-  const timezoneOffset = (new Date().getTimezoneOffset() / 60) * 3600 * 1000
+export const msToTime = (duration: number): string => {
+  const milliseconds = parseInt(String((duration % 1000) / 100))
+  const seconds = Math.floor((duration / 1000) % 60)
+  const minutes = Math.floor((duration / (1000 * 60)) % 60)
+  const hours = Math.floor((duration / (1000 * 60 * 60)) % 24)
 
-  return dateFormat(new Date(milliseconds + timezoneOffset), format)
+  const hoursFormated = (hours < 10) ? '0' + hours : hours
+  const minutesFormated = (minutes < 10) ? '0' + minutes : minutes
+  const secondsFormated = (seconds < 10) ? '0' + seconds : seconds
+
+  return `${hoursFormated}:${minutesFormated}:${secondsFormated}.${milliseconds}`
 }

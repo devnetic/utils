@@ -46,15 +46,21 @@ utils.dateFormat(date, 'HH:mm:ss') // 18:12:02
 utils.dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
 ```
 
-## msToTime(milliseconds: number, format = 'HH:mm:ss'): string
+## msToTime(milliseconds: number): string
 
 This function receive a milliseconds parameter and an optional format parameter; format parameter is any valid `dateFormat()` function format string.
 
 ```javascript
 const date = new Date('2020-04-24T18:12:02.432')
 
-utils.msToTime(1587871603551) // 22:26:43
-utils.msToTime(1587871603551, 'hh:mm:ss A') // 10:26:43 PM
+const HOUR = 60 * 60 * 1000
+const MINUTE = 60 * 1000
+const SECOND = 1000
+
+utils.msToTime((22 * HOUR) + (26 * MINUTE) + (43 * SECOND)) // 22:26:43.0
+utils.msToTime((10 * HOUR) + (26 * MINUTE) + (43 * SECOND)) // 10:26:43.0
+utils.msToTime(MINUTE + (25 * SECOND)) // 00:01:25.0
+utils.msToTime(MINUTE + 500) // '00:01:00.5'
 ```
 
 ---

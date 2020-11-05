@@ -66,8 +66,16 @@ test('should returns the correct time', t => {
 })
 
 test('should returns the correct time string', t => {
-  const milliseconds = 1593830862000
-  const expected = '02:47:42'
+  const HOUR = 60 * 60 * 1000
+  const MINUTE = 60 * 1000
+  const SECOND = 1000
 
-  t.is(utils.msToTime(milliseconds), expected)
+  t.is(utils.msToTime((2 * HOUR) + (47 * MINUTE) + (42 * SECOND)), '02:47:42.0')
+  t.is(utils.msToTime(SECOND), '00:00:01.0')
+  t.is(utils.msToTime(MINUTE + 500), '00:01:00.5')
+  t.is(utils.msToTime(MINUTE + SECOND), '00:01:01.0')
+  t.is(utils.msToTime(MINUTE + (25 * SECOND)), '00:01:25.0')
+  t.is(utils.msToTime(HOUR), '01:00:00.0')
+  t.is(utils.msToTime((21 * HOUR) + (MINUTE) + (25 * SECOND)), '21:01:25.0')
+  t.is(utils.msToTime((22 * HOUR) + (26 * MINUTE) + (43 * SECOND)), '22:26:43.0')
 })
