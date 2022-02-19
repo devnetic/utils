@@ -1,6 +1,6 @@
-const test = require('ava')
+import test from 'ava'
 
-const utils = require('../lib')
+import * as utils from './../src'
 
 test('should returns the correct date', t => {
   const date = new Date('2020-04-24T08:12:02')

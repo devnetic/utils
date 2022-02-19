@@ -38,7 +38,6 @@
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ava",
       "runtimeArgs": [
         "debug",
-        "--break",
         "${file}"
       ],
       "port": 9229,

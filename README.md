@@ -1,4 +1,4 @@
-# utils
+# Utility Library
 
 Common utils for every single day tasks.
 
@@ -10,13 +10,13 @@ Common utils for every single day tasks.
 ![GitHub issues](https://img.shields.io/github/issues-raw/devnetic/utils)
 ![GitHub](https://img.shields.io/github/license/devnetic/utils)
 
-# Usage
+# Date
 
 ## dateFormat(time: Date, format: string, monthNames: string[] = [], dayNames: string[] = []): string
 
-#### Year, month, and day tokens
+Returns a date formatted according to given format.
 
-*Tokens are case-sensitive.*
+### Year, month, and day tokens (*Tokens are case-sensitive*).
 
 | Input       | Example          | Description |
 | ----------- | ---------------- | ----------- |
@@ -26,9 +26,7 @@ Common utils for every single day tasks.
 | `MMM MMMM`  | `Jan..December`  | Month name in default English locale or set by function parameter |
 | `DD`        | `01..31`         | Day of month |
 
-#### Hour, minute, second, millisecond, and offset tokens
-
-*Tokens are case-sensitive.*
+### Hour, minute, second, millisecond, and offset tokens. (*Tokens are case-sensitive*).
 
 | Input          | Example  | Description |
 | -------------- | -------- | ----------- |
@@ -63,9 +61,11 @@ utils.msToTime(MINUTE + (25 * SECOND)) // 00:01:25.0
 utils.msToTime(MINUTE + 500) // '00:01:00.5'
 ```
 
----
+# String
 
 ## camelCase(value: string): string
+
+Convert a string to camel case. Each word is separated by a single uppercase letter and the first word begins with a lowercase.
 
 ```javascript
 utils.camelCase('someValue')  // someValue
@@ -76,6 +76,8 @@ utils.camelCase('SOME VALUE')  // someValue
 
 ## kebabCase(value: string): string
 
+Converts string to kebab case. Kebab case is a programming variable naming convention where a developer replaces the spaces between words with a dash.
+
 ```javascript
 utils.kebabCase('someValue')  // some-value
 utils.kebabCase('some value')  // some-value
@@ -83,7 +85,20 @@ utils.kebabCase('some  value')  // some-value
 utils.kebabCase('SOME VALUE')  // some-value
 ```
 
+## lcfirst(value: string): string 
+
+Convert the first character of a string to lowercase; the rest of the value characters are not converted and are returned the same.
+
+```javascript
+utils.lcfirst('someValue')  // someValue
+utils.lcfirst('somevalue')  // somevalue
+utils.lcfirst('SOME VALUE')  // sOME VALUE
+utils.lcfirst('SOMEVALUE')  // sOMEVALUE
+```
+
 ## pascalCase(value: string): string
+
+Convert a string to pascal case (upper camelcase). First letter of each word in a compound word is capitalized
 
 ```javascript
 utils.pascalCase('someValue')  // SomeValue
@@ -92,7 +107,20 @@ utils.pascalCase('some  value')  // SomeValue
 utils.pascalCase('SOME VALUE')  // SomeValue
 ```
 
-## snakeCase(value: string): string 
+## plural(value: string): string
+
+Pluralize any word.
+
+```javascript
+utils.plural('')  // Somevalue
+utils.plural('') // Some Value
+utils.plural('')  // Some_value
+utils.plural('')  // Some Value
+```
+
+## snakeCase(value: string): string
+
+Converts string to snake case. Snake case (stylized as snake_case) refers to the style of writing in which each space is replaced by an underscore (_) character, and the first letter of each word written in lowercase.
 
 ```javascript
 utils.snakeCase('someValue')  // some_value
@@ -103,6 +131,8 @@ utils.snakeCase('SOME VALUE')  // some_value
 
 ## titleCase(value: string): string
 
+Transform a string into title case following English rules
+
 ```javascript
 utils.titleCase('someValue')  // Somevalue
 utils.titleCase('some value') // Some Value
@@ -110,7 +140,22 @@ utils.titleCase('some  value')  // Some_value
 utils.titleCase('SOME VALUE')  // Some Value
 ```
 
----
+## ucwords(value: string, separators?: string): string
+
+Uppercase the first character of each word in a string.
+
+```javascript
+  utils.ucwords('apple cider')  // Apple Cider
+  utils.ucwords('HELLO WORLD!')  // HELLO WORLD!
+  utils.ucwords('HELLO WORLD!'.toLowerCase())  // HelloWorld!
+  utils.ucwords('hello|world!')  // Hello|world!
+  utils.ucwords('hello|world!'  // '|')  // Hello|World!
+  utils.ucwords(`mike o'hara`)  // Mike O'hara
+  utils.ucwords(`mike o'hara`, ` \t\r\n\f\v'`)  // MikeO'Hara
+  utils.ucwords('')  // ''
+```
+
+# Array
 
 ## fromEntries(entries: IterableIterator<[string, string]>): Object
 
@@ -126,7 +171,9 @@ const entries = new Map([
 utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
 ```
 
-## getType(value: any): string
+# Language
+
+## getType(value: unknown): string
 
 This function returns the value type, but this function is not just a typeof wrapper, because actually can determinate a more detailed data type. The data type is always a string starting with capital letter.
 
@@ -226,6 +273,24 @@ utils.isJSON(1.23)  // false
 utils.isJSON({ foo: BigInt(9007199254740991) })  // false
 ```
 
+## isNumber(value: any): boolean
+
+This function checks if value is classified as a Number primitive or object.
+
+```javascript
+utils.isNumeric('123')  // true
+utils.isNumeric(123)  // true
+utils.isNumeric(123.4)  // true
+utils.isNumeric('-123.4')  // true
+utils.isNumeric(-123)  // true
+utils.isNumeric('-123')  // true
+utils.isNumeric(Math.PI)  // true
+utils.isNumeric('a')  // false
+utils.isNumeric({})  // false
+utils.isNumeric('')  // false
+utils.isNumeric([])  // false
+```
+
 ## isNumeric(value: any): boolean
 
 This function check is a string value is a valid numeric value.
@@ -243,6 +308,8 @@ utils.isNumeric({})  // false
 utils.isNumeric('')  // false
 utils.isNumeric([])  // false
 ```
+
+# Utils
 
 ## matchAll(value: string, regex: RegExp): RegExpMatchArray[]
 
