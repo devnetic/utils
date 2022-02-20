@@ -44,11 +44,7 @@ export const pascalCase = (value: string): string => {
     .join('')
 }
 
-export const plural = (word: string/* , amount: number = 0 */): string => {
-  // if (amount !== undefined && amount === 1) {
-  //   return word
-  // }
-
+export const plural = (word: string): string => {
   const plural: Record<string, string> = {
     '(quiz)$': '$1zes',
     '^(ox)$': '$1en',

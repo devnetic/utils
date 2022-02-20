@@ -9,31 +9,35 @@
 */
 export const dateFormat = (time: Date, format: string, monthNames: string[] = [], dayNames: string[] = []): string => {
   // a global month names array
-  monthNames = monthNames.length === 0 ? [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ] : monthNames
+  monthNames = monthNames.length === 0
+    ? [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ]
+    : monthNames
 
   // a global day names array
-  dayNames = dayNames.length === 0 ? [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
-  ] : dayNames
+  dayNames = dayNames.length === 0
+    ? [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+      ]
+    : dayNames
 
   const formatRegex = /(YYYY|YY|MMMM|MMM|MM|dddd|ddd|dd|hh|HH|mm|m|ss|s|a|A|u)/gi
 

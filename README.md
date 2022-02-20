@@ -3,12 +3,81 @@
 Common utils for every single day tasks.
 
 ![Node CI](https://github.com/devnetic/utils/workflows/Node%20CI/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/devnetic/utils/badge.svg?branch=master)](https://coveralls.io/github/devnetic/utils?branch=master)
 ![npm (scoped)](https://img.shields.io/npm/v/@devnetic/utils)
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@devnetic/utils?color=red)
 ![npm](https://img.shields.io/npm/dt/@devnetic/utils)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
 ![GitHub issues](https://img.shields.io/github/issues-raw/devnetic/utils)
 ![GitHub](https://img.shields.io/github/license/devnetic/utils)
+
+# Array
+
+## accumulate(array: number[]): number[]
+
+Create an array of cumulative sum
+
+```js
+utils.accumulate([1, 2, 3])  // [1, 3, 6])
+utils.accumulate([1, 2, 3, 4])  // [1, 3, 6, 10])
+```
+
+## countBy<T extends Record<string, unknown>, K extends keyof T>(array: T[], prop: K): Record<string, number>
+
+Count by the properties of an array of objects.
+
+```js
+const branches = [
+  { branch: 'audi', model: 'q8', year: '2019' },
+  { branch: 'audi', model: 'rs7', year: '2020' },
+  { branch: 'ford', model: 'mustang', year: '2019' },
+  { branch: 'ford', model: 'explorer', year: '2020' },
+  { branch: 'bmw', model: 'x7', year: '2020' },
+]
+
+utils.countBy(branches, 'branch')  // { 'audi': 2, 'ford': 2, 'bmw': 1 }
+```
+
+## countOccurrences<T extends string | number>(array: T[]): Record<T, number>
+
+Count the occurrences of array elements.
+
+```js
+utils.countOccurrences([2, 1, 3, 3, 2, 3])  // { '1': 1, '2': 2, '3': 3 }
+utils.countOccurrences(['a', 'b', 'a', 'c', 'a', 'b'])  // { 'a': 3, 'b': 2, 'c': 1 }
+```
+
+## countOccurrencesBy<T, K extends T>(array: T[], value: K): number
+
+Count the occurrences of a value in an array.
+
+```js
+utils.countOccurrencesBy([2, 1, 3, 3, 2, 3], 2)  // 2
+utils.countOccurrencesBy(['a', 'b', 'a', 'c', 'a', 'b'], 'a')  // 3
+```
+
+## fromEntries(entries: IterableIterator<[string, string]>): Object
+
+This function transforms a list of key-value pairs into an object.
+
+```javascript
+utils.fromEntries([['0', 'a'], ['1', 'b'], ['2', 'c']])  // { 0: 'a', 1: 'b', 2: 'c' }
+
+const entries = new Map([
+  ['foo', 'bar'],
+  ['baz', 42]
+])
+utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
+```
+
+## range(min: number, max: number): number[]
+
+Create an array of numbers in the given range.
+
+```js
+utils.range(0, 5)  // [0, 1, 2, 3, 4, 5]
+utils.range(5, 10)  // [5, 6, 7, 8, 9, 10]
+```
 
 # Date
 
@@ -59,116 +128,6 @@ utils.msToTime((22 * HOUR) + (26 * MINUTE) + (43 * SECOND)) // 22:26:43.0
 utils.msToTime((10 * HOUR) + (26 * MINUTE) + (43 * SECOND)) // 10:26:43.0
 utils.msToTime(MINUTE + (25 * SECOND)) // 00:01:25.0
 utils.msToTime(MINUTE + 500) // '00:01:00.5'
-```
-
-# String
-
-## camelCase(value: string): string
-
-Convert a string to camel case. Each word is separated by a single uppercase letter and the first word begins with a lowercase.
-
-```javascript
-utils.camelCase('someValue')  // someValue
-utils.camelCase('some value')  // someValue
-utils.camelCase('some  value')  // someValue
-utils.camelCase('SOME VALUE')  // someValue
-```
-
-## kebabCase(value: string): string
-
-Converts string to kebab case. Kebab case is a programming variable naming convention where a developer replaces the spaces between words with a dash.
-
-```javascript
-utils.kebabCase('someValue')  // some-value
-utils.kebabCase('some value')  // some-value
-utils.kebabCase('some  value')  // some-value
-utils.kebabCase('SOME VALUE')  // some-value
-```
-
-## lcfirst(value: string): string 
-
-Convert the first character of a string to lowercase; the rest of the value characters are not converted and are returned the same.
-
-```javascript
-utils.lcfirst('someValue')  // someValue
-utils.lcfirst('somevalue')  // somevalue
-utils.lcfirst('SOME VALUE')  // sOME VALUE
-utils.lcfirst('SOMEVALUE')  // sOMEVALUE
-```
-
-## pascalCase(value: string): string
-
-Convert a string to pascal case (upper camelcase). First letter of each word in a compound word is capitalized
-
-```javascript
-utils.pascalCase('someValue')  // SomeValue
-utils.pascalCase('some value')  // SomeValue
-utils.pascalCase('some  value')  // SomeValue
-utils.pascalCase('SOME VALUE')  // SomeValue
-```
-
-## plural(value: string): string
-
-Pluralize any word.
-
-```javascript
-utils.plural('')  // Somevalue
-utils.plural('') // Some Value
-utils.plural('')  // Some_value
-utils.plural('')  // Some Value
-```
-
-## snakeCase(value: string): string
-
-Converts string to snake case. Snake case (stylized as snake_case) refers to the style of writing in which each space is replaced by an underscore (_) character, and the first letter of each word written in lowercase.
-
-```javascript
-utils.snakeCase('someValue')  // some_value
-utils.snakeCase('some value')  // some_value
-utils.snakeCase('some  value')  // some_value
-utils.snakeCase('SOME VALUE')  // some_value
-```
-
-## titleCase(value: string): string
-
-Transform a string into title case following English rules
-
-```javascript
-utils.titleCase('someValue')  // Somevalue
-utils.titleCase('some value') // Some Value
-utils.titleCase('some  value')  // Some_value
-utils.titleCase('SOME VALUE')  // Some Value
-```
-
-## ucwords(value: string, separators?: string): string
-
-Uppercase the first character of each word in a string.
-
-```javascript
-  utils.ucwords('apple cider')  // Apple Cider
-  utils.ucwords('HELLO WORLD!')  // HELLO WORLD!
-  utils.ucwords('HELLO WORLD!'.toLowerCase())  // HelloWorld!
-  utils.ucwords('hello|world!')  // Hello|world!
-  utils.ucwords('hello|world!'  // '|')  // Hello|World!
-  utils.ucwords(`mike o'hara`)  // Mike O'hara
-  utils.ucwords(`mike o'hara`, ` \t\r\n\f\v'`)  // MikeO'Hara
-  utils.ucwords('')  // ''
-```
-
-# Array
-
-## fromEntries(entries: IterableIterator<[string, string]>): Object
-
-This function transforms a list of key-value pairs into an object.
-
-```javascript
-utils.fromEntries([['0', 'a'], ['1', 'b'], ['2', 'c']])  // { 0: 'a', 1: 'b', 2: 'c' }
-
-const entries = new Map([
-  ['foo', 'bar'],
-  ['baz', 42]
-])
-utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
 ```
 
 # Language
@@ -307,6 +266,100 @@ utils.isNumeric('a')  // false
 utils.isNumeric({})  // false
 utils.isNumeric('')  // false
 utils.isNumeric([])  // false
+```
+
+# String
+
+## camelCase(value: string): string
+
+Convert a string to camel case. Each word is separated by a single uppercase letter and the first word begins with a lowercase.
+
+```javascript
+utils.camelCase('someValue')  // someValue
+utils.camelCase('some value')  // someValue
+utils.camelCase('some  value')  // someValue
+utils.camelCase('SOME VALUE')  // someValue
+```
+
+## kebabCase(value: string): string
+
+Converts string to kebab case. Kebab case is a programming variable naming convention where a developer replaces the spaces between words with a dash.
+
+```javascript
+utils.kebabCase('someValue')  // some-value
+utils.kebabCase('some value')  // some-value
+utils.kebabCase('some  value')  // some-value
+utils.kebabCase('SOME VALUE')  // some-value
+```
+
+## lcfirst(value: string): string 
+
+Convert the first character of a string to lowercase; the rest of the value characters are not converted and are returned the same.
+
+```javascript
+utils.lcfirst('someValue')  // someValue
+utils.lcfirst('somevalue')  // somevalue
+utils.lcfirst('SOME VALUE')  // sOME VALUE
+utils.lcfirst('SOMEVALUE')  // sOMEVALUE
+```
+
+## pascalCase(value: string): string
+
+Convert a string to pascal case (upper camelcase). First letter of each word in a compound word is capitalized
+
+```javascript
+utils.pascalCase('someValue')  // SomeValue
+utils.pascalCase('some value')  // SomeValue
+utils.pascalCase('some  value')  // SomeValue
+utils.pascalCase('SOME VALUE')  // SomeValue
+```
+
+## plural(value: string): string
+
+Pluralize any word.
+
+```javascript
+utils.plural('')  // Somevalue
+utils.plural('') // Some Value
+utils.plural('')  // Some_value
+utils.plural('')  // Some Value
+```
+
+## snakeCase(value: string): string
+
+Converts string to snake case. Snake case (stylized as snake_case) refers to the style of writing in which each space is replaced by an underscore (_) character, and the first letter of each word written in lowercase.
+
+```javascript
+utils.snakeCase('someValue')  // some_value
+utils.snakeCase('some value')  // some_value
+utils.snakeCase('some  value')  // some_value
+utils.snakeCase('SOME VALUE')  // some_value
+```
+
+## titleCase(value: string): string
+
+Transform a string into title case following English rules
+
+```javascript
+utils.titleCase('someValue')  // Somevalue
+utils.titleCase('some value') // Some Value
+utils.titleCase('some  value')  // Some_value
+utils.titleCase('SOME VALUE')  // Some Value
+```
+
+## ucwords(value: string, separators?: string): string
+
+Uppercase the first character of each word in a string.
+
+```javascript
+  utils.ucwords('apple cider')  // Apple Cider
+  utils.ucwords('HELLO WORLD!')  // HELLO WORLD!
+  utils.ucwords('HELLO WORLD!'.toLowerCase())  // HelloWorld!
+  utils.ucwords('hello|world!')  // Hello|world!
+  utils.ucwords('hello|world!'  // '|')  // Hello|World!
+  utils.ucwords(`mike o'hara`)  // Mike O'hara
+  utils.ucwords(`mike o'hara`, ` \t\r\n\f\v'`)  // MikeO'Hara
+  utils.ucwords('')  // ''
 ```
 
 # Utils

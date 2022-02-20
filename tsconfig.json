@@ -14,7 +14,7 @@
     "rootDir": "./src",
     "sourceMap": true,
     "strict": true,
-    "target": "ES2021"
+    "target": "ES2019"
   },
   "include": [
     "src/**/*.ts"
