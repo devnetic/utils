@@ -89,6 +89,76 @@ const entries = new Map([
 utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
 ```
 
+## getMaxIndex(array: number[]): number 
+
+Find the index of the maximum item of an array
+
+```js
+utils.getMaxIndex([1, 2, 3, 4, 5])  // 4
+utils.getMaxIndex([1, 3, 9, 7, 5])  // 2
+utils.getMaxIndex([1, 3, 7, 7, 5])  // 2
+```
+
+## getMinIndex(array: number[]): number 
+
+Find the index of the minimum item of an array
+
+```js
+utils.getMinIndex([6, 4, 8, 2, 10])  // 3
+utils.getMinIndex([6, 4, 2, 2, 10])  // 2
+utils.getMinIndex([1, 3, 7, 7, 5])  // 0
+```
+
+## const lastIndex<T,>(arr: T[], predicate: (a: T) => boolean): number
+
+Find the index of the last matching item of an array.
+
+```js
+utils.lastIndex([1, 3, 5, 7, 9, 2, 4, 6, 8], (i) => i % 2 === 1)  // 4
+utils.lastIndex([1, 3, 5, 7, 9, 8, 6, 4, 2], (i) => i > 6)  // 5
+utils.lastIndex([1, 2, 3, 1, 2, 3], (i) => i > 6)  // -1
+```
+
+## longestStringIndex(words: string[]): number
+
+Find the index of the longest string in an array
+
+```js
+utils.longestStringIndex(['foo', 'bar', 'baz'])  // 2
+utils.longestStringIndex(['foo', 'bar', 'baz', 'qux'])  // 3
+utils.longestStringIndex(['always', 'look', 'on', 'the', 'bright', 'side', 'of', 'life'])  // 4
+```
+
+## maxBy<T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T
+
+Find the maximum item of an array by given key.
+
+```js
+const people = [
+  { name: 'Bar', age: 24 },
+  { name: 'Baz', age: 32 },
+  { name: 'Foo', age: 42 },
+  { name: 'Fuzz', age: 36 },
+]
+
+utils.maxBy(people, 'age') // { name: 'Foo', age: 42 }
+```
+
+## minBy<T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T
+
+Find the minimum item of an array by given key.
+
+```js
+const people = [
+  { name: 'Bar', age: 24 },
+  { name: 'Baz', age: 32 },
+  { name: 'Foo', age: 42 },
+  { name: 'Fuzz', age: 36 },
+]
+
+utils.minBy(people, 'age') // { name: 'Bar', age: 24 }
+```
+
 ## range(min: number, max: number): number[]
 
 Create an array of numbers in the given range.

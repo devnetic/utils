@@ -40,6 +40,17 @@ export const countOccurrencesBy = <T, K extends T>(array: T[], value: K): number
   }, 0)
 }
 
+// type MultiDimensionalArray = Array<Array<(T | (T | Array<T>))>
+
+export const flatten = (array: any[], depth = 1): unknown[] => {
+  // return array.reduce((a, b) => {
+  //   return depth > 0 ? (Array.isArray(b) ? [...a, ...flatten(b, depth - 1)] : [...a, b]) : array.slice()
+  // }, [])
+  return depth > 0
+    ? array.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val), [])
+    : array.slice()
+}
+
 /**
  * Transforms a list of key-value pairs into an object.
  *
@@ -52,6 +63,42 @@ export const fromEntries = <T>(entries: Iterable<T> | ArrayLike<T>): object => {
   return Array.from(entries).reduce((result: object, [key, value]: any) => {
     return { ...result, [key]: value }
   }, {})
+}
+
+export const getMaxIndex = (array: number[]): number => {
+  return array.reduce((prev, curr, i, a) => {
+    return curr > a[prev] ? i : prev
+  }, 0)
+}
+
+export const getMinIndex = (arr: number[]): number => {
+  return arr.reduce((prev, curr, i, a) => {
+    return curr < a[prev] ? i : prev
+  }, 0)
+}
+
+export const longestStringIndex = (words: string[]): number => {
+  return words.reduce((prev, curr, index, array) => {
+    return curr.length >= array[prev].length ? index : prev
+  }, 0)
+}
+
+export const lastIndex = <T,>(arr: T[], predicate: (a: T) => boolean): number => {
+  return arr.reduce((prev, curr, index) => {
+    return predicate(curr) ? index : prev
+  }, -1)
+}
+
+export const maxBy = <T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T => {
+  return arr.reduce((prev, curr) => {
+    return curr[key] > prev[key] ? curr : prev
+  })
+}
+
+export const minBy = <T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T => {
+  return arr.reduce((prev, curr) => {
+    return curr[key] < prev[key] ? curr : prev
+  })
 }
 
 export const range = (min: number, max: number): number[] => Array.from({ length: max - min + 1 }, (_, i) => min + i)

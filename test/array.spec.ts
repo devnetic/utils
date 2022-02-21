@@ -51,6 +51,12 @@ test('should count occurrences by property', t => {
   t.is(utils.countOccurrencesBy(['a', 'b', 'a', 'c', 'a', 'b'], 'a'), 3)
 })
 
+test('should returns a flattened array', t => {
+  t.deepEqual(utils.flatten([1, [2, [3, [4, [5]]]]], Infinity), [1, 2, 3, 4, 5])
+  t.deepEqual(utils.flatten(['cat', ['lion', 'tiger']]), ['cat', 'lion', 'tiger'])
+  t.deepEqual(utils.flatten([0, 1, 2, [[[3, 4]]]], 2), [0, 1, 2, [3, 4]])
+})
+
 test('should returns the object created from entries', t => {
   const arrayEntries = [['0', 'a'], ['1', 'b'], ['2', 'c']]
   const mapEntries = new Map([
@@ -61,6 +67,52 @@ test('should returns the object created from entries', t => {
 
   t.deepEqual(utils.fromEntries(arrayEntries), { 0: 'a', 1: 'b', 2: 'c' })
   t.deepEqual(utils.fromEntries(mapEntries), { foo: 'bar', baz: '42', key: '123' })
+})
+
+test('should returns the maximum value index of an array', t => {
+  t.is(utils.getMaxIndex([1, 2, 3, 4, 5]), 4)
+  t.is(utils.getMaxIndex([1, 3, 9, 7, 5]), 2)
+  t.is(utils.getMaxIndex([1, 3, 7, 7, 5]), 2)
+})
+
+test('should returns the minimum value index of an array', t => {
+  t.is(utils.getMinIndex([6, 4, 8, 2, 10]), 3)
+  t.is(utils.getMinIndex([6, 4, 2, 2, 10]), 2)
+  t.is(utils.getMinIndex([1, 3, 7, 7, 5]), 0)
+})
+
+test('should returns the last matching element index', t => {
+  t.is(utils.lastIndex([1, 3, 5, 7, 9, 2, 4, 6, 8], (i) => i % 2 === 1), 4)
+  t.is(utils.lastIndex([1, 3, 5, 7, 9, 8, 6, 4, 2], (i) => i > 6), 5)
+  t.is(utils.lastIndex([1, 2, 3, 1, 2, 3], (i) => i > 6), -1)
+})
+
+test('should return the longest string index in an array', t => {
+  t.is(utils.longestStringIndex(['foo', 'bar', 'baz']), 2)
+  t.is(utils.longestStringIndex(['foo', 'bar', 'baz', 'qux']), 3)
+  t.is(utils.longestStringIndex(['always', 'look', 'on', 'the', 'bright', 'side', 'of', 'life']), 4)
+})
+
+test('should returns the the maximun item of and array by key', t => {
+  const people = [
+    { name: 'Bar', age: 24 },
+    { name: 'Baz', age: 32 },
+    { name: 'Foo', age: 42 },
+    { name: 'Fuzz', age: 36 },
+  ]
+
+  t.is(utils.maxBy(people, 'age'), people[2])
+})
+
+test('should returns the the minimun item of and array by key', t => {
+  const people = [
+    { name: 'Bar', age: 24 },
+    { name: 'Baz', age: 32 },
+    { name: 'Foo', age: 42 },
+    { name: 'Fuzz', age: 36 },
+  ]
+
+  t.is(utils.minBy(people, 'age'), people[0])
 })
 
 test('should create the given range', t => {
