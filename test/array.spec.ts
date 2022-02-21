@@ -7,6 +7,20 @@ test('should accumulate values', t => {
   t.deepEqual(utils.accumulate([1, 2, 3, 4]), [1, 3, 6, 10])
 })
 
+test('should create the cartesian product of two arrays', t => {
+  t.deepEqual(utils.cartesianProduct([1, 2], ['a', 'b']), [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']])
+  t.deepEqual(utils.cartesianProduct([1, 2], [3, 4]), [[1, 3], [1, 4], [2, 3], [2, 4]])
+})
+
+test('should find the closest number in an array', t => {
+  t.is(utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 50), 33)
+  t.is(utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 30), 29)
+  t.is(utils.closest([1, 2, 3], 2), 2)
+  t.is(utils.closest([1, 2, 3], 0), 1)
+  t.is(utils.closest([1, 2, 3], 4), 3)
+  t.is(utils.closest([1, 2, 3], -1), 1)
+})
+
 test('should count by property', t => {
   let users = [
     { id: 1, name: 'foo' },

@@ -4,6 +4,18 @@ export const accumulate = (array: number[]): number[] => {
   }, [0])
 }
 
+export const cartesianProduct = (...sets: Array<Array<string | number>>): Array<Array<string | number>> => {
+  return sets.reduce<Array<Array<string | number>>>((acc, set) => {
+    return acc.flatMap((x: Array<string | number>) => set.map((y: string | number) => [...x, y]))
+  }, [[]])
+}
+
+export const closest = (array: number[], target: number): number => {
+  return array.reduce((prev, curr) => {
+    return Math.abs(curr - target) < Math.abs(prev - target) ? curr : prev
+  })
+}
+
 export const countBy = <T extends Record<string, unknown>, K extends keyof T>(array: T[], prop: K): Record<string, number> => {
   return array.reduce((acc: Record<string, number>, curr) => {
     const key = curr[prop] as keyof object

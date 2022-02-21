@@ -22,6 +22,25 @@ utils.accumulate([1, 2, 3])  // [1, 3, 6])
 utils.accumulate([1, 2, 3, 4])  // [1, 3, 6, 10])
 ```
 
+## cartesianProduct(...sets: Array<Array<string | number>>): Array<Array<string | number>>
+
+Create cartesian product
+
+```js
+utils.cartesianProduct([1, 2], ['a', 'b'])  // [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
+utils.cartesianProduct([1, 2], [3, 4])  // [[1, 3], [1, 4], [2, 3], [2, 4]]
+```
+
+## closest(array: number[], target: number): number
+
+Find the closest number from an array
+
+```js
+utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 50)  // 33
+utils.closest([1, 2, 3], 2)  // 2
+utils.closest([1, 2, 3], -1)  // 1
+```
+
 ## countBy<T extends Record<string, unknown>, K extends keyof T>(array: T[], prop: K): Record<string, number>
 
 Count by the properties of an array of objects.
