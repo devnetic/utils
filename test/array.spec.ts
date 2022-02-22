@@ -22,6 +22,13 @@ test('should create the cartesian product of two arrays', t => {
   t.deepEqual(utils.cartesianProduct([1, 2], [3, 4]), [[1, 3], [1, 4], [2, 3], [2, 4]])
 })
 
+test('should returns an array split into chunks', t => {
+  t.deepEqual(utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 3), [[1, 2, 3], [4, 5, 6], [7, 8]])
+  t.deepEqual(utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4), [[1, 2, 3, 4], [5, 6, 7, 8]])
+  t.deepEqual(utils.chunk([1, 2, 3, 4, 5], 2), [[1, 2], [3, 4], [5]])
+  t.deepEqual(utils.chunk([1, 2, 3, 4, 5], 3), [[1, 2, 3], [4, 5]])
+})
+
 test('should find the closest number in an array', t => {
   t.is(utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 50), 33)
   t.is(utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 30), 29)
@@ -85,7 +92,7 @@ test('should returns all arrays of consecutive elements', t => {
   t.deepEqual(utils.getConsecutiveArrays([1, 2, 3, 4, 5], 6), [])
 })
 
-test('shoulk returns the intersection of arrays', t => {
+test('should returns the intersection of arrays', t => {
   t.deepEqual(utils.getIntersection([1, 2, 3], [2, 3, 4]), [2, 3])
   t.deepEqual(utils.getIntersection([1, 2, 3], [2, 3, 4], [3, 4, 5]), [3])
   t.deepEqual(utils.getIntersection([1, 2, 3], [2, 3, 4, 5], [1, 3, 5]), [3])
@@ -125,13 +132,39 @@ test('should returns indices of all occurrences of a value in an array', t => {
   t.deepEqual(utils.getIndicesOf(['h', 'e', 'l', 'l', 'o'], 'w'), [])
 })
 
+test('should group and array of objects by a property', t => {
+  const people = [
+    { branch: 'audi', model: 'q8', year: '2019' },
+    { branch: 'audi', model: 'rs7', year: '2020' },
+    { branch: 'ford', model: 'mustang', year: '2019' },
+    { branch: 'ford', model: 'explorer', year: '2020' },
+    { branch: 'bmw', model: 'x7', year: '2020' },
+  ]
+
+  const result = {
+    audi: [
+      { branch: 'audi', model: 'q8', year: '2019' },
+      { branch: 'audi', model: 'rs7', year: '2020' }
+    ],
+    bmw: [
+      { branch: 'bmw', model: 'x7', year: '2020' }
+    ],
+    ford: [
+      { branch: 'ford', model: 'mustang', year: '2019' },
+      { branch: 'ford', model: 'explorer', year: '2020' }
+    ]
+  }
+
+  t.deepEqual(utils.groupBy(people, 'branch'), result)
+})
+
 test('should returns the last matching element index', t => {
   t.is(utils.lastIndex([1, 3, 5, 7, 9, 2, 4, 6, 8], (i) => i % 2 === 1), 4)
   t.is(utils.lastIndex([1, 3, 5, 7, 9, 8, 6, 4, 2], (i) => i > 6), 5)
   t.is(utils.lastIndex([1, 2, 3, 1, 2, 3], (i) => i > 6), -1)
 })
 
-test('should return the longest string index in an array', t => {
+test('should returns the longest string index in an array', t => {
   t.is(utils.longestStringIndex(['foo', 'bar', 'baz']), 2)
   t.is(utils.longestStringIndex(['foo', 'bar', 'baz', 'qux']), 3)
   t.is(utils.longestStringIndex(['always', 'look', 'on', 'the', 'bright', 'side', 'of', 'life']), 4)
@@ -159,6 +192,32 @@ test('should returns the the minimun item of and array by key', t => {
   t.is(utils.minBy(people, 'age'), people[1])
 })
 
+test('should merge two arrays', t => {
+  t.deepEqual(utils.merge([1, 2, 3, 4], [4, 5, 6]), [1, 2, 3, 4, 5, 6])
+  t.deepEqual(utils.merge([1, 2, 3], [4, 5, 6]), [1, 2, 3, 4, 5, 6])
+})
+
+test('should returns the partion of an array based on a predicate', t => {
+  const people = [
+    { name: 'Bar', age: 24 },
+    { name: 'Baz', age: 32 },
+    { name: 'Foo', age: 42 },
+    { name: 'Fuzz', age: 36 },
+  ]
+
+  t.deepEqual(utils.partition(people, (person) => person.age > 30), [
+    [
+      { name: 'Baz', age: 32 },
+      { name: 'Foo', age: 42 },
+      { name: 'Fuzz', age: 36 }
+    ], [
+      { name: 'Bar', age: 24 }
+    ]
+  ])
+
+  t.deepEqual(utils.partition([1, 2, 3, 4, 5], (n) => Boolean(n % 2)), [[1, 3, 5], [2, 4]])
+})
+
 test('should create the given range', t => {
   t.deepEqual(utils.range(0, 5), [0, 1, 2, 3, 4, 5])
   t.deepEqual(utils.range(5, 10), [5, 6, 7, 8, 9, 10])
@@ -174,6 +233,37 @@ test('should returns the rank of an array of numbers', t => {
   t.deepEqual(utils.ranking([80, 65, 90, 50]), [2, 3, 1, 4])
   t.deepEqual(utils.ranking([80, 80, 70, 50]), [1, 1, 3, 4])
   t.deepEqual(utils.ranking([80, 80, 80, 50]), [1, 1, 1, 4])
+})
+
+test('should repeat an array', t => {
+  t.deepEqual(utils.repeat([1, 2, 3], 2), [1, 2, 3, 1, 2, 3])
+  t.deepEqual(utils.repeat([1, 2, 3], 0), [])
+  t.deepEqual(utils.repeat([1, 2, 3], -1), [])
+})
+
+test('should returns the shuffled array', t => {
+  const input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const shuffled = utils.shuffle(input)
+
+  t.false(utils.isEqual(input, shuffled))
+})
+
+test('should sort an array of objects by a property', t => {
+  const people = [
+    { name: 'Foo', age: 42 },
+    { name: 'Bar', age: 24 },
+    { name: 'Fuzz', age: 36 },
+    { name: 'Baz', age: 32 },
+  ]
+
+  const sorted = [
+    { name: 'Bar', age: 24 },
+    { name: 'Baz', age: 32 },
+    { name: 'Fuzz', age: 36 },
+    { name: 'Foo', age: 42 },
+  ]
+
+  t.deepEqual(utils.sortBy(people, 'age'), sorted)
 })
 
 test('should returns the union of arrays', t => {

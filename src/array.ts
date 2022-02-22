@@ -1,4 +1,5 @@
-export type RecursiveArray<T> = Array<(T | Array<(T | T[] | RecursiveArray<T>)>)>
+// export type NestedArray<T> = Array<(T | Array<(T | T[] | NestedArray<T>)>)>
+export type NestedArray<T> = Array<NestedArray<T> | T>
 
 export const accumulate = (array: number[]): number[] => {
   return array.reduce((acc, curr, index) => {
@@ -18,6 +19,14 @@ export const cartesianProduct = (...sets: Array<Array<string | number>>): Array<
   return sets.reduce<Array<Array<string | number>>>((acc, set) => {
     return acc.flatMap((x: Array<string | number>) => set.map((y: string | number) => [...x, y]))
   }, [[]])
+}
+
+export const chunk = <T,>(arr: T[], size: number): T[][] => {
+  return arr.reduce<T[][]>((acc, e, index) => {
+    index % size !== 0 ? acc[acc.length - 1].push(e) : acc.push([e])
+
+    return acc
+  }, [])
 }
 
 export const closest = (array: number[], target: number): number => {
@@ -50,7 +59,7 @@ export const countOccurrencesBy = <T, K extends T>(array: T[], value: K): number
   }, 0)
 }
 
-export const flatten = <T>(input: RecursiveArray<T>, depth = 1): T[] => {
+export const flatten = <T>(input: NestedArray<T>, depth = 1): NestedArray<T> => {
   return depth > 0
     ? input.reduce<T[]>((acc, val: any) => acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val), [])
     : input.slice() as T[]
@@ -108,6 +117,14 @@ export const getIndicesOf = <T>(array: T[], value: T): number[] => {
   }, [])
 }
 
+export const groupBy = <T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): Record<string, T[]> => {
+  return arr.reduce<Record<string, T[]>>((acc: any, item) => {
+    acc[item[key]] = [...(acc[item[key]] ?? []), item]
+
+    return acc
+  }, {})
+}
+
 export const longestStringIndex = (words: string[]): number => {
   return words.reduce((prev, curr, index, array) => {
     return curr.length >= array[prev].length ? index : prev
@@ -126,10 +143,22 @@ export const maxBy = <T extends Record<string, unknown>, K extends keyof T>(arr:
   })
 }
 
+export const merge = <T,>(a: T[], b: T[]): T[] => {
+  return [...new Set([...a, ...b])]
+}
+
 export const minBy = <T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T => {
   return arr.reduce((prev, curr) => {
     return curr[key] < prev[key] ? curr : prev
   })
+}
+
+export const partition = <T,>(arr: T[], criteria: (a: T) => boolean): T[][] => {
+  return arr.reduce<T[][]>((acc, curr) => {
+    acc[criteria(curr) ? 0 : 1].push(curr)
+
+    return acc
+  }, [[], []])
 }
 
 export const range = (min: number, max: number): number[] => Array.from({ length: max - min + 1 }, (_, i) => min + i)
@@ -138,8 +167,25 @@ export const ranking = (array: number[]): number[] => {
   return array.map((x, y, z) => z.filter((w) => w > x).length + 1)
 }
 
+export const repeat = <T,>(arr: T[], n: number): T[] => {
+  return Array.from({ length: arr.length * n }, (_, i) => arr[i % arr.length])
+}
+
+export const shuffle = <T,>(input: T[]): T[] => {
+  return input
+    .map((a) => ({ sort: Math.random(), value: a }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((a) => a.value)
+}
+
+export const sortBy = <T extends Record<string, any>, K extends keyof T>(input: T[], k: K): T[] => {
+  return input.concat().sort((a, b) => {
+    return a[k] > b[k] ? 1 : a[k] < b[k] ? -1 : 0
+  })
+}
+
 export const union = <T,>(...arrays: T[][]): T[] => {
-  return [...new Set(flatten(arrays))]
+  return [...new Set<any>(flatten(arrays))]
 }
 
 export const unique = <T>(array: T[]): T[] => {

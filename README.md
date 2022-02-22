@@ -59,6 +59,15 @@ utils.closest([1, 2, 3], 2)  // 2
 utils.closest([1, 2, 3], -1)  // 1
 ```
 
+## chunk<T,>(arr: T[], size: number): T[][]
+
+Split an array into chunks.
+
+```js
+utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
+utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4)  // [[1, 2, 3, 4], [5, 6, 7, 8]]
+```
+
 ## countBy<T extends Record<string, unknown>, K extends keyof T>(array: T[], prop: K): Record<string, number>
 
 Count by the properties of an array of objects.
@@ -181,6 +190,36 @@ utils.getSubsets([1, 2])  // [[]  // [1], [2], [1, 2]]
 utils.getSubsets([1, 2, 3])  // [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]])
 ```
 
+## groupBy<T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): Record<string, T[]>
+
+Group an array of objects by a key.
+
+```js
+const people = [
+  { branch: 'audi', model: 'q8', year: '2019' },
+  { branch: 'audi', model: 'rs7', year: '2020' },
+  { branch: 'ford', model: 'mustang', year: '2019' },
+  { branch: 'ford', model: 'explorer', year: '2020' },
+  { branch: 'bmw', model: 'x7', year: '2020' },
+]
+
+utils.groupBy(people, 'branch')
+
+// {
+//   audi: [
+//     { branch: 'audi', model: 'q8', year: '2019' },
+//     { branch: 'audi', model: 'rs7', year: '2020' }
+//   ],
+//   bmw: [
+//     { branch: 'bmw', model: 'x7', year: '2020' }
+//   ],
+//   ford: [
+//     { branch: 'ford', model: 'mustang', year: '2019' },
+//     { branch: 'ford', model: 'explorer', year: '2020' }
+//   ]
+// }
+```
+
 ## lastIndex<T,>(arr: T[], predicate: (a: T) => boolean): number
 
 Find the index of the last matching item of an array.
@@ -216,6 +255,15 @@ const people = [
 utils.maxBy(people, 'age') // { name: 'Foo', age: 42 }
 ```
 
+## merge<T,>(a: T[], b: T[]): T[]
+
+Merge two arrays.
+
+```js
+utils.merge([1, 2, 3, 4], [4, 5, 6])  // [1, 2, 3, 4, 5, 6]
+utils.merge([1, 2, 3], [4, 5, 6])  // [1, 2, 3, 4, 5, 6]
+```
+
 ## minBy<T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T
 
 Find the minimum item of an array by given key.
@@ -229,6 +277,31 @@ const people = [
 ]
 
 utils.minBy(people, 'age') // { name: 'Bar', age: 24 }
+```
+
+## partition<T,>(arr: T[], criteria: (a: T) => boolean): T[][]
+
+Partition an array based on a condition.
+
+```js
+const people = [
+  { name: 'Bar', age: 24 },
+  { name: 'Baz', age: 32 },
+  { name: 'Foo', age: 42 },
+  { name: 'Fuzz', age: 36 },
+]
+
+utils.partition(people, (person) => person.age > 30)
+
+// [
+//   [
+//     { name: 'Baz', age: 32 },
+//     { name: 'Foo', age: 42 },
+//     { name: 'Fuzz', age: 36 }
+//   ], [
+//     { name: 'Bar', age: 24 }
+//   ]
+// ]
 ```
 
 ## range(min: number, max: number): number[]
@@ -250,6 +323,47 @@ utils.ranking([5, 4, 3, 2, 1])  // [1, 2, 3, 4, 5]
 utils.ranking([80, 65, 90, 50])  // [2, 3, 1, 4]
 utils.ranking([80, 80, 70, 50])  // [1, 1, 3, 4]
 utils.ranking([80, 80, 80, 50])  // [1, 1, 1, 4]
+```
+
+## repeat<T,>(arr: T[], n: number): T[]
+
+Repeat an array.
+
+```js
+utils.repeat([1, 2, 3], 2)  // [1, 2, 3, 1, 2, 3]
+utils.repeat([1, 2, 3], 0)  // []
+utils.repeat([1, 2, 3], -1)  // []
+```
+
+## shuffle<T,>(input: T[]): T[]
+
+Shuffle an array.
+
+```js
+const input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+utils.shuffle(input)  // // [9, 1, 10, 6, 8, 5, 2, 3, 7, 4]
+```
+
+## sortBy<T extends Record<string, any>, K extends keyof T>(input: T[], k: K): T[]
+
+Sort an array of items by given key.
+
+```js
+const people = [
+  { name: 'Foo', age: 42 },
+  { name: 'Bar', age: 24 },
+  { name: 'Fuzz', age: 36 },
+  { name: 'Baz', age: 32 },
+]
+
+utils.sortBy(people, 'age')
+
+// [
+//   { name: 'Bar', age: 24 },
+//   { name: 'Baz', age: 32 },
+//   { name: 'Fuzz', age: 36 },
+//   { name: 'Foo', age: 42 },
+// ]
 ```
 
 ## union<T,>(...arrays: T[][]): T[]
