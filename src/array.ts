@@ -1,7 +1,17 @@
+export type RecursiveArray<T> = Array<(T | Array<(T | T[] | RecursiveArray<T>)>)>
+
 export const accumulate = (array: number[]): number[] => {
   return array.reduce((acc, curr, index) => {
     return index === 0 ? [curr] : [...acc, curr + acc[index - 1]]
   }, [0])
+}
+
+export const alphabet = (length: number = 26): string[] => {
+  return Array.from({ length }, (_, i) => String.fromCharCode(97 + i))
+}
+
+export const average = (array: number[]): number => {
+  return array.reduce((acc, curr) => acc + curr, 0) / array.length
 }
 
 export const cartesianProduct = (...sets: Array<Array<string | number>>): Array<Array<string | number>> => {
@@ -40,15 +50,10 @@ export const countOccurrencesBy = <T, K extends T>(array: T[], value: K): number
   }, 0)
 }
 
-// type MultiDimensionalArray = Array<Array<(T | (T | Array<T>))>
-
-export const flatten = (array: any[], depth = 1): unknown[] => {
-  // return array.reduce((a, b) => {
-  //   return depth > 0 ? (Array.isArray(b) ? [...a, ...flatten(b, depth - 1)] : [...a, b]) : array.slice()
-  // }, [])
+export const flatten = <T>(input: RecursiveArray<T>, depth = 1): T[] => {
   return depth > 0
-    ? array.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val), [])
-    : array.slice()
+    ? input.reduce<T[]>((acc, val: any) => acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val), [])
+    : input.slice() as T[]
 }
 
 /**
@@ -65,6 +70,16 @@ export const fromEntries = <T>(entries: Iterable<T> | ArrayLike<T>): object => {
   }, {})
 }
 
+export const getConsecutiveArrays = <T,>(array: T[], size: number): T[][] => {
+  return size > array.length
+    ? []
+    : array.slice(size - 1).map((_, index) => array.slice(index, size + index))
+}
+
+export const getIntersection = <T>(array: T[], ...arr: T[][]): T[] => {
+  return array.filter((x) => arr.every((y) => y.includes(x)))
+}
+
 export const getMaxIndex = (array: number[]): number => {
   return array.reduce((prev, curr, i, a) => {
     return curr > a[prev] ? i : prev
@@ -75,6 +90,22 @@ export const getMinIndex = (arr: number[]): number => {
   return arr.reduce((prev, curr, i, a) => {
     return curr < a[prev] ? i : prev
   }, 0)
+}
+
+export const getNthElements = <T,>(array: T[], nth: number): T[] => {
+  return array.filter((_, i) => i % nth === nth - 1)
+}
+
+export const getSubsets = <T>(array: T[]): T[][] => {
+  return array.reduce((acc: any, curr: any) => {
+    return [...acc, ...acc.map((x: any) => [...x, curr])]
+  }, [[]])
+}
+
+export const getIndicesOf = <T>(array: T[], value: T): number[] => {
+  return array.reduce<number[]>((acc, curr, i) => {
+    return curr === value ? [...acc, i] : acc
+  }, [])
 }
 
 export const longestStringIndex = (words: string[]): number => {
@@ -102,3 +133,15 @@ export const minBy = <T extends Record<string, unknown>, K extends keyof T>(arr:
 }
 
 export const range = (min: number, max: number): number[] => Array.from({ length: max - min + 1 }, (_, i) => min + i)
+
+export const ranking = (array: number[]): number[] => {
+  return array.map((x, y, z) => z.filter((w) => w > x).length + 1)
+}
+
+export const union = <T,>(...arrays: T[][]): T[] => {
+  return [...new Set(flatten(arrays))]
+}
+
+export const unique = <T>(array: T[]): T[] => {
+  return Array.from(new Set(array))
+}

@@ -22,6 +22,24 @@ utils.accumulate([1, 2, 3])  // [1, 3, 6])
 utils.accumulate([1, 2, 3, 4])  // [1, 3, 6, 10])
 ```
 
+## alphabet(length: number = 26): string[]
+
+Generate an array of alphabet characters.
+
+```js
+utils.alphabet()  // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
+utils.alphabet(10)  // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'])
+```
+
+## average(array: number[]): number
+
+Get the average of an array.
+
+```js
+utils.average([1, 2, 3]),  // 2
+utils.average([1, 2, 3, 4])  // 2.5
+```
+
 ## cartesianProduct(...sets: Array<Array<string | number>>): Array<Array<string | number>>
 
 Create cartesian product
@@ -89,6 +107,39 @@ const entries = new Map([
 utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
 ```
 
+## getConsecutiveArrays<T,>(array: T[], size: number): T[][]
+
+Get all arrays of consecutive elements.
+
+```js
+utils.getConsecutiveArrays([1, 2, 3, 4, 5], 2)  // [[1, 2], [2, 3], [3, 4], [4, 5]])
+utils.getConsecutiveArrays([1, 2, 3, 4, 5], 3)  // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
+utils.getConsecutiveArrays([1, 2, 3, 4, 5], 6)  // []
+```
+
+## getIndicesOf<T>(array: T[], value: T): number[]
+
+Get indices of a value in an array.
+
+```js
+utils.getIndicesOf([1, 2, 3, 4, 5], 2)  // [1]
+utils.getIndicesOf([1, 2, 3, 4, 2], 2)  // [1, 4]
+utils.getIndicesOf([1, 2, 3, 4, 5], 6)  // []
+utils.getIndicesOf(['h', 'e', 'l', 'l', 'o'], 'l')  // [2, 3]
+utils.getIndicesOf(['h', 'e', 'l', 'l', 'o'], 'w')  // []
+```
+
+## getIntersection<T>(array: T[], ...arr: T[][]): T[]
+
+Get the intersection of arrays.
+
+```js
+utils.getIntersection([1, 2, 3], [2, 3, 4])  // [2, 3]
+utils.getIntersection([1, 2, 3], [2, 3, 4], [3, 4, 5])  // [3]
+utils.getIntersection([1, 2, 3], [2, 3, 4, 5], [1, 3, 5])  // [3]
+utils.getIntersection([1, 2, 3, 4], [2, 3, 4], [3, 4, 5], [4, 5, 6])  // [4]
+```
+
 ## getMaxIndex(array: number[]): number 
 
 Find the index of the maximum item of an array
@@ -109,7 +160,28 @@ utils.getMinIndex([6, 4, 2, 2, 10])  // 2
 utils.getMinIndex([1, 3, 7, 7, 5])  // 0
 ```
 
-## const lastIndex<T,>(arr: T[], predicate: (a: T) => boolean): number
+## getNthElements<T,>(array: T[], nth: number): T[]
+
+Get all n-th items of an array.
+
+```js
+utils.getNthElements([1, 2, 3, 4, 5], 2)  // [2, 4]
+utils.getNthElements([1, 2, 3, 4, 5], 3)  // [3]
+utils.getNthElements([1, 2, 3, 4, 5, 6, 7, 8, 9], 2)  // [2, 4, 6, 8]
+utils.getNthElements([1, 2, 3, 4, 5, 6, 7, 8, 9], 3)  // [3, 6, 9]
+utils.getNthElements([1, 2, 3, 4, 5], 6)  // []
+```
+
+## getSubsets<T>(array: T[]): T[][]
+
+ Get all subsets of an array.
+
+```js
+utils.getSubsets([1, 2])  // [[]  // [1], [2], [1, 2]]
+utils.getSubsets([1, 2, 3])  // [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]])
+```
+
+## lastIndex<T,>(arr: T[], predicate: (a: T) => boolean): number
 
 Find the index of the last matching item of an array.
 
@@ -166,6 +238,39 @@ Create an array of numbers in the given range.
 ```js
 utils.range(0, 5)  // [0, 1, 2, 3, 4, 5]
 utils.range(5, 10)  // [5, 6, 7, 8, 9, 10]
+```
+
+## ranking(array: number[]): number[]
+
+Get the rank of an array of numbers
+
+```js
+utils.ranking([1, 2, 3, 4, 5])  // [5, 4, 3, 2, 1]
+utils.ranking([5, 4, 3, 2, 1])  // [1, 2, 3, 4, 5]
+utils.ranking([80, 65, 90, 50])  // [2, 3, 1, 4]
+utils.ranking([80, 80, 70, 50])  // [1, 1, 3, 4]
+utils.ranking([80, 80, 80, 50])  // [1, 1, 1, 4]
+```
+
+## union<T,>(...arrays: T[][]): T[]
+
+Get union of arrays.
+
+```js
+utils.union([1, 2, 3], [2, 3, 4, 5])  // [1, 2, 3, 4, 5]
+utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5])  // [1, 2, 3, 4, 5]
+utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5], [1, 2, 3, 4, 5])  // [1, 2, 3, 4, 5]
+```
+
+## unique<T>(array: T[]): T[]
+
+Get the unique values of an array.
+
+```js
+utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5])  // 1, 2, 3, 4, 5]
+utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5, 5])  // 1, 2, 3, 4, 5])
+utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e'])  // 'a', 'b', 'c', 'd', 'e'])
+utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e', 'e'])  // 'a', 'b', 'c', 'd', 'e'])
 ```
 
 # Date

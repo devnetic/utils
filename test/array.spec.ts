@@ -7,6 +7,16 @@ test('should accumulate values', t => {
   t.deepEqual(utils.accumulate([1, 2, 3, 4]), [1, 3, 6, 10])
 })
 
+test('should generate an array of alphabetical characters', t => {
+  t.deepEqual(utils.alphabet(), 'abcdefghijklmnopqrstuvwxyz'.split(''))
+  t.deepEqual(utils.alphabet(10), 'abcdefghij'.split(''))
+})
+
+test('should returns the average of an array', t => {
+  t.is(utils.average([1, 2, 3]), 2)
+  t.is(utils.average([1, 2, 3, 4]), 2.5)
+})
+
 test('should create the cartesian product of two arrays', t => {
   t.deepEqual(utils.cartesianProduct([1, 2], ['a', 'b']), [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']])
   t.deepEqual(utils.cartesianProduct([1, 2], [3, 4]), [[1, 3], [1, 4], [2, 3], [2, 4]])
@@ -69,6 +79,19 @@ test('should returns the object created from entries', t => {
   t.deepEqual(utils.fromEntries(mapEntries), { foo: 'bar', baz: '42', key: '123' })
 })
 
+test('should returns all arrays of consecutive elements', t => {
+  t.deepEqual(utils.getConsecutiveArrays([1, 2, 3, 4, 5], 2), [[1, 2], [2, 3], [3, 4], [4, 5]])
+  t.deepEqual(utils.getConsecutiveArrays([1, 2, 3, 4, 5], 3), [[1, 2, 3], [2, 3, 4], [3, 4, 5]])
+  t.deepEqual(utils.getConsecutiveArrays([1, 2, 3, 4, 5], 6), [])
+})
+
+test('shoulk returns the intersection of arrays', t => {
+  t.deepEqual(utils.getIntersection([1, 2, 3], [2, 3, 4]), [2, 3])
+  t.deepEqual(utils.getIntersection([1, 2, 3], [2, 3, 4], [3, 4, 5]), [3])
+  t.deepEqual(utils.getIntersection([1, 2, 3], [2, 3, 4, 5], [1, 3, 5]), [3])
+  t.deepEqual(utils.getIntersection([1, 2, 3, 4], [2, 3, 4], [3, 4, 5], [4, 5, 6]), [4])
+})
+
 test('should returns the maximum value index of an array', t => {
   t.is(utils.getMaxIndex([1, 2, 3, 4, 5]), 4)
   t.is(utils.getMaxIndex([1, 3, 9, 7, 5]), 2)
@@ -79,6 +102,27 @@ test('should returns the minimum value index of an array', t => {
   t.is(utils.getMinIndex([6, 4, 8, 2, 10]), 3)
   t.is(utils.getMinIndex([6, 4, 2, 2, 10]), 2)
   t.is(utils.getMinIndex([1, 3, 7, 7, 5]), 0)
+})
+
+test('should returns all n-th elements of an array', t => {
+  t.deepEqual(utils.getNthElements([1, 2, 3, 4, 5], 2), [2, 4])
+  t.deepEqual(utils.getNthElements([1, 2, 3, 4, 5], 3), [3])
+  t.deepEqual(utils.getNthElements([1, 2, 3, 4, 5, 6, 7, 8, 9], 2), [2, 4, 6, 8])
+  t.deepEqual(utils.getNthElements([1, 2, 3, 4, 5, 6, 7, 8, 9], 3), [3, 6, 9])
+  t.deepEqual(utils.getNthElements([1, 2, 3, 4, 5], 6), [])
+})
+
+test('should returns all subsets of an array', t => {
+  t.deepEqual(utils.getSubsets([1, 2]), [[], [1], [2], [1, 2]])
+  t.deepEqual(utils.getSubsets([1, 2, 3]), [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]])
+})
+
+test('should returns indices of all occurrences of a value in an array', t => {
+  t.deepEqual(utils.getIndicesOf([1, 2, 3, 4, 5], 2), [1])
+  t.deepEqual(utils.getIndicesOf([1, 2, 3, 4, 2], 2), [1, 4])
+  t.deepEqual(utils.getIndicesOf([1, 2, 3, 4, 5], 6), [])
+  t.deepEqual(utils.getIndicesOf(['h', 'e', 'l', 'l', 'o'], 'l'), [2, 3])
+  t.deepEqual(utils.getIndicesOf(['h', 'e', 'l', 'l', 'o'], 'w'), [])
 })
 
 test('should returns the last matching element index', t => {
@@ -106,13 +150,13 @@ test('should returns the the maximun item of and array by key', t => {
 
 test('should returns the the minimun item of and array by key', t => {
   const people = [
-    { name: 'Bar', age: 24 },
     { name: 'Baz', age: 32 },
+    { name: 'Bar', age: 24 },
     { name: 'Foo', age: 42 },
     { name: 'Fuzz', age: 36 },
   ]
 
-  t.is(utils.minBy(people, 'age'), people[0])
+  t.is(utils.minBy(people, 'age'), people[1])
 })
 
 test('should create the given range', t => {
@@ -122,4 +166,25 @@ test('should create the given range', t => {
   t.deepEqual(utils.range(5, 5), [5])
   t.deepEqual(utils.range(5, -5), [])
   t.deepEqual(utils.range(0, -5), [])
+})
+
+test('should returns the rank of an array of numbers', t => {
+  t.deepEqual(utils.ranking([1, 2, 3, 4, 5]), [5, 4, 3, 2, 1])
+  t.deepEqual(utils.ranking([5, 4, 3, 2, 1]), [1, 2, 3, 4, 5])
+  t.deepEqual(utils.ranking([80, 65, 90, 50]), [2, 3, 1, 4])
+  t.deepEqual(utils.ranking([80, 80, 70, 50]), [1, 1, 3, 4])
+  t.deepEqual(utils.ranking([80, 80, 80, 50]), [1, 1, 1, 4])
+})
+
+test('should returns the union of arrays', t => {
+  t.deepEqual(utils.union([1, 2, 3], [2, 3, 4, 5]), [1, 2, 3, 4, 5])
+  t.deepEqual(utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5]), [1, 2, 3, 4, 5])
+  t.deepEqual(utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5])
+})
+
+test('should returns the unique elements of an array', t => {
+  t.deepEqual(utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5]), [1, 2, 3, 4, 5])
+  t.deepEqual(utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5, 5]), [1, 2, 3, 4, 5])
+  t.deepEqual(utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e']), ['a', 'b', 'c', 'd', 'e'])
+  t.deepEqual(utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e', 'e']), ['a', 'b', 'c', 'd', 'e'])
 })
