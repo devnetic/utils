@@ -1,4 +1,3 @@
-// export type NestedArray<T> = Array<(T | Array<(T | T[] | NestedArray<T>)>)>
 export type NestedArray<T> = Array<NestedArray<T> | T>
 
 export const accumulate = (array: number[]): number[] => {
@@ -15,8 +14,8 @@ export const average = (array: number[]): number => {
   return array.reduce((acc, curr) => acc + curr, 0) / array.length
 }
 
-export const cartesianProduct = (...sets: Array<Array<string | number>>): Array<Array<string | number>> => {
-  return sets.reduce<Array<Array<string | number>>>((acc, set) => {
+export const cartesianProduct = <T extends any[]>(...sets: T[]): T[] => {
+  return sets.reduce((acc: any, set: any) => {
     return acc.flatMap((x: Array<string | number>) => set.map((y: string | number) => [...x, y]))
   }, [[]])
 }
@@ -161,7 +160,9 @@ export const partition = <T,>(arr: T[], criteria: (a: T) => boolean): T[][] => {
   }, [[], []])
 }
 
-export const range = (min: number, max: number): number[] => Array.from({ length: max - min + 1 }, (_, i) => min + i)
+export const range = (min: number, max: number): number[] => {
+  return Array.from({ length: max - min + 1 }, (_, i) => min + i)
+}
 
 export const ranking = (array: number[]): number[] => {
   return array.map((x, y, z) => z.filter((w) => w > x).length + 1)
@@ -169,6 +170,10 @@ export const ranking = (array: number[]): number[] => {
 
 export const repeat = <T,>(arr: T[], n: number): T[] => {
   return Array.from({ length: arr.length * n }, (_, i) => arr[i % arr.length])
+}
+
+export const swapItems = <T,>(a: T[], i: number, j: number): T[] => {
+  return (a[i] !== undefined && a[j] !== undefined && [...a.slice(0, i), a[j], ...a.slice(i + 1, j), a[i], ...a.slice(j + 1)]) || a
 }
 
 export const shuffle = <T,>(input: T[]): T[] => {
@@ -184,10 +189,33 @@ export const sortBy = <T extends Record<string, any>, K extends keyof T>(input: 
   })
 }
 
-export const union = <T,>(...arrays: T[][]): T[] => {
-  return [...new Set<any>(flatten(arrays))]
+export const transpose = <T,>(matrix: T[][]): T[][] => {
+  return matrix.reduce<T[][]>((prev, next) => {
+    return next.map((_, i) => (prev[i] ?? []).concat(next[i]))
+  }, [])
+}
+
+export const union = <T>(...arrays: T[]): T => {
+  return [...new Set(flatten(arrays))] as unknown as T
 }
 
 export const unique = <T>(array: T[]): T[] => {
   return Array.from(new Set(array))
+}
+
+export const unzip = <T>(arr: T[]): T[] => {
+  return arr.reduce((acc: any, curr: any) => {
+    curr.forEach((value: any, index: number) => acc[index].push(value))
+
+    return acc
+  },
+  Array.from({ length: Math.max(...arr.map((a: any) => a.length)) }, () => []))
+}
+
+export const zip = <T extends any[]>(...arrays: T[]): T[] => {
+  const maxLength = Math.max(...arrays.map((x) => x.length))
+
+  return Array.from({ length: maxLength }).map((_, index) => {
+    return Array.from({ length: arrays.length }, (_, key) => arrays[key][index])
+  }) as T[]
 }

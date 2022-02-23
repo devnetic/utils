@@ -254,6 +254,7 @@ test('should sort an array of objects by a property', t => {
     { name: 'Bar', age: 24 },
     { name: 'Fuzz', age: 36 },
     { name: 'Baz', age: 32 },
+    { name: 'FooBar', age: 42 }
   ]
 
   const sorted = [
@@ -261,12 +262,33 @@ test('should sort an array of objects by a property', t => {
     { name: 'Baz', age: 32 },
     { name: 'Fuzz', age: 36 },
     { name: 'Foo', age: 42 },
+    { name: 'FooBar', age: 42 }
   ]
 
   t.deepEqual(utils.sortBy(people, 'age'), sorted)
 })
 
+test('should swap the rows and columns of a matrix', t => {
+  const matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+  ]
+
+  t.deepEqual(utils.transpose(matrix), [
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+  ])
+})
+
+test('should swap two array items', t => {
+  t.deepEqual(utils.swapItems([1, 2, 3, 4, 5], 0, 4), [5, 2, 3, 4, 1])
+  t.deepEqual(utils.swapItems([1, 2, 3, 4, 5], 5, 6), [1, 2, 3, 4, 5])
+})
+
 test('should returns the union of arrays', t => {
+  t.deepEqual(utils.union([1, 2, 3], ['a', 'b']), [1, 2, 3, 'a', 'b'])
   t.deepEqual(utils.union([1, 2, 3], [2, 3, 4, 5]), [1, 2, 3, 4, 5])
   t.deepEqual(utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5]), [1, 2, 3, 4, 5])
   t.deepEqual(utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5])
@@ -277,4 +299,27 @@ test('should returns the unique elements of an array', t => {
   t.deepEqual(utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5, 5]), [1, 2, 3, 4, 5])
   t.deepEqual(utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e']), ['a', 'b', 'c', 'd', 'e'])
   t.deepEqual(utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e', 'e']), ['a', 'b', 'c', 'd', 'e'])
+})
+
+test('should unzip an array of arrays', t => {
+  t.deepEqual(utils.unzip([[1, 2], [3, 4]]), [[1, 3], [2, 4]])
+  t.deepEqual(utils.unzip([[1, 2, 3], [4, 5, 6]]), [[1, 4], [2, 5], [3, 6]])
+
+  const zipped = [
+    ['a', 1],
+    ['b', 2],
+    ['c', 3],
+    ['d', 4],
+    ['e', 5],
+  ]
+
+  t.deepEqual(utils.unzip(zipped), [['a', 'b', 'c', 'd', 'e'], [1, 2, 3, 4, 5]])
+})
+
+test('should return the zip of multiple arrays', t => {
+  t.deepEqual(utils.zip([1, 2, 3], [4, 5, 6], [7, 8, 9]), [[1, 4, 7], [2, 5, 8], [3, 6, 9]])
+  t.deepEqual(utils.zip([1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 2, 3]), [[1, 4, 7, 1], [2, 5, 8, 2], [3, 6, 9, 3]])
+  t.deepEqual(utils.zip(['a', 'b', 'c', 'd', 'e'], [1, 2, 3, 4, 5]), [['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5]])
+  t.deepEqual(utils.zip(['a', 'b'], [1, 2], [true, false]), [['a', 1, true], ['b', 2, false]])
+  t.deepEqual(utils.zip(['a'], [1, 2], [true, false]), [['a', 1, true], [undefined, 2, false]])
 })

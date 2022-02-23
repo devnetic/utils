@@ -366,6 +366,31 @@ utils.sortBy(people, 'age')
 // ]
 ```
 
+## swapItems<T,>(a: T[], i: number, j: number): T[]
+
+Swap two array items.
+
+```js
+utils.swapItems([1, 2, 3, 4, 5], 0, 4)  // [5, 2, 3, 4, 1]
+utils.swapItems([1, 2, 3, 4, 5], 5, 6)  // [1, 2, 3, 4, 5]
+```
+
+## transpose<T,>(matrix: T[][]): T[][]
+
+Swap the rows and columns of a matrix.
+
+```js
+utils.transpose([
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+])
+
+// [1, 4, 7],
+// [2, 5, 8],
+// [3, 6, 9],
+```
+
 ## union<T,>(...arrays: T[][]): T[]
 
 Get union of arrays.
@@ -385,6 +410,34 @@ utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5])  // 1, 2, 3, 4, 5]
 utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5, 5])  // 1, 2, 3, 4, 5])
 utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e'])  // 'a', 'b', 'c', 'd', 'e'])
 utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e', 'e'])  // 'a', 'b', 'c', 'd', 'e'])
+```
+
+## unzip<T>(arr: T[]): T[]
+
+Unzip an array of arrays
+
+```js
+const zipped = [
+  ['a', 1],
+  ['b', 2],
+  ['c', 3],
+  ['d', 4],
+  ['e', 5],
+]
+
+utils.unzip(zipped)  // [['a', 'b', 'c', 'd', 'e'], [1, 2, 3, 4, 5]])
+```
+
+## zip<T extends any[]>(...arrays: T[]): T[]
+
+Zip multiple arrays.
+
+```js
+utils.zip([1, 2, 3], [4, 5, 6], [7, 8, 9])  // [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+utils.zip([1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 2, 3])  // [[1, 4, 7, 1], [2, 5, 8, 2], [3, 6, 9, 3]]
+utils.zip(['a', 'b', 'c', 'd', 'e'], [1, 2, 3, 4, 5])  // [['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5]]
+utils.zip(['a', 'b'], [1, 2], [true, false])  // [['a', 1, true], ['b', 2, false]]
+utils.zip(['a'], [1, 2], [true, false])  // [['a', 1, true], [undefined, 2, false]]
 ```
 
 # Date
