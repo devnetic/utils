@@ -1,5 +1,7 @@
 export type NestedArray<T> = Array<NestedArray<T> | T>
 
+export type ArrayElementType<T> = T extends Array<(infer E)> ? (E | undefined) : T
+
 export const accumulate = (array: number[]): number[] => {
   return array.reduce((acc, curr, index) => {
     return index === 0 ? [curr] : [...acc, curr + acc[index - 1]]
@@ -14,10 +16,10 @@ export const average = (array: number[]): number => {
   return array.reduce((acc, curr) => acc + curr, 0) / array.length
 }
 
-export const cartesianProduct = <T extends any[]>(...sets: T[]): T[] => {
+export const cartesianProduct = <T>(...sets: T[]): Array<Array<ArrayElementType<T>>> => {
   return sets.reduce((acc: any, set: any) => {
-    return acc.flatMap((x: Array<string | number>) => set.map((y: string | number) => [...x, y]))
-  }, [[]])
+    return acc.flatMap((x: any) => set.map((y: any) => [...x, y]))
+  }, [[]]) as Array<Array<ArrayElementType<T>>>
 }
 
 export const chunk = <T,>(arr: T[], size: number): T[][] => {
@@ -195,8 +197,8 @@ export const transpose = <T,>(matrix: T[][]): T[][] => {
   }, [])
 }
 
-export const union = <T>(...arrays: T[]): T => {
-  return [...new Set(flatten(arrays))] as unknown as T
+export const union = <T>(...arrays: T[]): Array<ArrayElementType<T>> => {
+  return [...new Set(flatten(arrays))] as Array<ArrayElementType<T>>
 }
 
 export const unique = <T>(array: T[]): T[] => {
@@ -212,10 +214,10 @@ export const unzip = <T>(arr: T[]): T[] => {
   Array.from({ length: Math.max(...arr.map((a: any) => a.length)) }, () => []))
 }
 
-export const zip = <T extends any[]>(...arrays: T[]): T[] => {
-  const maxLength = Math.max(...arrays.map((x) => x.length))
+export const zip = <T>(...arrays: T[]): Array<Array<ArrayElementType<T>>> => {
+  const maxLength = Math.max(...arrays.map((x: any) => x.length))
 
-  return Array.from({ length: maxLength }).map((_, index) => {
-    return Array.from({ length: arrays.length }, (_, key) => arrays[key][index])
-  }) as T[]
+  return arrays.reduce((acc: any, curr: any) => {
+    return acc.map((x: any, i: number) => [...x, curr[i]])
+  }, Array.from({ length: maxLength }, () => []))
 }

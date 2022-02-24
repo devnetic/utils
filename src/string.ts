@@ -228,6 +228,26 @@ export const singular = (word: string): string => {
   return word
 }
 
+export const romanToArabic = (roman: string): number => {
+  const romanToArabic: Record<string, number> = {
+    I: 1,
+    V: 5,
+    X: 10,
+    L: 50,
+    C: 100,
+    D: 500,
+    M: 1000
+  }
+
+  const romanDigits = roman.split('')
+
+  return romanDigits.reduce((acc: number, curr: string, index: number) => {
+    return romanToArabic[curr] < romanToArabic[romanDigits[index + 1]]
+      ? acc - romanToArabic[curr]
+      : acc + romanToArabic[curr]
+  }, 0)
+}
+
 /**
  * Transforms a string to snake case
  *

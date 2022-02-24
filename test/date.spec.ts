@@ -79,3 +79,11 @@ test('should returns the correct time string', t => {
   t.is(utils.msToTime((21 * HOUR) + (MINUTE) + (25 * SECOND)), '21:01:25.0')
   t.is(utils.msToTime((22 * HOUR) + (26 * MINUTE) + (43 * SECOND)), '22:26:43.0')
 })
+
+test('should add the correct suffix to the date', t => {
+  t.is(utils.suffixDate(0), '12am')
+  t.is(utils.suffixDate(5), '5am')
+  t.is(utils.suffixDate(12), '12pm')
+  t.is(utils.suffixDate(15), '3pm')
+  t.is(utils.suffixDate(23), '11pm')
+})
