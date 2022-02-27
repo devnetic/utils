@@ -63,7 +63,7 @@ export const countOccurrencesBy = <T, K extends T>(array: T[], value: K): number
 export const flatten = <T>(input: NestedArray<T>, depth = 1): NestedArray<T> => {
   return depth > 0
     ? input.reduce<T[]>((acc, val: any) => acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val), [])
-    : input.slice() as T[]
+    : input.slice()
 }
 
 /**

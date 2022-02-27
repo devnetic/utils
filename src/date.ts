@@ -1,12 +1,25 @@
-/**
-* Returns date formatted according to given format
-*
-* @param {Date} time
-* @param {string} format
-* @param {string[]} [monthNames]
-* @param {string[]} [dayNames]
-* @returns {string}
-*/
+export interface DateExtract {
+  year: number
+  month: number
+  day: number
+  hour: number
+  minute: number
+  second: number
+  millisecond: number
+}
+
+export const dateExtract = (date: Date): DateExtract => {
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+    second: date.getSeconds(),
+    millisecond: date.getMilliseconds()
+  }
+}
+
 export const dateFormat = (time: Date, format: string, monthNames: string[] = [], dayNames: string[] = []): string => {
   // a global month names array
   monthNames = monthNames.length === 0
@@ -72,12 +85,54 @@ export const dateFormat = (time: Date, format: string, monthNames: string[] = []
   return format.replace(formatRegex, (match) => matches[match])
 }
 
-/**
- * Transform a duration in milliseconds to human readable 'HH:mm:ss.m' format
- *
- * @param {number} duration
- * @returns {string}
- */
+export const dayOfYear = (date: Date): number => {
+  const start = new Date(date.getFullYear(), 0, 0)
+  const diff = date.getTime() - start.getTime()
+  const oneDay = 1000 * 60 * 60 * 24
+
+  return Math.floor(diff / oneDay)
+}
+
+export const daysDiff = (startDate: Date, endDate: Date): number => {
+  return Math.ceil(Math.abs(startDate.valueOf() - endDate.valueOf()) / (1000 * 60 * 60 * 24))
+}
+
+export const daysInMonth = (month: number, year: number): number => {
+  return new Date(year, month, 0).getDate()
+}
+
+export const daysInYear = (year: number): number => {
+  return new Date(year, 1, 29).getDate() === 29 ? 366 : 365
+}
+
+export const firstDateOfMonth = (date = new Date()): Date => {
+  return new Date(date.getFullYear(), date.getMonth(), 1)
+}
+
+export const formatSeconds = (seconds: number): string => {
+  return (new Date(seconds * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/) as string[])[0]
+}
+
+export const getQuarter = (date = new Date()): number => {
+  return Math.ceil((date.getMonth() + 1) / 3)
+}
+
+export const getTimezone = (): string => {
+  return Intl.DateTimeFormat().resolvedOptions().timeZone
+}
+
+export const getWeekday = (date: Date): string => {
+  return dateFormat(date, 'dddd')
+}
+
+export const lastDateOfMonth = (date = new Date()): Date => {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999)
+}
+
+export const monthDiff = (startDate: Date, endDate: Date): number => {
+  return Math.max(0, (endDate.getFullYear() - startDate.getFullYear()) * 12 - startDate.getMonth() + endDate.getMonth())
+}
+
 export const msToTime = (duration: number): string => {
   const milliseconds = parseInt(String((duration % 1000) / 100))
   const seconds = Math.floor((duration / 1000) % 60)
@@ -93,4 +148,12 @@ export const msToTime = (duration: number): string => {
 
 export const suffixDate = (hour: number): string => {
   return `${hour % 12 === 0 ? 12 : hour % 12}${hour < 12 ? 'am' : 'pm'}`
+}
+
+export const tomorrow = (date: Date): Date => {
+  return new Date(date.setDate(date.getDate() + 1))
+}
+
+export const yesterday = (date: Date): Date => {
+  return new Date(date.setDate(date.getDate() - 1))
 }
