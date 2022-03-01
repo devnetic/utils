@@ -34,9 +34,10 @@ utils.dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
 
 1. [Array](https://github.com/devnetic/utils/docs/array.md)
 2. [Date](https://github.com/devnetic/utils/docs/date.md)
-3. [Language](https://github.com/devnetic/utils/docs/language.md)
-4. [String](https://github.com/devnetic/utils/docs/string.md)
-5. [Utils](https://github.com/devnetic/utils/docs/utils.md)
+3. [Function](https://github.com/devnetic/utils/docs/function.md)
+4. [Language](https://github.com/devnetic/utils/docs/language.md)
+5. [String](https://github.com/devnetic/utils/docs/string.md)
+6. [Utils](https://github.com/devnetic/utils/docs/utils.md)
 
 ## About
 
