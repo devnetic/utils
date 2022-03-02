@@ -1,22 +1,13 @@
-/**
- * Returns the type of the given parameter
- *
- * @param {*} value
- * @returns {string}
- */
 export const getType = (value: unknown = undefined): string => {
   const typeRegex = /\[object (.*)\]/
 
   return (Object.prototype.toString.call(value).match(typeRegex) as string[])[1]
 }
 
-/**
- * Performs a deep comparison between two values to determine if they are
- * equal.
- *
- * @param {*} value First value to compare.
- * @param {*} other Second value to compare.
- */
+export const isAsyncFunction = (value: unknown): boolean => {
+  return Object.prototype.toString.call(value) === '[object AsyncFunction]'
+}
+
 export const isEqual = (value: any, other: any): boolean => {
   if (Object.is(value, other)) {
     return true
@@ -45,14 +36,35 @@ export const isEqual = (value: any, other: any): boolean => {
   return true
 }
 
-/**
- * Validate if a value is a JSON valid object
- *
- * @param {*} value
- * @returns {boolean}
- *
- * @memberOf utils
- */
+export const isGeneratorFunction = (value: unknown): boolean => {
+  return Object.prototype.toString.call(value) === '[object GeneratorFunction]'
+}
+
+export const isFloat = (value: any): boolean => {
+  const parsedValue = parseFloat(value)
+
+  return parsedValue === +parsedValue && parsedValue !== (parsedValue | 0)
+}
+
+export const isFunction = (value: unknown): boolean => {
+  return [
+    '[object Function]',
+    '[object GeneratorFunction]',
+    '[object AsyncFunction]',
+    '[object Promise]'
+  ].includes(Object.prototype.toString.call(value))
+}
+
+export const isInteger = (value: any): boolean => {
+  if (isNaN(value)) {
+    return false
+  }
+
+  const parsedValue = parseFloat(value)
+
+  return (parsedValue | 0) === parsedValue
+}
+
 export const isJSON = (value: any): boolean => {
   if (getType(value) !== 'Object') {
     return false
@@ -65,38 +77,6 @@ export const isJSON = (value: any): boolean => {
   }
 
   return true
-}
-
-/**
- * Check if a value is a float number
- *
- * @param {*} value
- * @returns {boolean}
- *
- * @memberOf utils
- */
-export const isFloat = (value: any): boolean => {
-  const parsedValue = parseFloat(value)
-
-  return parsedValue === +parsedValue && parsedValue !== (parsedValue | 0)
-}
-
-/**
- * Check if a value is a float number
- *
- * @param {*} value
- * @returns {boolean}
- *
- * @memberOf utils
- */
-export const isInteger = (value: any): boolean => {
-  if (isNaN(value)) {
-    return false
-  }
-
-  const parsedValue = parseFloat(value)
-
-  return (parsedValue | 0) === parsedValue
 }
 
 export const isNumber = (value: any): boolean => {

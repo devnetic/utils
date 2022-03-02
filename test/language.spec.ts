@@ -24,6 +24,13 @@ test('should returns the correct type', t => {
   t.is(utils.getType(null), 'Null')
 })
 
+test('should validate if a value is an async function', t => {
+  t.true(utils.isAsyncFunction(async () => {}))
+  t.true(utils.isAsyncFunction(async function () { }))
+  t.false(utils.isAsyncFunction(() => {}))
+  t.false(utils.isAsyncFunction(function* () { }))
+})
+
 test('should verify equality', t => {
   t.true(utils.isEqual(1, 1))
   t.true(utils.isEqual(1.23, 1.23))
@@ -39,18 +46,6 @@ test('should verify equality', t => {
   t.false(utils.isEqual(['foo', { foo: 'bar' }, 1, 'a'], ['foo', { foo: 'baz' }, 1, 'a']))
   t.false(utils.isEqual(true, 1))
   t.false(utils.isEqual({ foo: 'bar' }, {}))
-})
-
-test('should validate if an object is json', t => {
-  t.true(utils.isJSON({}))
-  t.true(utils.isJSON({ foo: 'bar' }))
-  t.false(utils.isJSON(true))
-  t.false(utils.isJSON(false))
-  t.false(utils.isJSON(new Date()))
-  t.false(utils.isJSON(''))
-  t.false(utils.isJSON(1))
-  t.false(utils.isJSON(1.23))
-  t.false(utils.isJSON({ foo: BigInt(9007199254740991) }))
 })
 
 test('should validate if a value is float', t => {
@@ -74,6 +69,18 @@ test('should validate if a value is float', t => {
   t.false(utils.isFloat(NaN))
 })
 
+test('should verify if a value is a function', t => {
+  t.true(utils.isFunction(() => { }))
+  t.true(utils.isFunction(function* () { }))
+  t.true(utils.isFunction(async function () { }))
+  t.false(utils.isFunction({}))
+})
+
+test('should validate if a values is a generator function', t => {
+  t.true(utils.isGeneratorFunction(function* () { }))
+  t.false(utils.isGeneratorFunction(() => { }))
+})
+
 test('should validate if a value is integer', t => {
   t.true(utils.isInteger(42))
   t.true(utils.isInteger('42'))
@@ -94,6 +101,18 @@ test('should validate if a value is integer', t => {
   t.false(utils.isInteger(null))
   t.false(utils.isInteger(undefined))
   t.false(utils.isInteger(NaN))
+})
+
+test('should validate if an object is json', t => {
+  t.true(utils.isJSON({}))
+  t.true(utils.isJSON({ foo: 'bar' }))
+  t.false(utils.isJSON(true))
+  t.false(utils.isJSON(false))
+  t.false(utils.isJSON(new Date()))
+  t.false(utils.isJSON(''))
+  t.false(utils.isJSON(1))
+  t.false(utils.isJSON(1.23))
+  t.false(utils.isJSON({ foo: BigInt(9007199254740991) }))
 })
 
 test('should validate if a value is number', t => {

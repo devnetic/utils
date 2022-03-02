@@ -21,6 +21,19 @@ utils.getType(new Int16Array(3))  // 'Int16Array'
 
 ---
 
+## isAsyncFunction(value: unknown): boolean
+
+Check if a value is an async function.
+
+```js
+utils.isAsyncFunction(async () => {})  // true
+utils.isAsyncFunction(function async () { })  // true
+utils.isAsyncFunction(() => {})  // false
+utils.isAsyncFunction(function* () { })  // false
+```
+
+---
+
 ## isEqual(value: any, other: any): boolean
 
 This function evaluate equality between two values, the values could by any data type, including nested object.
@@ -44,6 +57,17 @@ utils.isEqual({ foo: 'bar' }, {})  // false
 
 ---
 
+## isGeneratorFunction(value: unknown): boolean
+
+Check if a value is a generator function.
+
+```js
+utils.isGeneratorFunction(function* () { })  // true
+utils.isGeneratorFunction(() => { })  // false
+```
+
+---
+
 ## isFloat(value: any): boolean
 
 This function check is a value is a valid float value.
@@ -60,6 +84,18 @@ utils.isFloat('a')  // false
 utils.isFloat({})  // false
 utils.isFloat('')  // false
 utils.isFloat([])  // false
+```
+
+---
+
+## isFunction(value: unknown): boolean
+
+Check if a value is a function.
+
+```js
+utils.isFunction(function () {})  // true
+utils.isFunction(function* () {})  // true
+utils.isFunction(async function () {})  // true
 ```
 
 ---
