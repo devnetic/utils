@@ -86,7 +86,7 @@ test('should returns the correct diff days', t => {
   t.is(utils.daysDiff(initial, final), 1839)
 })
 
-test('should return sthe days in given month', t => {
+test('should returns sthe days in given month', t => {
   t.is(utils.daysInMonth(4, 2022), 30)
   t.is(utils.daysInMonth(2, 2022), 28)
   t.is(utils.daysInMonth(2, 2020), 29)
@@ -108,11 +108,11 @@ test('should returns the day of year', t => {
   t.is(utils.dayOfYear(date), 137)
 })
 
-test('shoud returns the first date of the month', t => {
+test('should returns the first date of the month', t => {
   const date = new Date('2020-04-24T18:02:04.512')
   const firstDate = new Date('2020-04-01T00:00:00')
 
-  t.deepEqual(utils.firstDateOfMonth(date), firstDate)
+  t.is(utils.firstDateOfMonth(date).getTime(), firstDate.getTime())
 })
 
 test('should format seconds to human readable format', t => {
@@ -120,7 +120,7 @@ test('should format seconds to human readable format', t => {
   t.is(utils.formatSeconds(500), '00:08:20')
 })
 
-test('should returns the current quarter', t => {
+test('should returns the date quarter', t => {
   const date = new Date('2020-04-24T18:02:04.512')
 
   t.is(utils.getQuarter(date), 2)
@@ -135,7 +135,7 @@ test('should returns the timezone string', t => {
   t.true(timezone.split('/').length === 2)
 })
 
-test('should return the weekday of a date', t => {
+test('should returns the weekday of a date', t => {
   const date = new Date('2022-02-26T18:02:04.512')
 
   t.is(utils.getWeekday(date), 'Saturday')
@@ -178,14 +178,14 @@ test('should add the correct suffix to the date', t => {
   t.is(utils.suffixDate(23), '11pm')
 })
 
-test('should return tomorrow date', t => {
+test('should returns tomorrow date', t => {
   const date = new Date('2020-04-24T18:02:04.512')
   const tomorrow = new Date('2020-04-25T18:02:04.512')
 
   t.deepEqual(utils.tomorrow(date), tomorrow)
 })
 
-test('should return yesterday date', t => {
+test('should returns yesterday date', t => {
   const date = new Date('2020-04-24T18:02:04.512')
   const yesterday = new Date('2020-04-23T18:02:04.512')
 
