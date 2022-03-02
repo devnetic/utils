@@ -105,7 +105,7 @@ export const daysInYear = (year: number): number => {
   return new Date(year, 1, 29).getDate() === 29 ? 366 : 365
 }
 
-export const firstDateOfMonth = (date = new Date()): Date => {
+export const firstDateOfMonth = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth(), 1)
 }
 
@@ -113,7 +113,7 @@ export const formatSeconds = (seconds: number): string => {
   return (new Date(seconds * 1000).toUTCString().match(/(\d\d:\d\d:\d\d)/) as string[])[0]
 }
 
-export const getQuarter = (date = new Date()): number => {
+export const getQuarter = (date: Date): number => {
   return Math.ceil((date.getMonth() + 1) / 3)
 }
 
@@ -125,7 +125,7 @@ export const getWeekday = (date: Date): string => {
   return dateFormat(date, 'dddd')
 }
 
-export const lastDateOfMonth = (date = new Date()): Date => {
+export const lastDateOfMonth = (date: Date): Date => {
   return new Date(date.getFullYear(), date.getMonth() + 1, 0, 23, 59, 59, 999)
 }
 

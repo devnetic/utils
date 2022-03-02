@@ -95,7 +95,7 @@ utils.daysInYear(2021)  // 365
 
 ---
 
-## firstDateOfMonth(date = new Date()): Date
+## firstDateOfMonth(date): Date
 
 Get the first date in the month of a date
 
@@ -118,7 +118,7 @@ utils.formatSeconds(500)  // '00:08:20'
 
 ---
 
-## getQuarter(date = new Date()): number
+## getQuarter(date): number
 
 Get the current quarter of a date.
 
@@ -152,7 +152,7 @@ utils.getWeekday(date)  // 'Saturday'
 
 ---
 
-## lastDateOfMonth(date = new Date()): Date
+## lastDateOfMonth(date): Date
 
 Get the last date in the month of a date.
 
