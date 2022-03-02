@@ -13,6 +13,7 @@ test('should execute the box handler function', t => {
   t.is(getPercentNumber('10%'), 0.1)
   t.is(getPercentNumber('50%'), 0.5)
 
+  parseFloat
   const getMoney = (price: string) => Number.parseFloat(price.replace(/\$/, ''))
   const getPercent = (percent: string) => Number.parseFloat(percent.replace(/\%/, '')) * 0.01
 
