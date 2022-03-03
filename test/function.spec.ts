@@ -40,8 +40,6 @@ test('should execute compose functions from right to left', t => {
   t.is(fn('Hello World'), 'dlrow olleH')
 })
 
-<<<<<<< HEAD
-=======
 test('should curry a function', t => {
   const sum = (a: number, b: number, c: number): number => a + b + c
 
@@ -95,7 +93,6 @@ test('should partial apply a function', t => {
   t.is(inc(2), 3)
 })
 
->>>>>>> af19900... feat: new functions and docs, reorganization
 test('should compose functions from left to right', t => {
   const lowercase = (str: string) => str.toLowerCase()
   const capitalize = (str: string) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
