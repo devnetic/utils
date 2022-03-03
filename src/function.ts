@@ -36,7 +36,45 @@ export const compose = <T>(...fns: Array<(arg: T) => T>) => {
   }, value)
 }
 
-export const noop = (): void => {}
+// export const curry = <T extends unknown[], U extends unknown[], R>(fn: (...args: [...T, ...U]) => R, ...front: T) => {
+//   return (...tailArgs: U) => fn(...front, ...tailArgs)
+// }
+
+type Curried<A extends any[], R> =
+  <P extends Partial<A>>(...args: P) => P extends A ? R :
+    A extends [...SameLength<P>, ...infer S] ? S extends any[]
+      ? Curried<S, R>
+      : never : never
+
+type SameLength<T extends any[]> = Extract<{ [K in keyof T]: any }, any[]>
+
+// export function curry<A extends any[], R>(fn: (...args: A) => R): Curried<A, R> {
+export const curry = <A extends any[], R>(fn: (...args: A) => R): Curried<A, R> => {
+  return (...args: any[]): any =>
+    args.length >= fn.length ? fn(...args as any) : curry((fn as any).bind(undefined, ...args));
+}
+
+// type aggregateFn<T> = (...args: T[]) => T
+
+// interface curryFn<T> extends aggregateFn<T> {
+//   (...args: T[]): curryFn<T>
+// }
+
+// export const curry = (fn: Function, ...args: any[]): any => {
+//   return fn.length <= args.length
+//     ? fn(...args)
+//     : curry.bind(null, fn, ...args)
+// }
+
+// export const curry = <T>(fn: Function, ...args: T[]): T => {
+//   return fn.length <= args.length
+//     ? fn(...args)
+//     : curry.bind(null, fn, ...args)
+// }
+
+export const noop = (): Function => {
+  return () => {}
+}
 
 export const pipe = <T>(...fns: Array<(arg: T) => T>) => {
   return (value: T) => fns.reduce((acc, fn) => {

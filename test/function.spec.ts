@@ -40,9 +40,22 @@ test('should execute compose functions from right to left', t => {
   t.is(fn('Hello World'), 'dlrow olleH')
 })
 
+test('should curry a function', t => {
+  const sum = (a: number, b: number, c: number): number => a + b + c
+
+  t.is(utils.curry(sum)(1)(2)(3), 6)
+  t.is(utils.curry(sum)(1, 2, 3), 6)
+  // t.is(utils.curry(sum, 1)(2, 3), 6)
+  // t.is(utils.curry(sum, 1)(2)(3), 6)
+  // t.is(utils.curry(sum, 1, 2)(3), 6)
+  // t.is(utils.curry(sum, 1, 2, 3), 6)
+})
+
 test('should create an empty function', t => {
-  t.true(utils.isFunction(utils.noop))
-  t.is(utils.noop(), undefined)
+  const noop = utils.noop()
+
+  t.true(utils.isFunction(noop))
+  t.is(noop(), undefined)
 })
 
 test('should compose functions from left to right', t => {
