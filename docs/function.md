@@ -4,7 +4,7 @@ Box handler.
 
 ## boxHandler<T>(value: T): BoxHandler<T>
 
-```js
+```ts
 const getPercentNumber = (value: string) =>
   utils.boxHandler(value)
     .next((value: string) => value.replace(/\%/, ''))
@@ -34,7 +34,7 @@ getDiscountPrice('$6.00', '20%')  // 4.8
 
 Compose functions from right to left.
 
-```js
+```ts
 const lowercase = (str: string) => str.toLowerCase();
 const capitalize = (str: string) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 const reverse = (str: string) => str.split('').reverse().join('');
@@ -51,7 +51,7 @@ fn('Hello World')  // 'dlrow olleH'
 
 Create an empty function.
 
-```js
+```ts
 utils.isFunction(utils.noop)  // true
 utils.noop()  // undefined
 ```
@@ -62,7 +62,7 @@ utils.noop()  // undefined
 
 Compose functions from left to right.
 
-```js
+```ts
 const lowercase = (str: string) => str.toLowerCase()
 const capitalize = (str: string) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`
 const reverse = (str: string) => str.split('').reverse().join('')
@@ -79,7 +79,7 @@ fn('Hello World')  // 'dlrow olleH'
 
 Create a function that accepts a single argument.
 
-```js
+```ts
 ['1', '2', '3', '4', '5'].map(utils.unary(Number))  // [1, 2, 3, 4, 5]
 ```
 
