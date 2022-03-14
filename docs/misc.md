@@ -65,6 +65,7 @@ utils.fahrenheitToCelsius(212)   // 100
 
 ---
 
+<<<<<<< HEAD
 ## getQueryStringValue(url: string, key: string): string | undefined
 
 Get the value of a param from a URL
@@ -98,6 +99,8 @@ utils.getType(new Int16Array(3))  // 'Int16Array'
 
 ---
 
+=======
+>>>>>>> 62f2b7f... feat: new functions and docs, reorganization
 ## hexToRgb(hex: string): number[]
 
 Convert hex to rgb.
@@ -144,6 +147,7 @@ utils.rgbToHex(20, 10, 200)    // '#140ac8'
 
 ---
 
+<<<<<<< HEAD
 ## async runPromisesInSequence(promises: Array<Promise<unknown>>): Promise<unknown>
 
 Run Promises in sequence.
@@ -158,6 +162,8 @@ await utils.runPromisesInSequence([
 
 ---
 
+=======
+>>>>>>> 62f2b7f... feat: new functions and docs, reorganization
 ## toFullHexColor = (color: string): string
 
 Convert 3 digits color to 6 digits color
