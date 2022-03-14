@@ -4,7 +4,7 @@
 
 Extract year, month, day, hour, minute, second and millisecond from a date.
 
-```js
+```ts
 const date = new Date('2020-04-24T18:02:04.512')
 
 utils.dateExtract(date), {
@@ -58,7 +58,7 @@ utils.dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
 
 Get the number of days in given month.
 
-```js
+```ts
 utils.daysInMonth(4, 2022)  // 30
 utils.daysInMonth(2, 2022)  // 28
 utils.daysInMonth(2, 2020)  // 29
@@ -75,7 +75,7 @@ utils.daysInMonth(12, 2020)  // 31
 
 Calculate the number of difference days between two dates.
 
-```js
+```ts
 const initial = new Date('2014-12-19')
 const final = new Date('2020-01-01')
 
@@ -88,7 +88,7 @@ utils.daysDiff(initial, final)  // 1839
 
 Get the total number of days in a year
 
-```js
+```ts
 utils.daysInYear(2020)  // 366
 utils.daysInYear(2021)  // 365
 ```
@@ -99,7 +99,7 @@ utils.daysInYear(2021)  // 365
 
 Get the first date in the month of a date
 
-```js
+```ts
 const date = new Date('2020-04-24T18:02:04.512')
 
 utils.firstDateOfMonth(date)  // '2020-04-01T00:00:00'
@@ -111,7 +111,7 @@ utils.firstDateOfMonth(date)  // '2020-04-01T00:00:00'
 
 Convert seconds to hh:mm:ss format
 
-```js
+```ts
 utils.formatSeconds(200)  // '00:03:20'
 utils.formatSeconds(500)  // '00:08:20'
 ```
@@ -122,7 +122,7 @@ utils.formatSeconds(500)  // '00:08:20'
 
 Get the current quarter of a date.
 
-```js
+```ts
 const date = new Date('2020-04-24T18:02:04.512')
 
 utils.getQuarter(date), 2
@@ -134,7 +134,7 @@ utils.getQuarter(date), 2
 
 Get the timezone string.
 
-```js
+```ts
 getTimezone(); // 'Europe/Berlin'
 ```
 
@@ -144,7 +144,7 @@ getTimezone(); // 'Europe/Berlin'
 
 Get the weekday of a date.
 
-```js
+```ts
 const date = new Date('2022-02-26T18:02:04.512')
 
 utils.getWeekday(date)  // 'Saturday'
@@ -156,7 +156,7 @@ utils.getWeekday(date)  // 'Saturday'
 
 Get the last date in the month of a date.
 
-```js
+```ts
 const date = new Date('2020-04-24T18:02:04.512')
 
 utils.lastDateOfMonth(date)  // '2020-04-30T23:59:59.999'
@@ -168,7 +168,7 @@ utils.lastDateOfMonth(date)  // '2020-04-30T23:59:59.999'
 
 Calculate the number of difference days between two dates.
 
-```js
+```ts
 const initial = new Date('2020-01-01')
 const final = new Date('2021-01-01')
 
@@ -200,7 +200,7 @@ utils.msToTime(MINUTE + 500) // '00:01:00.5'
 
 Add AM PM suffix to an hour.
 
-```js
+```ts
 utils.suffixDate(0)  // '12am'
 utils.suffixDate(5)  // '5am'
 utils.suffixDate(12)  // '12pm'
@@ -214,7 +214,7 @@ utils.suffixDate(23)  // '11pm'
 
 Get the tomorrow date.
 
-```js
+```ts
 const date = new Date('2020-04-24T18:02:04.512')
 
 utils.tomorrow(date)  // 2020-04-25T18:02:04.512
@@ -226,7 +226,7 @@ utils.tomorrow(date)  // 2020-04-25T18:02:04.512
 
 Get the yesterday date.
 
-```js
+```ts
 const date = new Date('2020-04-24T18:02:04.512')
 
 utils.yesterday(date) // '2020-04-23T18:02:04.512'

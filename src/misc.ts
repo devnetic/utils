@@ -2,6 +2,48 @@ import crypto from 'crypto'
 
 import { bytesToUuid } from './bytes-to-uuid'
 
+export const celsiusToFahrenheit = (celsius: number): number => {
+  return (celsius * 9 / 5) + 32
+}
+
+export const coalesce = (...args: unknown[]): unknown => {
+  for (const arg of args) {
+    if (arg !== undefined && arg !== null) {
+      return arg
+    }
+  }
+
+  return undefined
+}
+
+export const counter = (initialValue = 1): Function => {
+  let count = initialValue
+
+  return (): number => {
+    return count++
+  }
+}
+
+export const diceRoll = (): number => {
+  return Math.floor(Math.random() * 6) + 1
+}
+
+export const fahrenheitToCelsius = (fahrenheit: number): number => {
+  return Math.fround(((fahrenheit - 32) * 5) / 9)
+}
+
+export const hexToRgb = (hex: string): number[] => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+
+  return (result !== null)
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16)
+      ]
+    : []
+}
+
 /**
  * Perform a global regular expression match. Searches subject for all
  * matches to the regular expression given in pattern and return them.
@@ -25,6 +67,21 @@ export const matchAll = (value: string, regex: RegExp): RegExpMatchArray[] => {
   }
 
   return matches
+}
+
+export const rgbToHex = (red: number, green: number, blue: number): string => {
+  return `#${((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1)}`
+}
+
+export const toFullHexColor = (color: string): string => {
+  if (color.length > 4 && color.startsWith('#')) {
+    return color
+  }
+
+  return `#${(color.startsWith('#') ? color.slice(1) : color)
+    .split('')
+    .map((c) => `${c}${c}`)
+    .join('')}`
 }
 
 /**
