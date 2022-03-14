@@ -4,7 +4,7 @@
 
 This function returns the value type, but this function is not just a typeof wrapper, because actually can determinate a more detailed data type. The data type is always a string starting with capital letter.
 
-```js
+```ts
 utils.getType({})  // 'Object'
 utils.getType(new Date())  // 'Date'
 utils.getType(String())  // 'String'
@@ -25,7 +25,7 @@ utils.getType(new Int16Array(3))  // 'Int16Array'
 
 Check if a value is an async function.
 
-```js
+```ts
 utils.isAsyncFunction(async () => {})  // true
 utils.isAsyncFunction(function async () { })  // true
 utils.isAsyncFunction(() => {})  // false
@@ -38,7 +38,7 @@ utils.isAsyncFunction(function* () { })  // false
 
 This function evaluate equality between two values, the values could by any data type, including nested object.
 
-```js
+```ts
 utils.isEqual(1, 1)  // true
 utils.isEqual(1.23, 1.23)  // true
 utils.isEqual('1', '1')  // true
@@ -61,7 +61,7 @@ utils.isEqual({ foo: 'bar' }, {})  // false
 
 Check if a value is a generator function.
 
-```js
+```ts
 utils.isGeneratorFunction(function* () { })  // true
 utils.isGeneratorFunction(() => { })  // false
 ```
@@ -72,7 +72,7 @@ utils.isGeneratorFunction(() => { })  // false
 
 This function check is a value is a valid float value.
 
-```js
+```ts
 utils.isFloat(123.4)  // true
 utils.isFloat(-123.4)  // true
 utils.isFloat(Math.PI)  // true
@@ -92,7 +92,7 @@ utils.isFloat([])  // false
 
 Check if a value is a function.
 
-```js
+```ts
 utils.isFunction(function () {})  // true
 utils.isFunction(function* () {})  // true
 utils.isFunction(async function () {})  // true
@@ -104,7 +104,7 @@ utils.isFunction(async function () {})  // true
 
 This function check is a value is a valid float value.
 
-```js
+```ts
 utils.isInteger(42) // true
 utils.isInteger('42') // true
 utils.isInteger(4e2)  // true
@@ -132,7 +132,7 @@ utils.isInteger(NaN)  // false
 
 This function check is a value is a valid JSON value.
 
-```js
+```ts
 utils.isJSON({})  // true
 utils.isJSON({ foo: 'bar' })  // true
 utils.isJSON(true)  // false
@@ -150,7 +150,7 @@ utils.isJSON({ foo: BigInt(9007199254740991) })  // false
 
 This function checks if value is classified as a Number primitive or object.
 
-```js
+```ts
 utils.isNumeric('123')  // true
 utils.isNumeric(123)  // true
 utils.isNumeric(123.4)  // true
@@ -170,7 +170,7 @@ utils.isNumeric([])  // false
 
 This function check is a string value is a valid numeric value.
 
-```js
+```ts
 utils.isNumeric('123')  // true
 utils.isNumeric(123)  // true
 utils.isNumeric(123.4)  // true

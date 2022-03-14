@@ -1,21 +1,3 @@
-// type ReturnType<T> = T extends infer R ? R : any
-
-// export interface BoxHandler {
-//   next: (handler: (value: any) => any) => BoxHandler
-//   done: (handler: (value: any) => any) => any
-// }
-
-// export const boxHandler = (value: any): BoxHandler => {
-//   return {
-//     next: (handler: (value: any) => any): BoxHandler => {
-//       return boxHandler(handler(value))
-//     },
-//     done: (handler: (value: any) => any): ReturnType<BoxHandler> => {
-//       return handler(value)
-//     }
-//   }
-// }
-
 export interface BoxHandler<T> {
   next: <U>(f: (value: T) => U) => BoxHandler<U>
   done: <U>(f: (value: T) => U) => U
@@ -46,4 +28,14 @@ export const unary = <Input, Result>(fn: UnaryFn<Input, Result>): UnaryFn<Input,
   return (input: Input): Result => {
     return fn(input)
   }
+}
+
+export const uncurry = (fn: Function, n = 1): Function => {
+  return (...args: any[]) => (
+    (acc) => (args: any[]) => args.reduce((x, y) => x(y), acc)
+  )(fn)(args.slice(0, n))
+}
+
+export const xor = (a: boolean, b: boolean): boolean => {
+  return a !== b
 }

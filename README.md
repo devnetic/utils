@@ -21,7 +21,7 @@ $ npm i -S @devnetic/utils
 
 # Usage
 
-```js
+```ts
 const utils = require('@devnetic/utils)
 
 const date = new Date('2020-04-24T18:12:02.432')

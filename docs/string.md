@@ -4,7 +4,7 @@
 
 Convert a string to camel case. Each word is separated by a single uppercase letter and the first word begins with a lowercase.
 
-```js
+```ts
 utils.camelCase('someValue')  // someValue
 utils.camelCase('some value')  // someValue
 utils.camelCase('some  value')  // someValue
@@ -17,7 +17,7 @@ utils.camelCase('SOME VALUE')  // someValue
 
 Converts string to kebab case. Kebab case is a programming variable naming convention where a developer replaces the spaces between words with a dash.
 
-```js
+```ts
 utils.kebabCase('someValue')  // some-value
 utils.kebabCase('some value')  // some-value
 utils.kebabCase('some  value')  // some-value
@@ -30,7 +30,7 @@ utils.kebabCase('SOME VALUE')  // some-value
 
 Convert the first character of a string to lowercase; the rest of the value characters are not converted and are returned the same.
 
-```js
+```ts
 utils.lcfirst('someValue')  // someValue
 utils.lcfirst('somevalue')  // somevalue
 utils.lcfirst('SOME VALUE')  // sOME VALUE
@@ -43,7 +43,7 @@ utils.lcfirst('SOMEVALUE')  // sOMEVALUE
 
 Convert a string to pascal case (upper camelcase). First letter of each word in a compound word is capitalized
 
-```js
+```ts
 utils.pascalCase('someValue')  // SomeValue
 utils.pascalCase('some value')  // SomeValue
 utils.pascalCase('some  value')  // SomeValue
@@ -56,7 +56,7 @@ utils.pascalCase('SOME VALUE')  // SomeValue
 
 Pluralize any word.
 
-```js
+```ts
 utils.plural('')  // Somevalue
 utils.plural('') // Some Value
 utils.plural('')  // Some_value
@@ -69,7 +69,7 @@ utils.plural('')  // Some Value
 
 Converts string to snake case. Snake case (stylized as snake_case) refers to the style of writing in which each space is replaced by an underscore (_) character, and the first letter of each word written in lowercase.
 
-```js
+```ts
 utils.snakeCase('someValue')  // some_value
 utils.snakeCase('some value')  // some_value
 utils.snakeCase('some  value')  // some_value
@@ -82,7 +82,7 @@ utils.snakeCase('SOME VALUE')  // some_value
 
 Transform a string into title case following English rules
 
-```js
+```ts
 utils.titleCase('someValue')  // Somevalue
 utils.titleCase('some value') // Some Value
 utils.titleCase('some  value')  // Some_value
@@ -95,7 +95,7 @@ utils.titleCase('SOME VALUE')  // Some Value
 
 Uppercase the first character of each word in a string.
 
-```js
+```ts
   utils.ucwords('apple cider')  // Apple Cider
   utils.ucwords('HELLO WORLD!')  // HELLO WORLD!
   utils.ucwords('HELLO WORLD!'.toLowerCase())  // HelloWorld!

@@ -4,7 +4,7 @@
 
 Create an array of cumulative sum
 
-```js
+```ts
 utils.accumulate([1, 2, 3])  // [1, 3, 6])
 utils.accumulate([1, 2, 3, 4])  // [1, 3, 6, 10])
 ```
@@ -15,7 +15,7 @@ utils.accumulate([1, 2, 3, 4])  // [1, 3, 6, 10])
 
 Generate an array of alphabet characters.
 
-```js
+```ts
 utils.alphabet()  // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'])
 utils.alphabet(10)  // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'])
 ```
@@ -26,7 +26,7 @@ utils.alphabet(10)  // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'])
 
 Get the average of an array.
 
-```js
+```ts
 utils.average([1, 2, 3]),  // 2
 utils.average([1, 2, 3, 4])  // 2.5
 ```
@@ -37,7 +37,7 @@ utils.average([1, 2, 3, 4])  // 2.5
 
 Create cartesian product
 
-```js
+```ts
 utils.cartesianProduct([1, 2], ['a', 'b'])  // [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
 utils.cartesianProduct([1, 2], [3, 4])  // [[1, 3], [1, 4], [2, 3], [2, 4]]
 ```
@@ -48,7 +48,7 @@ utils.cartesianProduct([1, 2], [3, 4])  // [[1, 3], [1, 4], [2, 3], [2, 4]]
 
 Find the closest number from an array
 
-```js
+```ts
 utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 50)  // 33
 utils.closest([1, 2, 3], 2)  // 2
 utils.closest([1, 2, 3], -1)  // 1
@@ -60,7 +60,7 @@ utils.closest([1, 2, 3], -1)  // 1
 
 Split an array into chunks.
 
-```js
+```ts
 utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
 utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4)  // [[1, 2, 3, 4], [5, 6, 7, 8]]
 ```
@@ -71,7 +71,7 @@ utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4)  // [[1, 2, 3, 4], [5, 6, 7, 8]]
 
 Count by the properties of an array of objects.
 
-```js
+```ts
 const branches = [
   { branch: 'audi', model: 'q8', year: '2019' },
   { branch: 'audi', model: 'rs7', year: '2020' },
@@ -89,7 +89,7 @@ utils.countBy(branches, 'branch')  // { 'audi': 2, 'ford': 2, 'bmw': 1 }
 
 Count the occurrences of array elements.
 
-```js
+```ts
 utils.countOccurrences([2, 1, 3, 3, 2, 3])  // { '1': 1, '2': 2, '3': 3 }
 utils.countOccurrences(['a', 'b', 'a', 'c', 'a', 'b'])  // { 'a': 3, 'b': 2, 'c': 1 }
 ```
@@ -100,7 +100,7 @@ utils.countOccurrences(['a', 'b', 'a', 'c', 'a', 'b'])  // { 'a': 3, 'b': 2, 'c'
 
 Count the occurrences of a value in an array.
 
-```js
+```ts
 utils.countOccurrencesBy([2, 1, 3, 3, 2, 3], 2)  // 2
 utils.countOccurrencesBy(['a', 'b', 'a', 'c', 'a', 'b'], 'a')  // 3
 ```
@@ -127,7 +127,7 @@ utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
 
 Get all arrays of consecutive elements.
 
-```js
+```ts
 utils.getConsecutiveArrays([1, 2, 3, 4, 5], 2)  // [[1, 2], [2, 3], [3, 4], [4, 5]])
 utils.getConsecutiveArrays([1, 2, 3, 4, 5], 3)  // [[1, 2, 3], [2, 3, 4], [3, 4, 5]]
 utils.getConsecutiveArrays([1, 2, 3, 4, 5], 6)  // []
@@ -139,7 +139,7 @@ utils.getConsecutiveArrays([1, 2, 3, 4, 5], 6)  // []
 
 Get indices of a value in an array.
 
-```js
+```ts
 utils.getIndicesOf([1, 2, 3, 4, 5], 2)  // [1]
 utils.getIndicesOf([1, 2, 3, 4, 2], 2)  // [1, 4]
 utils.getIndicesOf([1, 2, 3, 4, 5], 6)  // []
@@ -153,7 +153,7 @@ utils.getIndicesOf(['h', 'e', 'l', 'l', 'o'], 'w')  // []
 
 Get the intersection of arrays.
 
-```js
+```ts
 utils.getIntersection([1, 2, 3], [2, 3, 4])  // [2, 3]
 utils.getIntersection([1, 2, 3], [2, 3, 4], [3, 4, 5])  // [3]
 utils.getIntersection([1, 2, 3], [2, 3, 4, 5], [1, 3, 5])  // [3]
@@ -166,7 +166,7 @@ utils.getIntersection([1, 2, 3, 4], [2, 3, 4], [3, 4, 5], [4, 5, 6])  // [4]
 
 Find the index of the maximum item of an array
 
-```js
+```ts
 utils.getMaxIndex([1, 2, 3, 4, 5])  // 4
 utils.getMaxIndex([1, 3, 9, 7, 5])  // 2
 utils.getMaxIndex([1, 3, 7, 7, 5])  // 2
@@ -178,7 +178,7 @@ utils.getMaxIndex([1, 3, 7, 7, 5])  // 2
 
 Find the index of the minimum item of an array
 
-```js
+```ts
 utils.getMinIndex([6, 4, 8, 2, 10])  // 3
 utils.getMinIndex([6, 4, 2, 2, 10])  // 2
 utils.getMinIndex([1, 3, 7, 7, 5])  // 0
@@ -190,7 +190,7 @@ utils.getMinIndex([1, 3, 7, 7, 5])  // 0
 
 Get all n-th items of an array.
 
-```js
+```ts
 utils.getNthElements([1, 2, 3, 4, 5], 2)  // [2, 4]
 utils.getNthElements([1, 2, 3, 4, 5], 3)  // [3]
 utils.getNthElements([1, 2, 3, 4, 5, 6, 7, 8, 9], 2)  // [2, 4, 6, 8]
@@ -204,7 +204,7 @@ utils.getNthElements([1, 2, 3, 4, 5], 6)  // []
 
  Get all subsets of an array.
 
-```js
+```ts
 utils.getSubsets([1, 2])  // [[]  // [1], [2], [1, 2]]
 utils.getSubsets([1, 2, 3])  // [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]])
 ```
@@ -215,7 +215,7 @@ utils.getSubsets([1, 2, 3])  // [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 
 
 Group an array of objects by a key.
 
-```js
+```ts
 const people = [
   { branch: 'audi', model: 'q8', year: '2019' },
   { branch: 'audi', model: 'rs7', year: '2020' },
@@ -247,7 +247,7 @@ utils.groupBy(people, 'branch')
 
 Find the index of the last matching item of an array.
 
-```js
+```ts
 utils.lastIndex([1, 3, 5, 7, 9, 2, 4, 6, 8], (i) => i % 2 === 1)  // 4
 utils.lastIndex([1, 3, 5, 7, 9, 8, 6, 4, 2], (i) => i > 6)  // 5
 utils.lastIndex([1, 2, 3, 1, 2, 3], (i) => i > 6)  // -1
@@ -259,7 +259,7 @@ utils.lastIndex([1, 2, 3, 1, 2, 3], (i) => i > 6)  // -1
 
 Find the index of the longest string in an array
 
-```js
+```ts
 utils.longestStringIndex(['foo', 'bar', 'baz'])  // 2
 utils.longestStringIndex(['foo', 'bar', 'baz', 'qux'])  // 3
 utils.longestStringIndex(['always', 'look', 'on', 'the', 'bright', 'side', 'of', 'life'])  // 4
@@ -271,7 +271,7 @@ utils.longestStringIndex(['always', 'look', 'on', 'the', 'bright', 'side', 'of',
 
 Find the maximum item of an array by given key.
 
-```js
+```ts
 const people = [
   { name: 'Bar', age: 24 },
   { name: 'Baz', age: 32 },
@@ -287,7 +287,7 @@ utils.maxBy(people, 'age') // { name: 'Foo', age: 42 }
 
 Merge two arrays.
 
-```js
+```ts
 utils.merge([1, 2, 3, 4], [4, 5, 6])  // [1, 2, 3, 4, 5, 6]
 utils.merge([1, 2, 3], [4, 5, 6])  // [1, 2, 3, 4, 5, 6]
 ```
@@ -298,7 +298,7 @@ utils.merge([1, 2, 3], [4, 5, 6])  // [1, 2, 3, 4, 5, 6]
 
 Find the minimum item of an array by given key.
 
-```js
+```ts
 const people = [
   { name: 'Bar', age: 24 },
   { name: 'Baz', age: 32 },
@@ -315,7 +315,7 @@ utils.minBy(people, 'age') // { name: 'Bar', age: 24 }
 
 Partition an array based on a condition.
 
-```js
+```ts
 const people = [
   { name: 'Bar', age: 24 },
   { name: 'Baz', age: 32 },
@@ -342,7 +342,7 @@ utils.partition(people, (person) => person.age > 30)
 
 Create an array of numbers in the given range.
 
-```js
+```ts
 utils.range(0, 5)  // [0, 1, 2, 3, 4, 5]
 utils.range(5, 10)  // [5, 6, 7, 8, 9, 10]
 ```
@@ -353,7 +353,7 @@ utils.range(5, 10)  // [5, 6, 7, 8, 9, 10]
 
 Get the rank of an array of numbers
 
-```js
+```ts
 utils.ranking([1, 2, 3, 4, 5])  // [5, 4, 3, 2, 1]
 utils.ranking([5, 4, 3, 2, 1])  // [1, 2, 3, 4, 5]
 utils.ranking([80, 65, 90, 50])  // [2, 3, 1, 4]
@@ -367,7 +367,7 @@ utils.ranking([80, 80, 80, 50])  // [1, 1, 1, 4]
 
 Repeat an array.
 
-```js
+```ts
 utils.repeat([1, 2, 3], 2)  // [1, 2, 3, 1, 2, 3]
 utils.repeat([1, 2, 3], 0)  // []
 utils.repeat([1, 2, 3], -1)  // []
@@ -379,7 +379,7 @@ utils.repeat([1, 2, 3], -1)  // []
 
 Shuffle an array.
 
-```js
+```ts
 const input = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 utils.shuffle(input)  // // [9, 1, 10, 6, 8, 5, 2, 3, 7, 4]
 ```
@@ -390,7 +390,7 @@ utils.shuffle(input)  // // [9, 1, 10, 6, 8, 5, 2, 3, 7, 4]
 
 Sort an array of items by given key.
 
-```js
+```ts
 const people = [
   { name: 'Foo', age: 42 },
   { name: 'Bar', age: 24 },
@@ -414,7 +414,7 @@ utils.sortBy(people, 'age')
 
 Swap two array items.
 
-```js
+```ts
 utils.swapItems([1, 2, 3, 4, 5], 0, 4)  // [5, 2, 3, 4, 1]
 utils.swapItems([1, 2, 3, 4, 5], 5, 6)  // [1, 2, 3, 4, 5]
 ```
@@ -425,7 +425,7 @@ utils.swapItems([1, 2, 3, 4, 5], 5, 6)  // [1, 2, 3, 4, 5]
 
 Swap the rows and columns of a matrix.
 
-```js
+```ts
 utils.transpose([
   [1, 2, 3],
   [4, 5, 6],
@@ -443,7 +443,7 @@ utils.transpose([
 
 Get union of arrays.
 
-```js
+```ts
 utils.union([1, 2, 3], [2, 3, 4, 5])  // [1, 2, 3, 4, 5]
 utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5])  // [1, 2, 3, 4, 5]
 utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5], [1, 2, 3, 4, 5])  // [1, 2, 3, 4, 5]
@@ -455,7 +455,7 @@ utils.union([1, 2, 3], [2, 3, 4, 5], [1, 3, 5], [1, 2, 3, 4, 5])  // [1, 2, 3, 4
 
 Get the unique values of an array.
 
-```js
+```ts
 utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5])  // 1, 2, 3, 4, 5]
 utils.unique([1, 2, 3, 4, 5, 5, 5, 5, 5, 5])  // 1, 2, 3, 4, 5])
 utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e'])  // 'a', 'b', 'c', 'd', 'e'])
@@ -468,7 +468,7 @@ utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e', 'e'])  // 'a', 'b', '
 
 Unzip an array of arrays
 
-```js
+```ts
 const zipped = [
   ['a', 1],
   ['b', 2],
@@ -486,7 +486,7 @@ utils.unzip(zipped)  // [['a', 'b', 'c', 'd', 'e'], [1, 2, 3, 4, 5]])
 
 Zip multiple arrays.
 
-```js
+```ts
 utils.zip([1, 2, 3], [4, 5, 6], [7, 8, 9])  // [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
 utils.zip([1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 2, 3])  // [[1, 4, 7, 1], [2, 5, 8, 2], [3, 6, 9, 3]]
 utils.zip(['a', 'b', 'c', 'd', 'e'], [1, 2, 3, 4, 5])  // [['a', 1], ['b', 2], ['c', 3], ['d', 4], ['e', 5]]
