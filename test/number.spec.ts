@@ -1,0 +1,51 @@
+import test from 'ava'
+
+import * as utils from '../src'
+
+test('should add an ordinal suffix to a number', t => {
+  t.is(utils.addOrdinalSuffix(1), '1st')
+  t.is(utils.addOrdinalSuffix(2), '2nd')
+  t.is(utils.addOrdinalSuffix(3), '3rd')
+  t.is(utils.addOrdinalSuffix(4), '4th')
+  t.is(utils.addOrdinalSuffix(5), '5th')
+  t.is(utils.addOrdinalSuffix(6), '6th')
+  t.is(utils.addOrdinalSuffix(7), '7th')
+  t.is(utils.addOrdinalSuffix(8), '8th')
+  t.is(utils.addOrdinalSuffix(9), '9th')
+  t.is(utils.addOrdinalSuffix(10), '10th')
+  t.is(utils.addOrdinalSuffix(11), '11th')
+  t.is(utils.addOrdinalSuffix(12), '12th')
+  t.is(utils.addOrdinalSuffix(13), '13th')
+  t.is(utils.addOrdinalSuffix(14), '14th')
+  t.is(utils.addOrdinalSuffix(15), '15th')
+  t.is(utils.addOrdinalSuffix(16), '16th')
+  t.is(utils.addOrdinalSuffix(17), '17th')
+  t.is(utils.addOrdinalSuffix(18), '18th')
+  t.is(utils.addOrdinalSuffix(19), '19th')
+  t.is(utils.addOrdinalSuffix(20), '20th')
+  t.is(utils.addOrdinalSuffix(21), '21st')
+  t.is(utils.addOrdinalSuffix(22), '22nd')
+  t.is(utils.addOrdinalSuffix(23), '23rd')
+})
+
+test('should return the factorial of a number', t => {
+  t.is(utils.factorial(0), 1)
+  t.is(utils.factorial(1), 1)
+  t.is(utils.factorial(2), 2)
+  t.is(utils.factorial(3), 6)
+  t.is(utils.factorial(4), 24)
+  t.is(utils.factorial(5), 120)
+})
+
+test('should calculate fibonacci numbers', t => {
+  t.is(utils.fibonacci(0), 0)
+  t.is(utils.fibonacci(1), 1)
+  t.is(utils.fibonacci(2), 1)
+  t.is(utils.fibonacci(3), 2)
+  t.is(utils.fibonacci(4), 3)
+  t.is(utils.fibonacci(5), 5)
+  t.is(utils.fibonacci(6), 8)
+  t.is(utils.fibonacci(7), 13)
+  t.is(utils.fibonacci(12), 144)
+  t.is(utils.fibonacci(13), 233)
+})

@@ -68,6 +68,11 @@ test('should count occurrences by property', t => {
   t.is(utils.countOccurrencesBy(['a', 'b', 'a', 'c', 'a', 'b'], 'a'), 3)
 })
 
+test('should calculate the division of an array', t => {
+  t.is(utils.division([1, 2, 3, 4]), 0.041666666666666664)
+  t.is(utils.division([1, 2, 3, 4, 5]), 0.008333333333333333)
+})
+
 test('should returns a flattened array', t => {
   t.deepEqual(utils.flatten([1, [2, [3, [4, [5]]]]], Infinity), [1, 2, 3, 4, 5])
   t.deepEqual(utils.flatten(['cat', ['lion', 'tiger']]), ['cat', 'lion', 'tiger'])
