@@ -65,6 +65,18 @@ utils.fahrenheitToCelsius(212)   // 100
 
 ---
 
+## getQueryStringValue(url: string, key: string): string | undefined
+
+Get the value of a param from a URL
+
+```ts
+utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'foo')   // 'bar'
+utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'baz')   // 'qux'
+utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'quux')  // undefined
+```
+
+---
+
 ## hexToRgb(hex: string): number[]
 
 Convert hex to rgb.
@@ -107,6 +119,20 @@ utils.rgbToHex(0, 255, 0)      // '#00ff00'
 utils.rgbToHex(0, 0, 0)        // '#000000'
 utils.rgbToHex(255, 255, 255)  // '#ffffff'
 utils.rgbToHex(20, 10, 200)    // '#140ac8'
+```
+
+---
+
+## async runPromisesInSequence(promises: Array<Promise<unknown>>): Promise<unknown>
+
+Run Promises in sequence.
+
+```ts
+await utils.runPromisesInSequence([
+  new Promise<number>(resolve => setTimeout(() => resolve(1), 100)),
+  new Promise(resolve => setTimeout(() => resolve(2), 50)),
+  new Promise(resolve => setTimeout(() => resolve(3), 0)),
+]) // [1, 2, 3]
 ```
 
 ---

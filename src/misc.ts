@@ -32,6 +32,21 @@ export const fahrenheitToCelsius = (fahrenheit: number): number => {
   return Math.fround(((fahrenheit - 32) * 5) / 9)
 }
 
+export const getQueryStringValue = (url: string, key: string): string | undefined => {
+  const queryString = url.split('?')[1]
+  const queryStringPairs = queryString.split('&')
+
+  for (const queryStringPair of queryStringPairs) {
+    const [queryStringKey, queryStringValue] = queryStringPair.split('=')
+
+    if (queryStringKey === key) {
+      return queryStringValue
+    }
+  }
+
+  return undefined
+}
+
 export const hexToRgb = (hex: string): number[] => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
 
@@ -71,6 +86,16 @@ export const matchAll = (value: string, regex: RegExp): RegExpMatchArray[] => {
 
 export const rgbToHex = (red: number, green: number, blue: number): string => {
   return `#${((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1)}`
+}
+
+export const runPromisesInSequence = async (promises: Array<Promise<unknown>>): Promise<unknown> => {
+  return await promises.reduce(async (promiseChain, currentTask) => {
+    return await promiseChain.then(async (chainResult) => {
+      return await currentTask.then(async (currentResult) => {
+        return [...chainResult as any, currentResult]
+      })
+    })
+  }, Promise.resolve([]))
 }
 
 export const toFullHexColor = (color: string): string => {
