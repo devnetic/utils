@@ -65,7 +65,6 @@ utils.fahrenheitToCelsius(212)   // 100
 
 ---
 
-<<<<<<< HEAD
 ## getQueryStringValue(url: string, key: string): string | undefined
 
 Get the value of a param from a URL
@@ -78,6 +77,7 @@ utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'quux')  // 
 
 ---
 
+<<<<<<< HEAD
 ## getType(value: unknown): string
 
 This function returns the value type, but this function is not just a typeof wrapper, because actually can determinate a more detailed data type. The data type is always a string starting with capital letter.
@@ -99,8 +99,6 @@ utils.getType(new Int16Array(3))  // 'Int16Array'
 
 ---
 
-=======
->>>>>>> 62f2b7f... feat: new functions and docs, reorganization
 ## hexToRgb(hex: string): number[]
 
 Convert hex to rgb.
@@ -147,7 +145,6 @@ utils.rgbToHex(20, 10, 200)    // '#140ac8'
 
 ---
 
-<<<<<<< HEAD
 ## async runPromisesInSequence(promises: Array<Promise<unknown>>): Promise<unknown>
 
 Run Promises in sequence.
@@ -162,8 +159,6 @@ await utils.runPromisesInSequence([
 
 ---
 
-=======
->>>>>>> 62f2b7f... feat: new functions and docs, reorganization
 ## toFullHexColor = (color: string): string
 
 Convert 3 digits color to 6 digits color
