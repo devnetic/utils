@@ -107,6 +107,17 @@ utils.countOccurrencesBy(['a', 'b', 'a', 'c', 'a', 'b'], 'a')  // 3
 
 ---
 
+## division(numbers: number[]): number
+
+Calculate the division of arguments.
+
+```ts
+utils.division([1, 2, 3, 4]),     // 0.041666666666666664
+utils.division([1, 2, 3, 4, 5]),  // 0.008333333333333333
+```
+
+---
+
 ## fromEntries(entries: IterableIterator<[string, string]>): Object
 
 This function transforms a list of key-value pairs into an object.
