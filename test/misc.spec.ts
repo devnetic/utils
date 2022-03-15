@@ -29,12 +29,26 @@ test('should generate a counter', t => {
   t.is(initializedCounter(), 12)
 })
 
+test('should simulate a dice roll', t => {
+  const value = utils.diceRoll()
+
+  t.true(typeof value === 'number')
+  t.true(value >= 1)
+  t.true(value <= 6)
+})
+
 test('should convert fahrenheit to celsius', t => {
   t.is(utils.fahrenheitToCelsius(-4), -20)
   t.is(utils.fahrenheitToCelsius(32), 0)
   t.is(utils.fahrenheitToCelsius(33.8), 1)
   t.is(utils.fahrenheitToCelsius(33.9), 1.0555555820465088)
   t.is(utils.fahrenheitToCelsius(212), 100)
+})
+
+test('should get the value from a URL query string', t => {
+  t.is(utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'foo'), 'bar')
+  t.is(utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'baz'), 'qux')
+  t.is(utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'quux'), undefined)
 })
 
 test('should convert hex to rgb', t => {
@@ -90,6 +104,20 @@ test('should convert rgb to hex', t => {
   t.is(utils.rgbToHex(20, 10, 200), '#140ac8')
 })
 
+test('should run promises in sequence', async t => {
+  try {
+    const result = await utils.runPromisesInSequence([
+      new Promise<number>(resolve => setTimeout(() => resolve(1), 100)),
+      new Promise(resolve => setTimeout(() => resolve(2), 50)),
+      new Promise(resolve => setTimeout(() => resolve(3), 0)),
+    ])
+
+    t.deepEqual(result, [1, 2, 3])
+  } catch (error) {
+    t.fail(error as string)
+  }
+})
+
 test('should convert 3 digits color to 6 digits color', t => {
   t.is(utils.toFullHexColor('#f00'), '#ff0000')
   t.is(utils.toFullHexColor('#0f0'), '#00ff00')
@@ -100,14 +128,6 @@ test('should convert 3 digits color to 6 digits color', t => {
   t.is(utils.toFullHexColor('#000'), '#000000')
   t.is(utils.toFullHexColor('000'), '#000000')
   t.is(utils.toFullHexColor('#fff0'), '#fff0')
-})
-
-test('should simulate a dice roll', t => {
-  const value = utils.diceRoll()
-
-  t.true(typeof value === 'number')
-  t.true(value >= 1)
-  t.true(value <= 6)
 })
 
 test('should returns a valid UUID', t => {
