@@ -77,7 +77,6 @@ utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'quux')  // 
 
 ---
 
-<<<<<<< HEAD
 ## getType(value: unknown): string
 
 This function returns the value type, but this function is not just a typeof wrapper, because actually can determinate a more detailed data type. The data type is always a string starting with capital letter.
