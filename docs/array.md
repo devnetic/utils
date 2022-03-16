@@ -44,6 +44,17 @@ utils.cartesianProduct([1, 2], [3, 4])  // [[1, 3], [1, 4], [2, 3], [2, 4]]
 
 ---
 
+## chunk<T,>(arr: T[], size: number): T[][]
+
+Split an array into chunks.
+
+```ts
+utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
+utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4)  // [[1, 2, 3, 4], [5, 6, 7, 8]]
+```
+
+---
+
 ## closest(array: number[], target: number): number
 
 Find the closest number from an array
@@ -52,17 +63,6 @@ Find the closest number from an array
 utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 50)  // 33
 utils.closest([1, 2, 3], 2)  // 2
 utils.closest([1, 2, 3], -1)  // 1
-```
-
----
-
-## chunk<T,>(arr: T[], size: number): T[][]
-
-Split an array into chunks.
-
-```ts
-utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 3)  // [[1, 2, 3], [4, 5, 6], [7, 8]]
-utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4)  // [[1, 2, 3, 4], [5, 6, 7, 8]]
 ```
 
 ---
@@ -118,18 +118,14 @@ utils.division([1, 2, 3, 4, 5]),  // 0.008333333333333333
 
 ---
 
-## fromEntries(entries: IterableIterator<[string, string]>): Object
+## flatten<T>(input: NestedArray<T>, depth = 1): NestedArray<T>
 
-This function transforms a list of key-value pairs into an object.
+Flatten an array.
 
-```javascript
-utils.fromEntries([['0', 'a'], ['1', 'b'], ['2', 'c']])  // { 0: 'a', 1: 'b', 2: 'c' }
-
-const entries = new Map([
-  ['foo', 'bar'],
-  ['baz', 42]
-])
-utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
+```ts
+utils.flatten([1, [2, [3, [4, [5]]]]], Infinity)  // [1, 2, 3, 4, 5]
+utils.flatten(['cat', ['lion', 'tiger']])         // ['cat', 'lion', 'tiger']
+utils.flatten([0, 1, 2, [[[3, 4]]]], 2)           // [0, 1, 2, [3, 4]]
 ```
 
 ---
