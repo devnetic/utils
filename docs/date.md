@@ -45,7 +45,7 @@ Returns a date formatted according to given format.
 | `s ss`         | `0..59`  | Seconds |
 | `u`            | `436`    | Fractional seconds |
 
-```javascript
+```ts
 const date = new Date('2020-04-24T18:12:02.432')
 
 utils.dateFormat(date, 'HH:mm:ss') // 18:12:02
@@ -181,7 +181,7 @@ utils.monthDiff(initial, final)  // 12
 
 Transform a duration in milliseconds to human readable 'HH:mm:ss.m' format
 
-```javascript
+```ts
 const date = new Date('2020-04-24T18:12:02.432')
 
 const HOUR = 60 * 60 * 1000

@@ -79,18 +79,6 @@ test('should returns a flattened array', t => {
   t.deepEqual(utils.flatten([0, 1, 2, [[[3, 4]]]], 2), [0, 1, 2, [3, 4]])
 })
 
-test('should returns the object created from entries', t => {
-  const arrayEntries = [['0', 'a'], ['1', 'b'], ['2', 'c']]
-  const mapEntries = new Map([
-    ['foo', 'bar'],
-    ['baz', '42']
-  ])
-  mapEntries.set('key', '123')
-
-  t.deepEqual(utils.fromEntries(arrayEntries), { 0: 'a', 1: 'b', 2: 'c' })
-  t.deepEqual(utils.fromEntries(mapEntries), { foo: 'bar', baz: '42', key: '123' })
-})
-
 test('should returns all arrays of consecutive elements', t => {
   t.deepEqual(utils.getConsecutiveArrays([1, 2, 3, 4, 5], 2), [[1, 2], [2, 3], [3, 4], [4, 5]])
   t.deepEqual(utils.getConsecutiveArrays([1, 2, 3, 4, 5], 3), [[1, 2, 3], [2, 3, 4], [3, 4, 5]])

@@ -70,24 +70,16 @@ export const flatten = <T>(input: NestedArray<T>, depth = 1): NestedArray<T> => 
     : input.slice()
 }
 
-/**
- * Transforms a list of key-value pairs into an object.
- *
- * @param {*} iterable An iterable such as Array or Map or other objects
- * implementing the iterable protocol.
- * @returns A new object whose properties are given by the entries of the
- * iterable.
- */
-export const fromEntries = <T>(entries: Iterable<T> | ArrayLike<T>): object => {
-  return Array.from(entries).reduce((result: object, [key, value]: any) => {
-    return { ...result, [key]: value }
-  }, {})
-}
-
 export const getConsecutiveArrays = <T,>(array: T[], size: number): T[][] => {
   return size > array.length
     ? []
     : array.slice(size - 1).map((_, index) => array.slice(index, size + index))
+}
+
+export const getIndicesOf = <T>(array: T[], value: T): number[] => {
+  return array.reduce<number[]>((acc, curr, i) => {
+    return curr === value ? [...acc, i] : acc
+  }, [])
 }
 
 export const getIntersection = <T>(array: T[], ...arr: T[][]): T[] => {
@@ -116,12 +108,6 @@ export const getSubsets = <T>(array: T[]): T[][] => {
   }, [[]])
 }
 
-export const getIndicesOf = <T>(array: T[], value: T): number[] => {
-  return array.reduce<number[]>((acc, curr, i) => {
-    return curr === value ? [...acc, i] : acc
-  }, [])
-}
-
 export const groupBy = <T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): Record<string, T[]> => {
   return arr.reduce<Record<string, T[]>>((acc: any, item) => {
     acc[item[key]] = [...(acc[item[key]] ?? []), item]
@@ -130,16 +116,16 @@ export const groupBy = <T extends Record<string, unknown>, K extends keyof T>(ar
   }, {})
 }
 
-export const longestStringIndex = (words: string[]): number => {
-  return words.reduce((prev, curr, index, array) => {
-    return curr.length >= array[prev].length ? index : prev
-  }, 0)
-}
-
 export const lastIndex = <T,>(arr: T[], predicate: (a: T) => boolean): number => {
   return arr.reduce((prev, curr, index) => {
     return predicate(curr) ? index : prev
   }, -1)
+}
+
+export const longestStringIndex = (words: string[]): number => {
+  return words.reduce((prev, curr, index, array) => {
+    return curr.length >= array[prev].length ? index : prev
+  }, 0)
 }
 
 export const maxBy = <T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T => {
@@ -178,10 +164,6 @@ export const repeat = <T,>(arr: T[], n: number): T[] => {
   return Array.from({ length: arr.length * n }, (_, i) => arr[i % arr.length])
 }
 
-export const swapItems = <T,>(a: T[], i: number, j: number): T[] => {
-  return (a[i] !== undefined && a[j] !== undefined && [...a.slice(0, i), a[j], ...a.slice(i + 1, j), a[i], ...a.slice(j + 1)]) || a
-}
-
 export const shuffle = <T,>(input: T[]): T[] => {
   return input
     .map((a) => ({ sort: Math.random(), value: a }))
@@ -193,6 +175,10 @@ export const sortBy = <T extends Record<string, any>, K extends keyof T>(input: 
   return input.concat().sort((a, b) => {
     return a[k] > b[k] ? 1 : a[k] < b[k] ? -1 : 0
   })
+}
+
+export const swapItems = <T,>(a: T[], i: number, j: number): T[] => {
+  return (a[i] !== undefined && a[j] !== undefined && [...a.slice(0, i), a[j], ...a.slice(i + 1, j), a[i], ...a.slice(j + 1)]) || a
 }
 
 export const transpose = <T,>(matrix: T[][]): T[][] => {
