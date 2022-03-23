@@ -21,6 +21,30 @@ test('should returns the object created from entries', t => {
   t.deepEqual(utils.fromEntries(mapEntries), { foo: 'bar', baz: '42', key: '123' })
 })
 
+test('should get the value at given path of an object', t => {
+  const obj = {
+    a: {
+      b: {
+        c: 42
+      }
+    }
+  }
+
+  t.is(utils.getValue(obj, 'a.b.c'), 42)
+  t.is(utils.getValue(obj, 'a.b.c.d'), undefined)
+  t.is(utils.getValue(obj, 'a.b.c.d', 'default'), 'default')
+})
+
+test('should inverted the keys and values of an object', t => {
+  const obj = {
+    foo: 'bar',
+    baz: 'fuzz',
+    ergo: 'lorem'
+  }
+
+  t.deepEqual(utils.invert(obj), { a: 'a', b: 'b', c: 'c' })
+})
+
 test('should extract values of a property from an array of object', t => {
   t.deepEqual(utils.pluck([{ a: 1 }, { a: 2 }, { a: 3 }], 'a'), [1, 2, 3])
   t.deepEqual(utils.pluck(
@@ -35,17 +59,11 @@ test('should extract values of a property from an array of object', t => {
   )
 })
 
-
-test('should get the value at given path of an object', t => {
+test('should rename keys of an object', t => {
   const obj = {
-    a: {
-      b: {
-        c: 42
-      }
-    }
+    foo: 'bar',
+    baz: 42
   }
 
-  t.is(utils.getValue(obj, 'a.b.c'), 42)
-  t.is(utils.getValue(obj, 'a.b.c.d'), undefined)
-  t.is(utils.getValue(obj, 'a.b.c.d', 'default'), 'default')
+  t.deepEqual(utils.renameKeys(obj, { foo: 'bar', baz: 'fuz' }), { bar: 'bar', fuz: 42 })
 })
