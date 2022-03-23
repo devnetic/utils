@@ -27,6 +27,26 @@ utils.fromEntries(entries)  // { foo: 'bar', baz: 42 }
 
 ---
 
+## getValue(object: object, path: string, defaultValue?: unknown): unknown
+
+Get the value at given path of an object.
+
+```ts
+const obj = {
+  a: {
+    b: {
+      c: 42
+    }
+  }
+}
+
+utils.getValue(obj, 'a.b.c')               // 42
+utils.getValue(obj, 'a.b.c.d')             // undefined
+utils.getValue(obj, 'a.b.c.d', 'default')  // 'default'
+```
+
+---
+
 ## pluck<T, K extends keyof T>(array: ArrayLike<T>, property: K): Array<T[K]> 
 
 Extract values of a property from an array of objects.
