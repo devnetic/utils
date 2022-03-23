@@ -47,6 +47,54 @@ utils.getValue(obj, 'a.b.c.d', 'default')  // 'default'
 
 ---
 
+## invert(object: object): object
+
+Invert keys and values of an object.
+
+```ts
+const obj = {
+  foo: 'bar',
+  baz: 'fuzz',
+  ergo: 'lorem'
+}
+
+utils.invert(obj)  // { bar: 'foo', fuzz: 'baz', lorem: 'ergo' }
+```
+
+---
+
+## omit<T, K extends keyof T>(object: T, keys: K[]): Omit<T, K>
+
+Omit a subset of properties from an object
+
+```ts
+const obj = {
+  foo: 'bar',
+  baz: 'fuzz',
+  ergo: 'lorem'
+}
+
+utils.omit(obj, ['foo', 'ergo'])  // { baz: 'fuzz' }
+```
+
+---
+
+## pick<T, K extends keyof T>(object: T, keys: K[]): { [P in K]: T[P] }
+
+Pick a subset of properties of an object.
+
+```ts
+const obj = {
+  foo: 'bar',
+  baz: 'fuzz',
+  ergo: 'lorem'
+}
+
+utils.pick(obj, ['foo', 'ergo'])  // { foo: 'bar', ergo: 'lorem' }
+```
+
+---
+
 ## pluck<T, K extends keyof T>(array: ArrayLike<T>, property: K): Array<T[K]> 
 
 Extract values of a property from an array of objects.
@@ -61,6 +109,37 @@ utils.pluck(
   ],
   'name'
 )                                                 // ['John', 'Smith', 'Peter']
+```
+
+---
+
+## removeNullish<T>(value: T): object
+
+Remove all null and undefined properties from an object.
+
+```ts
+const obj = {
+  foo: null,
+  baz: undefined,
+  ergo: 'lorem'
+}
+
+utils.removeNullish(obj),  // { ergo: 'lorem' }
+```
+
+---
+
+## renameKeys<T extends object, K extends keyof T>(object: T, map: { [key in K]: string }): object
+
+Immutably rename object keys.
+
+```ts
+const obj = {
+  foo: 'bar',
+  baz: 42
+}
+
+utils.renameKeys(obj, { foo: 'bar', baz: 'fuz' })  // { bar: 'bar', fuz: 42 }
 ```
 
 ---
