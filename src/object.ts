@@ -33,16 +33,48 @@ export const getValue = (object: object, path: string, defaultValue?: unknown): 
   return result ?? defaultValue
 }
 
-export const invert = <T>(object: Record<string, T>): Record<T, string> => {
-  return Object.entries(object).reduce((result: Record<T, string>, [key, value]: [string, T]) => {
+export const invert = (object: object): object => {
+  return Object.entries(object).reduce((result: object, [key, value]: [string, any]) => {
     return { ...result, [value]: key }
   }, {})
+}
+
+export const omit = <T, K extends keyof T>(object: T, keys: K[]): Omit<T, K> => {
+  return Object.entries(object).reduce((result: object, [key, value]: [any, any]) => {
+    if (keys.includes(key)) {
+      return result
+    }
+
+    return { ...result, [key]: value }
+  }, {}) as any
+}
+
+export const pick = <T, K extends keyof T>(object: T, keys: K[]): { [P in K]: T[P] } => {
+  return Object.entries(object).reduce((result: object, [key, value]: [any, any]) => {
+    if (keys.includes(key)) {
+      return { ...result, [key]: value }
+    }
+
+    return result
+  }, {}) as Pick<T, K>
 }
 
 export const pluck = <T, K extends keyof T>(array: ArrayLike<T>, property: K): Array<T[K]> => {
   return Array.from(array).map((item: T) => {
     return item[property]
   })
+}
+
+// type NoUndefinedField<T> = { [P in keyof T]-?: NoUndefinedField<NonNullable<T[P]>> }
+
+export const removeNullish = <T>(value: T): object => {
+  return Object.entries(value).reduce((result: object, [key, value]: [any, any]) => {
+    if (value === null || value === undefined) {
+      return result
+    }
+
+    return { ...result, [key]: value }
+  }, {}) as any
 }
 
 export const renameKeys = <T extends object, K extends keyof T>(object: T, map: { [key in K]: string }): object => {

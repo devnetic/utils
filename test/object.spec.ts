@@ -42,7 +42,27 @@ test('should inverted the keys and values of an object', t => {
     ergo: 'lorem'
   }
 
-  t.deepEqual(utils.invert(obj), { a: 'a', b: 'b', c: 'c' })
+  t.deepEqual(utils.invert(obj), { bar: 'foo', fuzz: 'baz', lorem: 'ergo' })
+})
+
+test('should omit a subset of properties from an object', t => {
+  const obj = {
+    foo: 'bar',
+    baz: 'fuzz',
+    ergo: 'lorem'
+  }
+
+  t.deepEqual(utils.omit(obj, ['foo', 'ergo']), { baz: 'fuzz' })
+})
+
+test('should pick a subset of properties from an object', t => {
+  const obj = {
+    foo: 'bar',
+    baz: 'fuzz',
+    ergo: 'lorem'
+  }
+
+  t.deepEqual(utils.pick(obj, ['foo', 'ergo']), { foo: 'bar', ergo: 'lorem' })
 })
 
 test('should extract values of a property from an array of object', t => {
@@ -57,6 +77,16 @@ test('should extract values of a property from an array of object', t => {
     ),
     ['John', 'Smith', 'Peter']
   )
+})
+
+test('should remove null and undefined values from an object', t => {
+  const obj = {
+    foo: null,
+    baz: undefined,
+    ergo: 'lorem'
+  }
+
+  t.deepEqual(utils.removeNullish(obj), { ergo: 'lorem' })
 })
 
 test('should rename keys of an object', t => {
