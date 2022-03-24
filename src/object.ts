@@ -1,3 +1,6 @@
+export type IsNullable<T, K> = T extends null | undefined ? K : never
+export type NullableKeys<T> = { [K in keyof T]-?: IsNullable<T[K], K> }[keyof T]
+
 export const createObject = (): object => {
   return Object.create(null)
 }
@@ -23,10 +26,6 @@ export const getValue = (object: object, path: string, defaultValue?: unknown): 
   for (let index = 0; index < keys.length; index++) {
     const key = keys[index]
 
-    if (result === undefined || result === null) {
-      return defaultValue
-    }
-
     result = result[key]
   }
 
@@ -49,14 +48,14 @@ export const omit = <T, K extends keyof T>(object: T, keys: K[]): Omit<T, K> => 
   }, {}) as any
 }
 
-export const pick = <T, K extends keyof T>(object: T, keys: K[]): { [P in K]: T[P] } => {
+export const pick = <T, K extends keyof T>(object: T, keys: K[]): { [P in K]: T[K] } => {
   return Object.entries(object).reduce((result: object, [key, value]: [any, any]) => {
     if (keys.includes(key)) {
       return { ...result, [key]: value }
     }
 
     return result
-  }, {}) as Pick<T, K>
+  }, {}) as { [P in K]: T[K] }
 }
 
 export const pluck = <T, K extends keyof T>(array: ArrayLike<T>, property: K): Array<T[K]> => {
@@ -65,9 +64,7 @@ export const pluck = <T, K extends keyof T>(array: ArrayLike<T>, property: K): A
   })
 }
 
-// type NoUndefinedField<T> = { [P in keyof T]-?: NoUndefinedField<NonNullable<T[P]>> }
-
-export const removeNullish = <T>(value: T): object => {
+export const removeNullish = <T>(value: T): Omit<T, NullableKeys<T>> => {
   return Object.entries(value).reduce((result: object, [key, value]: [any, any]) => {
     if (value === null || value === undefined) {
       return result
@@ -80,5 +77,13 @@ export const removeNullish = <T>(value: T): object => {
 export const renameKeys = <T extends object, K extends keyof T>(object: T, map: { [key in K]: string }): object => {
   return Object.entries(map).reduce((result: object, [key, value]: any) => {
     return { ...result, [value]: Reflect.get(object, key) }
+  }, {})
+}
+
+export const sortKeys = <T extends object>(object: T): object => {
+  return Object.entries(object).sort(([keyA, valueA], [keyB, valueB]): number => {
+    return keyA.localeCompare(keyB)
+  }).reduce((result: object, [key, value]: any) => {
+    return { ...result, [key]: value }
   }, {})
 }

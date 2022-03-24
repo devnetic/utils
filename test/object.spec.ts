@@ -58,7 +58,7 @@ test('should omit a subset of properties from an object', t => {
 test('should pick a subset of properties from an object', t => {
   const obj = {
     foo: 'bar',
-    baz: 'fuzz',
+    baz: 123,
     ergo: 'lorem'
   }
 
@@ -96,4 +96,14 @@ test('should rename keys of an object', t => {
   }
 
   t.deepEqual(utils.renameKeys(obj, { foo: 'bar', baz: 'fuz' }), { bar: 'bar', fuz: 42 })
+})
+
+test('should sort keys of an object', t => {
+  const obj = {
+    foo: 'bar',
+    baz: 42,
+    ergo: 'lorem'
+  }
+
+  t.deepEqual(utils.sortKeys(obj), { baz: 42, ergo: 'lorem', foo: 'bar' })
 })

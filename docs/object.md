@@ -79,7 +79,7 @@ utils.omit(obj, ['foo', 'ergo'])  // { baz: 'fuzz' }
 
 ---
 
-## pick<T, K extends keyof T>(object: T, keys: K[]): { [P in K]: T[P] }
+## pick<T, K extends keyof T>(object: T, keys: K[]): { [P in K]: T[K] }
 
 Pick a subset of properties of an object.
 
@@ -140,6 +140,22 @@ const obj = {
 }
 
 utils.renameKeys(obj, { foo: 'bar', baz: 'fuz' })  // { bar: 'bar', fuz: 42 }
+```
+
+---
+
+## sortKeys<T extends object>(object: T): object
+
+Sort an object by its properties,
+
+```ts
+const obj = {
+  foo: 'bar',
+  baz: 42,
+  ergo: 'lorem'
+}
+
+utils.sortKeys(obj)  // { baz: 42, ergo: 'lorem', foo: 'bar' }
 ```
 
 ---
