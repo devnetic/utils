@@ -140,19 +140,6 @@ Object.keys(object).includes(value)  // true
 
 ---
 
-## randomSign(): number
-
-Generate a random sign.
-
-```ts
-const value = utils.randomSign()
-
-typeof value === 'number'    // true
-value === 1 || value === -1  // true
-```
-
----
-
 ## randomString(): string
 
 Generate a random string using Node crypto module.

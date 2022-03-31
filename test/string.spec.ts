@@ -15,6 +15,13 @@ test('should convert the value to came case', t => {
   t.is(utils.camelCase(''), '')
 })
 
+test('should capitalize the first letter of the value', t => {
+  const expected = 'SomeValue'
+
+  t.is(utils.capitalize('hello world'), 'Hello world')
+  t.is(utils.capitalize(''), '')
+})
+
 test('should convert the value to kebab case', t => {
   const expected = 'some-value'
 

@@ -49,10 +49,6 @@ export const randomProperty = <T,>(object: { [key: string]: T }): string => {
   return keys[randomInteger(0, keys.length - 1)]
 }
 
-export const randomSign = (): number => {
-  return Math.random() >= 0.5 ? 1 : -1
-}
-
 export const randomString = (): string => {
   return crypto.randomBytes(32).toString('hex')
 }
