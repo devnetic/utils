@@ -17,6 +17,10 @@ export const camelCase = (value: string): string => {
     .join('')
 }
 
+export const capitalize = (value: string): string => {
+  return value.charAt(0).toUpperCase() + value.slice(1)
+}
+
 /**
  * Transforms a value to kebab case
  *

@@ -87,13 +87,6 @@ test('should return a random property of an object', t => {
   t.true(Object.keys(object).includes(value))
 })
 
-test('should return a random sign', t => {
-  const value = utils.randomSign()
-
-  t.true(typeof value === 'number')
-  t.true(value === 1 || value === -1)
-})
-
 test('should return a random string', t => {
   const value = utils.randomString()
 
