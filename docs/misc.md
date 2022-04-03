@@ -77,6 +77,27 @@ utils.getQueryStringValue('http://localhost:8080/?foo=bar&baz=qux', 'quux')  // 
 
 ---
 
+## getType(value: unknown): string
+
+This function returns the value type, but this function is not just a typeof wrapper, because actually can determinate a more detailed data type. The data type is always a string starting with capital letter.
+
+```ts
+utils.getType({})  // 'Object'
+utils.getType(new Date())  // 'Date'
+utils.getType(String())  // 'String'
+utils.getType('')  // 'String'
+utils.getType('123')  // 'String'
+utils.getType(123)  // 'Number'
+utils.getType(123.4)  // 'Number'
+utils.getType(true)  // 'Boolean'
+utils.getType(false)  // 'Boolean'
+utils.getType(BigInt(1))  // 'BigInt'
+utils.getType([])  // 'Array'
+utils.getType(new Int16Array(3))  // 'Int16Array'
+```
+
+---
+
 ## hexToRgb(hex: string): number[]
 
 Convert hex to rgb.
