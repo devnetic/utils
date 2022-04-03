@@ -47,6 +47,12 @@ export const getQueryStringValue = (url: string, key: string): string | undefine
   return undefined
 }
 
+export const getType = (value: unknown = undefined): string => {
+  const typeRegex = /\[object (.*)\]/
+
+  return (Object.prototype.toString.call(value).match(typeRegex) as string[])[1]
+}
+
 export const hexToRgb = (hex: string): number[] => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
 
