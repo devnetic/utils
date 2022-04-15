@@ -1,4 +1,4 @@
-# Language Functions
+# Validator Functions
 
 ## areEqual<T>(array: T[]): boolean
 
