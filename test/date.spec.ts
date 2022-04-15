@@ -131,8 +131,6 @@ test('should returns the timezone string', t => {
 
   t.true(typeof timezone === 'string')
   t.true(timezone.length > 0)
-  t.true(timezone.includes('/'))
-  t.true(timezone.split('/').length === 2)
 })
 
 test('should returns the weekday of a date', t => {
