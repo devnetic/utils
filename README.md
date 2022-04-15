@@ -32,16 +32,16 @@ utils.dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
 
 # Documentation
 
-1. [Array](https://github.com/devnetic/utils/docs/array.md)
-2. [Date](https://github.com/devnetic/utils/docs/date.md)
-3. [Function](https://github.com/devnetic/utils/docs/function.md)
-4. [Math](https://github.com/devnetic/utils/docs/math.md)
-5. [Misc](https://github.com/devnetic/utils/docs/misc.md)
-6. [Number](https://github.com/devnetic/utils/docs/number.md)
-7. [Object](https://github.com/devnetic/utils/docs/object.md)
-8. [Random](https://github.com/devnetic/utils/docs/random.md)
-9. [String](https://github.com/devnetic/utils/docs/string.md)
-10. [Validator](https://github.com/devnetic/utils/docs/validator.md)
+1. [Array](https://github.com/devnetic/utils/blob/master/docs/array.md)
+2. [Date](https://github.com/devnetic/utils/blob/master/docs/date.md)
+3. [Function](https://github.com/devnetic/utils/blob/master/docs/function.md)
+4. [Math](https://github.com/devnetic/utils/blob/master/docs/math.md)
+5. [Misc](https://github.com/devnetic/utils/blob/master/docs/misc.md)
+6. [Number](https://github.com/devnetic/utils/blob/master/docs/number.md)
+7. [Object](https://github.com/devnetic/utils/blob/master/docs/object.md)
+8. [Random](https://github.com/devnetic/utils/blob/master/docs/random.md)
+9. [String](https://github.com/devnetic/utils/blob/master/docs/string.md)
+10. [Validator](https://github.com/devnetic/utils/blob/master/docs/validator.md)
 
 ## About
 
