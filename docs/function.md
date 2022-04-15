@@ -47,6 +47,17 @@ fn('Hello World')  // 'dlrow olleH'
 
 ---
 
+## noop(): void
+
+Create an empty function.
+
+```ts
+utils.isFunction(utils.noop)  // true
+utils.noop()  // undefined
+```
+
+---
+
 ## pipe<T>(...fns: Array<(arg: T) => T>)
 
 Compose functions from left to right.
