@@ -1,6 +1,6 @@
 {
   "name": "@devnetic/utils",
-  "version": "1.2.1",
+  "version": "2.0.0",
   "description": "Common utils for every single day tasks",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
@@ -8,7 +8,8 @@
     "build": "npm run clean && tsc",
     "build:watch": "npm run build -- -w",
     "clean": "rm -rf lib",
-    "coverage": "nyc ava",
+    "coverage": "nyc --reporter=lcov ava",
+    "coverage:view": "nyc ava",
     "lint": "ts-standard",
     "lint:fix": "ts-standard --fix",
     "prepublishOnly": "npm run build && npm run lint && npm run coverage",
@@ -16,22 +17,12 @@
     "test": "ava",
     "test:watch": "ava --watch"
   },
-  "ava": {
-    "files": [
-      "test/**/*.spec.js"
-    ]
-  },
   "ts-standard": {
     "ignore": [
       "lib",
       "examples",
       "test"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "repository": {
     "type": "git",
@@ -64,16 +55,17 @@
   },
   "homepage": "https://github.com/devnetic/utils#readme",
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
-    "@commitlint/config-conventional": "^11.0.0",
-    "@commitlint/format": "^11.0.0",
-    "@types/node": "^14.14.6",
-    "ava": "^3.13.0",
-    "husky": "^4.3.0",
+    "@commitlint/cli": "^16.2.1",
+    "@commitlint/config-conventional": "^16.2.1",
+    "@commitlint/format": "^16.2.1",
+    "@types/node": "^17.0.21",
+    "@types/sinon": "^10.0.11",
+    "ava": "^4.0.1",
+    "husky": "^7.0.4",
     "nyc": "^15.1.0",
-    "standard-version": "^9.0.0",
-    "ts-standard": "^9.0.0",
-    "typescript": "^4.0.5"
-  },
-  "dependencies": {}
+    "sinon": "^13.0.1",
+    "standard-version": "^9.3.2",
+    "ts-standard": "^11.0.0",
+    "typescript": "^4.5.5"
+  }
 }

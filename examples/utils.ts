@@ -1,5 +1,13 @@
 import * as utils from './../src'
 
+const arrayEntries = [['0', 'a'], ['1', 'b'], ['2', 'c']]
+const mapEntries = new Map([
+  ['foo', 'bar'],
+  ['baz', '42']
+])
+mapEntries.set('key', '123')
+console.log(utils.fromEntries(arrayEntries))
+
 // console.log(utils.camelCase('someValue'))
 // console.log(utils.camelCase('some value'))
 // console.log(utils.camelCase('some  value'))
