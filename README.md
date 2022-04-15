@@ -9,11 +9,13 @@
 ![GitHub issues](https://img.shields.io/github/issues-raw/devnetic/utils)
 ![GitHub](https://img.shields.io/github/license/devnetic/utils)
 
-This library try to have efficien functions for almost any need when you are writing a software in JavaScript or Node.js.
+This library tries to have efficient functions for almost any need when you are writing software in JavaScript or Node.js.
 
-The library is written in TypeScript, so you have full type support when using it.
+The library is written in TypeScript, so you have full type support when you use it.
 
-# Instalation
+If you need a function or feature that is not present in this library, please send me a message or open a Pull Request requesting the feature and I will do my best to include it.
+
+# Installation
 
 ```shell
 $ npm i -S @devnetic/utils
@@ -21,7 +23,7 @@ $ npm i -S @devnetic/utils
 
 # Usage
 
-```ts
+```js
 const utils = require('@devnetic/utils)
 
 const date = new Date('2020-04-24T18:12:02.432')
