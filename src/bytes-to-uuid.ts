@@ -1,7 +1,7 @@
 const byteToHex: string[] = []
 
 for (let index = 0; index < 256; ++index) {
-  byteToHex[index] = (index + 0x100).toString(16).substr(1)
+  byteToHex[index] = (index + 0x100).toString(16).substring(1)
 }
 
 export const bytesToUuid = (buffer: Buffer): string => {
