@@ -132,8 +132,4 @@ export const uuid = (): string => {
   randomBytes[8] = (randomBytes[8] & 0x3f) | 0x80
 
   return bytesToUuid(randomBytes)
-
-  // let a: number
-  // let b: string
-  // for (a = 0, b = ''; a++ < 36; b += a * 51 & 52 ? (a ^ 15 ? 8 ^ Math.random() * (a ^ 20 ? 16 : 4) : 4).toString(16) : '-'); return b
 }
