@@ -48,6 +48,20 @@ export const getQueryStringValue = (url: string, key: string): string | undefine
 }
 
 export const getType = (value: unknown = undefined): string => {
+  const type = typeof value
+
+  if (type !== 'object') {
+    if (type === 'function') {
+      return 'Function'
+    }
+
+    if (type === 'bigint') {
+      return 'BigInt'
+    }
+
+    return type
+  }
+
   const typeRegex = /\[object (.*)\]/
 
   return (Object.prototype.toString.call(value).match(typeRegex) as string[])[1]

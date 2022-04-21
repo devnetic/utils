@@ -185,11 +185,6 @@ test('should returns the the minimun item of and array by key', t => {
   t.is(utils.minBy(people, 'age'), people[1])
 })
 
-test('should merge two arrays', t => {
-  t.deepEqual(utils.merge([1, 2, 3, 4], [4, 5, 6]), [1, 2, 3, 4, 5, 6])
-  t.deepEqual(utils.merge([1, 2, 3], [4, 5, 6]), [1, 2, 3, 4, 5, 6])
-})
-
 test('should returns the partion of an array based on a predicate', t => {
   const people = [
     { name: 'Bar', age: 24 },

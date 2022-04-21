@@ -245,7 +245,7 @@ export const isRegExp = <T>(value: T): boolean => {
 }
 
 export const isString = <T>(value: T): boolean => {
-  return getType(value) === 'String'
+  return typeof value === 'string' || value instanceof String
 }
 
 export const isSubsetOf = <T>(set: T[], subset: T[]): boolean => {
