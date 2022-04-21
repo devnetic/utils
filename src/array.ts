@@ -134,10 +134,6 @@ export const maxBy = <T extends Record<string, unknown>, K extends keyof T>(arr:
   })
 }
 
-export const merge = <T,>(a: T[], b: T[]): T[] => {
-  return [...new Set([...a, ...b])]
-}
-
 export const minBy = <T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T => {
   return arr.reduce((prev, curr) => {
     return curr[key] < prev[key] ? curr : prev

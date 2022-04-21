@@ -290,17 +290,6 @@ utils.maxBy(people, 'age') // { name: 'Foo', age: 42 }
 ```
 ---
 
-## merge<T,>(a: T[], b: T[]): T[]
-
-Merge two arrays.
-
-```ts
-utils.merge([1, 2, 3, 4], [4, 5, 6])  // [1, 2, 3, 4, 5, 6]
-utils.merge([1, 2, 3], [4, 5, 6])  // [1, 2, 3, 4, 5, 6]
-```
-
----
-
 ## minBy<T extends Record<string, unknown>, K extends keyof T>(arr: T[], key: K): T
 
 Find the minimum item of an array by given key.
