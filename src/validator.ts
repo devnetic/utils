@@ -61,6 +61,10 @@ export const isBic = (value: string): boolean => {
   return /^([A-Z]{6}[A-Z2-9][A-NP-Z1-9])(X{3}|[A-WY-Z0-9][A-Z0-9]{2})?$/.test(value)
 }
 
+export const isBoolean = (value: unknown): boolean => {
+  return typeof value === 'boolean'
+}
+
 export const isCurrentYear = (value: Date): boolean => {
   return value.getFullYear() === new Date().getFullYear()
 }
@@ -99,6 +103,10 @@ export const isEqual = (value: any, other: any): boolean => {
 
 export const isEven = (value: number): boolean => {
   return value % 2 === 0
+}
+
+export const isFalsy = (value: unknown): boolean => {
+  return !value // eslint-disable-line
 }
 
 export const isFloat = (value: any): boolean => {
@@ -258,6 +266,10 @@ export const isSubsetOf = <T>(set: T[], subset: T[]): boolean => {
 
 export const isToday = (date: Date): boolean => {
   return date.toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10)
+}
+
+export const isTruthy = (value: unknown): boolean => {
+  return !isFalsy(value)
 }
 
 export const isUpperCase = (value: string): boolean => {

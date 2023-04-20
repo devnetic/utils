@@ -2,7 +2,7 @@
 
 ## accumulate(array: number[]): number[]
 
-Create an array of cumulative sum
+Create an array of cumulative sum.
 
 ```ts
 utils.accumulate([1, 2, 3])  // [1, 3, 6])
@@ -35,7 +35,7 @@ utils.average([1, 2, 3, 4])  // 2.5
 
 ## cartesianProduct(...sets: Array<Array<string | number>>): Array<Array<string | number>>
 
-Create cartesian product
+Create cartesian product.
 
 ```ts
 utils.cartesianProduct([1, 2], ['a', 'b'])  // [[1, 'a'], [1, 'b'], [2, 'a'], [2, 'b']]
@@ -43,6 +43,19 @@ utils.cartesianProduct([1, 2], [3, 4])  // [[1, 3], [1, 4], [2, 3], [2, 4]]
 ```
 
 ---
+
+## castArray<T>(value?: T | T[]): T[]
+
+Casts value as an array if it's not one.
+
+```ts
+utils.castArray()            // []
+utils.castArray(1)           // [1]
+utils.castArray('1')         // ['1']
+utils.castArray({ 'a': 1 })  // [{ 'a': 1 }]
+utils.castArray('abc')       // ['abc']
+utils.castArray([1, 2, 3])   // [1, 2, 3]
+```
 
 ## chunk<T,>(arr: T[], size: number): T[][]
 
@@ -57,7 +70,7 @@ utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4)  // [[1, 2, 3, 4], [5, 6, 7, 8]]
 
 ## closest(array: number[], target: number): number
 
-Find the closest number from an array
+Find the closest number from an array.
 
 ```ts
 utils.closest([29, 87, 8, 78, 97, 20, 75, 33, 24, 17], 50)  // 33
@@ -98,7 +111,7 @@ utils.countOccurrences(['a', 'b', 'a', 'c', 'a', 'b'])  // { 'a': 3, 'b': 2, 'c'
 
 ## countOccurrencesBy<T, K extends T>(array: T[], value: K): number
 
-Count the occurrences of a value in an array.
+Count the occurrences of a given value in an array.
 
 ```ts
 utils.countOccurrencesBy([2, 1, 3, 3, 2, 3], 2)  // 2
@@ -171,7 +184,7 @@ utils.getIntersection([1, 2, 3, 4], [2, 3, 4], [3, 4, 5], [4, 5, 6])  // [4]
 
 ## getMaxIndex(array: number[]): number 
 
-Find the index of the maximum item of an array
+Find the index of the maximum item of an array.
 
 ```ts
 utils.getMaxIndex([1, 2, 3, 4, 5])  // 4
@@ -183,7 +196,7 @@ utils.getMaxIndex([1, 3, 7, 7, 5])  // 2
 
 ## getMinIndex(array: number[]): number 
 
-Find the index of the minimum item of an array
+Find the index of the minimum item of an array.
 
 ```ts
 utils.getMinIndex([6, 4, 8, 2, 10])  // 3
@@ -264,7 +277,7 @@ utils.lastIndex([1, 2, 3, 1, 2, 3], (i) => i > 6)  // -1
 
 ## longestStringIndex(words: string[]): number
 
-Find the index of the longest string in an array
+Find the index of the longest string in an array.
 
 ```ts
 utils.longestStringIndex(['foo', 'bar', 'baz'])  // 2
@@ -347,7 +360,7 @@ utils.range(5, 10)  // [5, 6, 7, 8, 9, 10]
 
 ## ranking(array: number[]): number[]
 
-Get the rank of an array of numbers
+Get the rank of an array of numbers.
 
 ```ts
 utils.ranking([1, 2, 3, 4, 5])  // [5, 4, 3, 2, 1]
@@ -462,7 +475,7 @@ utils.unique(['a', 'b', 'c', 'd', 'e', 'e', 'e', 'e', 'e', 'e'])  // 'a', 'b', '
 
 ## unzip<T>(arr: T[]): T[]
 
-Unzip an array of arrays
+Unzip an array of arrays.
 
 ```ts
 const zipped = [

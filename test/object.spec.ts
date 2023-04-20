@@ -41,6 +41,9 @@ test('should deep clone an object', t => {
   }
 
   const clonedObject = utils.clone(target)
+
+  // An empty object is returned for uncloneable values such as error objects,
+  // functions, DOM nodes, and WeakMaps.
   Reflect.set(target, 'weakMap', {})
 
   t.deepEqual(target, clonedObject)
@@ -144,6 +147,38 @@ test('should extract values of a property from an array of object', t => {
   )
 })
 
+test('should remove keys from an object where the predicate return truthy', t => {
+  const obj = {
+    foo: 'bar',
+    baz: 123,
+    ergo: 'lorem',
+    ipsum: '',
+    dolor: 0,
+    sit: false,
+    amet: null,
+    consectetur: undefined
+  }
+
+  const array = [
+    'foo',
+    123,
+    'ergo',
+    false,
+    'ipsum',
+    null,
+    'dolor',
+    undefined,
+    'sit',
+    '',
+    0,
+    true
+  ]
+
+  t.deepEqual(utils.remove(obj, (key: string, value: any) => key === 'foo' || value === 123), { ergo: 'lorem', ipsum: '', dolor: 0, sit: false, amet: null, consectetur: undefined })
+  t.deepEqual(utils.remove(obj, (key: string, value: any) => !Boolean(value)), { foo: 'bar', baz: 123, ergo: 'lorem' })
+  t.deepEqual(utils.remove(array, (key: string, value: any) => key === '0' || value === 123), ['ergo', false, 'ipsum', null, 'dolor', undefined, 'sit', '', 0, true])
+})
+
 test('should remove null and undefined values from an object', t => {
   const obj = {
     foo: null,
@@ -180,7 +215,7 @@ test('should set the value at given path of an object', t => {
   t.deepEqual(utils.setValue(target, 'a.b.c.d', 'bar'), { a: { b: { c: { d: 'bar' }  } }, foo: [2, { bar: 'baz' }] })
   t.deepEqual(utils.setValue(target, 'foo[1]["bar"]', 'bazbar'), { a: { b: { c: 42 } }, foo: [2, { bar: 'bazbar' }] })
   t.deepEqual(utils.setValue(target, 'foo[0]', 'bar'), { a: { b: { c: 42 } }, foo: ['bar', { bar: 'baz' }] })
-  t.deepEqual(utils.setValue(target, 'foo[]', 'bar'), { a: { b: { c: 42 } }, foo: [2, { bar: 'baz' }, 'bar'] })
+  t.deepEqual(utils.setValue(target, 'foo[]', 'buzz'), { a: { b: { c: 42 } }, foo: [2, { bar: 'baz' }, 'buzz'] })
 })
 
 test('should sort keys of an object', t => {

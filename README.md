@@ -24,12 +24,23 @@ $ npm i -S @devnetic/utils
 # Usage
 
 ```js
-const utils = require('@devnetic/utils)
+// commonjs
+const { dateFormat } = require('@devnetic/utils)
 
 const date = new Date('2020-04-24T18:12:02.432')
 
-utils.dateFormat(date, 'HH:mm:ss') // 18:12:02
-utils.dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
+dateFormat(date, 'HH:mm:ss') // 18:12:02
+dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
+```
+
+```js
+// ES Module
+import { dateFormat } from '@devnetic/utils'
+
+const date = new Date('2020-04-24T18:12:02.432')
+
+dateFormat(date, 'HH:mm:ss') // 18:12:02
+dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
 ```
 
 # Documentation
@@ -45,12 +56,72 @@ utils.dateFormat(date, 'hh:mm:ss a') // 06:12:02 pm
 9. [String](https://github.com/devnetic/utils/blob/master/docs/string.md)
 10. [Validator](https://github.com/devnetic/utils/blob/master/docs/validator.md)
 
+# [Array Functions](https://github.com/devnetic/utils/blob/master/docs/array.md)
+
+- **accumulate:** Create an array of cumulative sum.
+- **alphabet:** Generate an array of alphabet characters.
+- **average:** Get the average of an array.
+- **cartesianProduct:** Create cartesian product.
+- **castArray:** Casts value as an array if it's not one.
+- **chunk:** Split an array into chunks.
+- **closest:** Find the closest number from an array
+- **countBy:** Count by the properties of an array of objects.
+- **countOccurrences:** Count the occurrences of array elements.
+- **countOccurrencesBy:** Count the occurrences of a given value in an array.
+- **division:** Calculate the division of arguments.
+- **flatten:** Flatten an array.
+- **getConsecutiveArrays:** Get all arrays of consecutive elements.
+- **getIndicesOf:** Get indices of a value in an array.
+- **getIntersection:** Get the intersection of arrays.
+- **getMaxIndex:** Find the index of the maximum item of an array
+- **getMinIndex:** Find the index of the minimum item of an array
+- **getNthElements:** Get all n-th items of an array.
+- **getSubsets:** Get all subsets of an array.
+- **groupBy:** Group an array of objects by a key.
+- **lastIndex:** Find the index of the last matching item of an array.
+- **longestStringIndex:** Find the index of the longest string in an array.
+- **maxBy:** Find the maximum item of an array by given key.
+- **minBy:** Find the minimum item of an array by given key.
+- **partition:** Partition an array based on a condition.
+- **range:** Create an array of numbers in the given range.
+- **ranking:** Get the rank of an array of numbers
+- **repeat:** Repeat an array.
+- **shuffle:** Shuffle an array.
+- **sortBy:** Sort an array of items by given key.
+- **swapItems:** Swap two array items.
+- **transpose:** Swap the rows and columns of a matrix.
+- **union:** Get union of arrays.
+- **unique:** Get the unique values of an array.
+- **unzip:** Unzip an array of arrays
+- **zip:** Zip multiple arrays.
+
+
+# [Date Functions](https://github.com/devnetic/utils/blob/master/docs/date.md)
+
+- **dateExtract:** Extract year, month, day, hour, minute, second and millisecond from a date.
+- **dateFormat:** Returns a date formatted according to given format.
+- **daysInMonth:** Get the number of days in given month.
+- **daysInYear:** Get the total number of days in a year
+- **daysDiff:** Calculate the number of difference days between two dates.
+- **firstDateOfMonth:** Get the first date in the month of a date
+- **formatSeconds:** Convert seconds to hh:mm:ss format
+- **getQuarter:** Get the current quarter of a date.
+- **getTimezone:** Get the timezone string.
+- **getWeekday:** Get the weekday of a date.
+- **lastDateOfMonth:** Get the last date in the month of a date.
+- **monthDiff:** Calculate the number of difference days between two dates.
+- **msToTime:** Transform a duration in milliseconds to human readable 'HH:mm:ss.m' format
+- **suffixDate:** Add AM PM suffix to an hour.
+- **tomorrow:** Get the tomorrow date.
+- **yesterday:** Get the yesterday date.
+
+
 ## About
 
 This project is developed by _Álvaro José Agámez Licha_. I love building products and sharing knowledge.
 
 Be my friend on:
 
-- [Twitter](https://twitter.com/aagamezl)
-- [dev.to](https://dev.to/aagamezl)
-- [Github](https://github.com/aagamezl)
+- **[T**witter](https://twitter.com/aagamezl)
+- **[d**ev.to](https://dev.to/aagamezl)
+- **[G**ithub](https://github.com/aagamezl)

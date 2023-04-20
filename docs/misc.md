@@ -43,6 +43,41 @@ initializedCounter()  // 12
 
 ---
 
+## crc32(value: string): number
+
+Returns the crc32 checksum of string as an integer.
+
+```ts
+utils.crc32('hello world')                                    // 222957957
+utils.crc32('The quick brown fox jumped over the lazy dog.')  // 2191738434
+```
+
+---
+
+## decimalToHex(value: number): string
+
+Returns a string containing a hexadecimal representation of the given unsigned `value` argument.
+
+```ts
+utils.decimalToHex(0)           // '0'
+utils.decimalToHex(1)           // '1'
+utils.decimalToHex(10)          // 'a'
+utils.decimalToHex(15)          // 'f'
+utils.decimalToHex(16)          // '10'
+utils.decimalToHex(17)          // '11'
+utils.decimalToHex(255)         // 'ff'
+utils.decimalToHex(256)         // '100'
+utils.decimalToHex(257)         // '101'
+utils.decimalToHex(65535)       // 'ffff'
+utils.decimalToHex(65536)       // '10000'
+utils.decimalToHex(65537)       // '10001'
+utils.decimalToHex(4294967295)  // 'ffffffff'
+utils.decimalToHex(4294967296)  // '100000000'
+utils.decimalToHex(4294967297)  // '100000001'
+```
+
+---
+
 ## diceRoll(): number
 
 Emulate a dice throw.
