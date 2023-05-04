@@ -41,14 +41,17 @@ test('should execute compose functions from right to left', t => {
 })
 
 test('should curry a function', t => {
-  const sum = (a: number, b: number, c: number): number => a + b + c
+  const sumThreeNumbers = (a: number, b: number, c: number): number => a + b + c
+  const sumFourNumbers = (a: number, b: number, c: number, d: number): number => a + b + c + d
 
-  t.is(utils.curry(sum)(1)(2)(3), 6)
-  t.is(utils.curry(sum)(1, 2, 3), 6)
-  t.is(utils.curry(sum, 1)(2, 3), 6)
-  t.is(utils.curry(sum, 1)(2)(3), 6)
-  t.is(utils.curry(sum, 1, 2)(3), 6)
-  t.is(utils.curry(sum, 1, 2, 3), 6)
+  t.is(utils.curry(sumThreeNumbers)(1)(2)(3), 6)
+  t.is(utils.curry(sumThreeNumbers)(1, 2, 3), 6)
+  t.is(utils.curry(sumThreeNumbers, 1)(2, 3), 6)
+  t.is(utils.curry(sumThreeNumbers, 1)(2)(3), 6)
+  t.is(utils.curry(sumThreeNumbers, 1, 2)(3), 6)
+  t.is(utils.curry(sumThreeNumbers, 1, 2, 3), 6)
+  t.is(utils.curry(sumFourNumbers, 1, 2, 3, 4), 10)
+  t.is(utils.curry(sumFourNumbers)(1)(2)(3)(4), 10)
 })
 
 test('should memoize a function', t => {
@@ -67,6 +70,13 @@ test('should memoize a function', t => {
   t.is(memoizedFibonacci(6), 8)
 })
 
+test('should create an empty function', t => {
+  const noop = utils.noop()
+
+  t.true(utils.isFunction(noop))
+  t.is(noop(), undefined)
+})
+
 test('should execute a function once', t => {
   let counter = 0
   const incOnce = utils.once((): number => ++counter)
@@ -76,13 +86,6 @@ test('should execute a function once', t => {
   incOnce() // n = 1
 
   t.is(counter, 1)
-})
-
-test('should create an empty function', t => {
-  const noop = utils.noop()
-
-  t.true(utils.isFunction(noop))
-  t.is(noop(), undefined)
 })
 
 test('should partial apply a function', t => {

@@ -96,6 +96,8 @@ value.split('.').length === 4  // true
 
 ## randomItem<T,>(array: T[]): T
 
+Get a random item from an array.
+
 ```ts
 const array = [1, 2, 3, 4, 5]
 const value = utils.randomItem(array)

@@ -24,6 +24,8 @@ utils.base64ToUint8('aGVsbG8=')  // [0x68, 0x65, 0x6c, 0x6c, 0x6f]
 
 ## baseUrl(value: string): string
 
+Get the base URL without any parameters.
+
 ```ts
 utils.baseUrl('https://example.com/path?query=string')                 // 'https://example.com/path')
 utils.baseUrl('https://example.com/path?query=string#hash')            // 'https://example.com/path')
@@ -35,6 +37,8 @@ utils.baseUrl('https://example.org/abc/xyz?123')                       // 'https
 ---
 
 ## byteLength(value: string, encoding?: BufferEncoding): number
+
+Get the length of a string in bytes.
 
 ```ts
 utils.byteLength('hello world')                    // 11
@@ -99,6 +103,8 @@ utils.countWords('welcome a board')  // 3
 ---
 
 ## decapitalize(value: string): string
+
+Decapitalize a string.
 
 ```ts
 utils.decapitalize('SomeValue')    // 'someValue'
@@ -487,7 +493,7 @@ utils.template('hello {0} {1} {2}', 'world', 'again', 'and again')  // 'hello wo
 
 ## titleCase(value: string): string
 
-Transform a string into title case following English rules
+Transform a string into title case following English rules.
 
 ```ts
 utils.titleCase('someValue')  // Somevalue

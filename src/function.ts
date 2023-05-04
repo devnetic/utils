@@ -22,9 +22,38 @@ export const compose = <T>(...fns: Array<(arg: T) => T>) => {
 
 export const curry = <A extends any[], R>(fn: Callback<A, R>, ...args: any[]): any => {
   return fn.length <= args.length
-    ? fn(...args as any) as unknown as Callback<A, R>
-    : curry.bind(null, fn, ...args as any) as unknown as Callback<A, R>
+    ? fn(...args as any)
+    : curry.bind(null, fn, ...args as any)
 }
+
+// type Func<T = any> = (...args: T[]) => any
+
+// export const curry = <A extends any[], R>(fn: Callback<A, R>, ...args: R[]): any => {
+//   return fn.length <= args.length
+//     ? fn(...args as any)
+//     : curry.bind(null, fn, ...args as any)
+// }
+
+// type Curry<T extends (...args: any[]) => any> =
+//   Parameters<T> extends [first: infer F, second: infer S, ...rest: infer R] ?
+//       ((input: F) => Curry<(input: S, ...rest: R) => ReturnType<T>>) :
+//     T
+
+// export const curry = <T extends (...args: any[]) => any, R>(fn: T, ...args: R[]): Curry<T> => {
+//   return fn.length <= args.length
+//     ? fn(...args as any)
+//     : curry.bind(null, fn, ...args as any)
+// }
+
+// export const curry = <T extends (...args: any[]) => any>(fn: T, ...args: any[]): Curry<T> => {
+//   const argCount = fn.length
+
+//   if (args.length >= argCount) {
+//     return fn(...args)
+//   }
+
+//   return curry(fn.bind(null, ...args), argCount - args.length) as Curry<T>
+// }
 
 export const memoize = <A extends any[], R>(fn: Callback<A, R>): Callback<A, R> => {
   const cache: { [key: string]: R } = {}

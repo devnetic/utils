@@ -90,6 +90,8 @@ utils.diceRoll()  // random value between 1 and 6
 
 ## fahrenheitToCelsius = (fahrenheit: number): number
 
+Convert Fahrenheit to Celsius.
+
 ```ts
 utils.fahrenheitToCelsius(-4)    // -20
 utils.fahrenheitToCelsius(32)    // 0
@@ -195,7 +197,7 @@ await utils.runPromisesInSequence([
 
 ## toFullHexColor = (color: string): string
 
-Convert 3 digits color to 6 digits color
+Convert 3 digits color to 6 digits color.
 
 ```ts
 utils.toFullHexColor('#f00')    // '#ff0000'

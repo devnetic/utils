@@ -741,8 +741,6 @@ utils.isTruthy('')         // false
 
 ---
 
-## 
-
 ## isUpperCase(value: string): boolean
 
 Check if a string is upper case.
