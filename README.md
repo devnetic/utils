@@ -6,6 +6,7 @@
 ![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@devnetic/utils?color=red)
 ![npm](https://img.shields.io/npm/dt/@devnetic/utils)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/feross/standard)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ![GitHub issues](https://img.shields.io/github/issues-raw/devnetic/utils)
 ![GitHub](https://img.shields.io/github/license/devnetic/utils)
 
