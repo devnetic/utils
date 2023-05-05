@@ -109,6 +109,8 @@ utils.gcd(10, 15)  // 5
 
 ## multiply(...numbers: number[]): number
 
+Multiply arguments.
+
 ```ts
 utils.multiply(0, 0)            // 0
 utils.multiply(0, 1)            // 0

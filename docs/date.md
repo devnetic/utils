@@ -71,6 +71,17 @@ utils.daysInMonth(12, 2020)  // 31
 
 ---
 
+## daysInYear(year: number): number
+
+Get the total number of days in a year.
+
+```ts
+utils.daysInYear(2020)  // 366
+utils.daysInYear(2021)  // 365
+```
+
+---
+
 ## daysDiff(startDate: Date, endDate: Date): number
 
 Calculate the number of difference days between two dates.
@@ -84,20 +95,9 @@ utils.daysDiff(initial, final)  // 1839
 
 ---
 
-## daysInYear(year: number): number
-
-Get the total number of days in a year
-
-```ts
-utils.daysInYear(2020)  // 366
-utils.daysInYear(2021)  // 365
-```
-
----
-
 ## firstDateOfMonth(date): Date
 
-Get the first date in the month of a date
+Get the first date in the month of a date.
 
 ```ts
 const date = new Date('2020-04-24T18:02:04.512')
@@ -109,7 +109,7 @@ utils.firstDateOfMonth(date)  // '2020-04-01T00:00:00'
 
 ## formatSeconds(seconds: number): string
 
-Convert seconds to hh:mm:ss format
+Convert seconds to hh:mm:ss format.
 
 ```ts
 utils.formatSeconds(200)  // '00:03:20'
@@ -179,7 +179,7 @@ utils.monthDiff(initial, final)  // 12
 
 ## msToTime(milliseconds: number): string
 
-Transform a duration in milliseconds to human readable 'HH:mm:ss.m' format
+Transform a duration in milliseconds to human readable 'HH:mm:ss.m' format.
 
 ```ts
 const date = new Date('2020-04-24T18:12:02.432')

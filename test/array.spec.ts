@@ -22,6 +22,15 @@ test('should create the cartesian product of two arrays', t => {
   t.deepEqual(utils.cartesianProduct([1, 2], [3, 4]), [[1, 3], [1, 4], [2, 3], [2, 4]])
 })
 
+test('should casts value as an array if it\'s not one.', t => {
+  t.deepEqual(utils.castArray(), [])
+  t.deepEqual(utils.castArray(1), [1])
+  t.deepEqual(utils.castArray('1'), ['1'])
+  t.deepEqual(utils.castArray({ 'a': 1 }), [{ 'a': 1 }])
+  t.deepEqual(utils.castArray('abc'), ['abc'])
+  t.deepEqual(utils.castArray([1, 2, 3]), [1, 2, 3])
+})
+
 test('should returns an array split into chunks', t => {
   t.deepEqual(utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 3), [[1, 2, 3], [4, 5, 6], [7, 8]])
   t.deepEqual(utils.chunk([1, 2, 3, 4, 5, 6, 7, 8], 4), [[1, 2, 3, 4], [5, 6, 7, 8]])

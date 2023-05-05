@@ -2,6 +2,8 @@ import crypto from 'crypto'
 
 import { bytesToUuid } from './bytes-to-uuid'
 
+let globalCrcTable: number[]
+
 export const celsiusToFahrenheit = (celsius: number): number => {
   return (celsius * 9 / 5) + 32
 }
@@ -22,6 +24,21 @@ export const counter = (initialValue = 1): Function => {
   return (): number => {
     return count++
   }
+}
+
+export const crc32 = (value: string): number => {
+  const crcTable = globalCrcTable !== undefined ? globalCrcTable : (globalCrcTable = makeCRCTable())
+  let crc = 0 ^ (-1)
+
+  for (let i = 0, length = value.length; i < length; i++) {
+    crc = (crc >>> 8) ^ crcTable[(crc ^ value.charCodeAt(i)) & 0xFF]
+  }
+
+  return (crc ^ (-1)) >>> 0
+}
+
+export const decimalToHex = (value: number): string => {
+  return value.toString(16)
 }
 
 export const diceRoll = (): number => {
@@ -77,6 +94,23 @@ export const hexToRgb = (hex: string): number[] => {
         parseInt(result[3], 16)
       ]
     : []
+}
+
+const makeCRCTable = (): number[] => {
+  let char
+  const crcTable = []
+
+  for (let n = 0; n < 256; n++) {
+    char = n
+
+    for (let k = 0; k < 8; k++) {
+      char = (1 & char) !== 0 ? 3988292384 ^ char >>> 1 : char >>> 1
+    }
+
+    crcTable[n] = char
+  }
+
+  return crcTable
 }
 
 /**

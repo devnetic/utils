@@ -182,6 +182,22 @@ utils.isBic('12345678')     // false
 
 ---
 
+## isBoolean(value: unknown): boolean
+
+Checks if value is classified as a boolean primitive or object.
+
+```ts
+utils.isBoolean(true)            // true
+utils.isBoolean(false)           // true
+utils.isBoolean(Boolean(true))   // true
+utils.isBoolean(Boolean(false))  // true
+utils.isBoolean(1)               // false
+utils.isBoolean('true')          // false
+utils.isBoolean(null)            // false
+```
+
+---
+
 ## isCurrentYear(value: Date): boolean
 
 Check if a date occurs in the current year.
@@ -238,6 +254,28 @@ utils.isEven(0)   // true
 utils.isEven(1)   // false
 utils.isEven(3)   // false
 utils.isEven(-1)  // false
+```
+
+---
+
+## isFalsy(value: unknown): boolean
+
+Validate if a value is Falsy.
+
+```ts
+utils.isFalsy(false)      // true
+utils.isFalsy(null)       // true
+utils.isFalsy(undefined)  // true
+utils.isFalsy(0)          // true
+utils.isFalsy(-0)         // true
+utils.isFalsy(0n)         // true
+utils.isFalsy(NaN)        // true
+utils.isFalsy('')         // true
+utils.isFalsy(true)       // false
+utils.isFalsy(1)          // false
+utils.isFalsy('1')        // false
+utils.isFalsy({})         // false
+utils.isFalsy([])         // false
 ```
 
 ---
@@ -674,6 +712,31 @@ Check if a date is today.
 
 ```ts
 utils.isToday(new Date(2022, 3, 4))  // true
+```
+
+---
+
+## isTruthy(value: unknown): boolean
+
+Validate if a value is truethy.
+
+```ts
+utils.isTruthy(true)       // true
+utils.isTruthy(1)          // true
+utils.isTruthy('foo')      // true
+utils.isTruthy('false')    // true
+utils.isTruthy(12n)        // true
+utils.isTruthy(Infinity)   // true
+utils.isTruthy(-Infinity)  // true
+utils.isTruthy(NaN)        // false
+utils.isTruthy(false)      // false
+utils.isTruthy(null)       // false
+utils.isTruthy(undefined)  // false
+utils.isTruthy(0)          // false
+utils.isTruthy(-0)         // false
+utils.isTruthy(0n)         // false
+utils.isTruthy(NaN)        // false
+utils.isTruthy('')         // false
 ```
 
 ---

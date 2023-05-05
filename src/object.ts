@@ -1,3 +1,4 @@
+// import { getType } from './misc'
 import { getType } from './misc'
 import { isNil, isObject } from './validator'
 
@@ -8,6 +9,8 @@ export const clone = <T>(target: T): T => {
   if (isNil(target) || !isObject(target)) {
     return target
   }
+
+  // return Object.create(Object.getPrototypeOf(target), Object.getOwnPropertyDescriptors(target))
 
   const cloned: any = {}
 
@@ -121,24 +124,42 @@ export const merge = <T>(...sources: T[]): T => {
   }, Array.isArray(sources[0]) ? [] : {})
 }
 
-export const omit = <T, K extends keyof T>(object: T, keys: K[]): Omit<T, K> => {
-  return Object.entries(object).reduce((result: object, [key, value]: [any, any]) => {
-    if (keys.includes(key)) {
-      return result
-    }
+export const omit = <T extends Record<string, unknown>, K extends keyof T>(target: T, keys: K[]): Omit<T, K> => {
+  // return Object.entries(object).reduce((result: object, [key, value]: [any, any]) => {
+  //   if (keys.includes(key)) {
+  //     return result
+  //   }
 
-    return { ...result, [key]: value }
-  }, {}) as any
+  //   return { ...result, [key]: value }
+  // }, {}) as any
+
+  // type ReturnType = Omit<T, K>
+
+  return Object.keys(target).reduce((result: any, key: any) => {
+    if (!keys.includes(key)) {
+      result[key] = target[key]
+    }
+    return result
+  }, {})
+
+  // return keys.reduce((result: Record<string, unknown>, key: K) => {
+  //   if (t)
+  //   return { ...result, [key]: target[key] }
+  // }, {}) as Omit<T, K>
 }
 
-export const pick = <T, K extends keyof T>(object: T, keys: K[]): { [P in K]: T[K] } => {
-  return Object.entries(object).reduce((result: object, [key, value]: [any, any]) => {
-    if (keys.includes(key)) {
-      return { ...result, [key]: value }
-    }
+export const pick = <T, K extends keyof T>(target: T, keys: K[]): { [P in K]: T[K] } => {
+  // return Object.entries(target).reduce((result: object, [key, value]: [any, any]) => {
+  //   if (keys.includes(key)) {
+  //     return { ...result, [key]: value }
+  //   }
 
-    return result
-  }, {}) as { [P in K]: T[K] }
+  //   return result
+  // }, {}) as { [P in K]: T[K] }
+
+  return keys.reduce((result: Record<string, unknown>, key: K) => {
+    return { ...result, [key]: target[key] }
+  }, {}) as Pick<T, K>
 }
 
 export const pluck = <T, K extends keyof T>(array: ArrayLike<T>, property: K): Array<T[K]> => {
@@ -147,7 +168,7 @@ export const pluck = <T, K extends keyof T>(array: ArrayLike<T>, property: K): A
   })
 }
 
-export const removeNullish = <T>(value: T): Omit<T, NullableKeys<T>> => {
+export const removeNullish = <T>(value: { [s: string]: T } | ArrayLike<T>): Omit<T, NullableKeys<T>> => {
   return Object.entries(value).reduce((result: object, [key, value]: [any, any]) => {
     if (value === null || value === undefined) {
       return result
@@ -155,6 +176,18 @@ export const removeNullish = <T>(value: T): Omit<T, NullableKeys<T>> => {
 
     return { ...result, [key]: value }
   }, {}) as any
+}
+
+export const remove = <T>(target: { [s: string]: T } | ArrayLike<T>, predicate: (key: string, value: unknown) => boolean): unknown => {
+  const isTargetArray = Array.isArray(target)
+
+  return Object.entries(target).reduce((result: any, [key, value]: [any, any]) => {
+    if (predicate(key, value)) {
+      return result
+    }
+
+    return isTargetArray ? [...result, value] : { ...result, [key]: value }
+  }, isTargetArray ? [] : {}) as T
 }
 
 export const renameKeys = <T extends object, K extends keyof T>(object: T, map: { [key in K]: string }): object => {

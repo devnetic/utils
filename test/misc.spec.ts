@@ -59,6 +59,29 @@ test('should generate a counter', t => {
   t.is(initializedCounter(), 12)
 })
 
+test('should generate a crc32 hash', t => {
+  t.is(utils.crc32('hello world'), 222957957)
+  t.is(utils.crc32('The quick brown fox jumped over the lazy dog.'), 2191738434)
+})
+
+test('should convert a decimal to hexadecimal', t => {
+  t.is(utils.decimalToHex(0), '0')
+  t.is(utils.decimalToHex(1), '1')
+  t.is(utils.decimalToHex(10), 'a')
+  t.is(utils.decimalToHex(15), 'f')
+  t.is(utils.decimalToHex(16), '10')
+  t.is(utils.decimalToHex(17), '11')
+  t.is(utils.decimalToHex(255), 'ff')
+  t.is(utils.decimalToHex(256), '100')
+  t.is(utils.decimalToHex(257), '101')
+  t.is(utils.decimalToHex(65535), 'ffff')
+  t.is(utils.decimalToHex(65536), '10000')
+  t.is(utils.decimalToHex(65537), '10001')
+  t.is(utils.decimalToHex(4294967295), 'ffffffff')
+  t.is(utils.decimalToHex(4294967296), '100000000')
+  t.is(utils.decimalToHex(4294967297), '100000001')
+})
+
 test('should simulate a dice roll', t => {
   const value = utils.diceRoll()
 
@@ -94,14 +117,15 @@ test('should convert hex to rgb', t => {
 })
 
 test('should returns all matches', t => {
-  const first: RegExpMatchArray = []
-  first[0] = 'o'
+  // write a const called first that implement RegExpMatchArray
+  const first: RegExpMatchArray = ['o']
+  // first[0] = 'o'
   first.index = 1
   first.input = 'Lorem'
   first.groups = undefined
 
-  const second: RegExpMatchArray = []
-  second[0] = 'e',
+  const second: RegExpMatchArray = ['e']
+  // second[0] = 'e',
   second.index = 3,
   second.input = 'Lorem',
   second.groups = undefined
@@ -113,11 +137,11 @@ test('should returns all matches', t => {
 })
 
 test('should returns a zero-with match result', t => {
-  const match: RegExpMatchArray = []
+  const match: RegExpMatchArray = ['']
   match.index = 0
   match.input = 'Lorem'
   match.groups = undefined
-  match[0] = ''
+  // match[0] = ''
 
   t.deepEqual(utils.matchAll('Lorem', /^/g), [match])
 })

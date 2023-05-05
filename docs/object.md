@@ -174,6 +174,44 @@ utils.pluck(
 
 ---
 
+## remove<T>(target: T, predicate: (key: string, value: unknown) => boolean): unknown
+
+Remove keys from an object where the predicate return truthy.
+
+```ts
+const obj = {
+  foo: 'bar',
+  baz: 123,
+  ergo: 'lorem',
+  ipsum: '',
+  dolor: 0,
+  sit: false,
+  amet: null,
+  consectetur: undefined
+}
+
+const array = [
+  'foo',
+  123,
+  'ergo',
+  false,
+  'ipsum',
+  null,
+  'dolor',
+  undefined,
+  'sit',
+  '',
+  0,
+  true
+]
+
+utils.remove(obj, (key: string, value: any) => key === 'foo' || value === 123)  // { ergo: 'lorem', ipsum: '', dolor: 0, sit: false, amet: null, consectetur: undefined }
+utils.remove(obj, (key: string, value: any) => !Boolean(value))  // { foo: 'bar', baz: 123, ergo: 'lorem' }
+utils.remove(array, (key: string, value: any) => key === '0' || value === 123)  // ['ergo', false, 'ipsum', null, 'dolor', undefined, 'sit', '', 0, true]
+```
+
+---
+
 ## removeNullish<T>(value: T): object
 
 Remove all null and undefined properties from an object.

@@ -22,6 +22,14 @@ export const cartesianProduct = <T>(...sets: T[]): Array<Array<ArrayElementType<
   }, [[]]) as Array<Array<ArrayElementType<T>>>
 }
 
+export const castArray = <T>(value?: T | T[]): T[] => {
+  if (value === undefined) {
+    return []
+  }
+
+  return Array.isArray(value) ? value : [value]
+}
+
 export const chunk = <T,>(arr: T[], size: number): T[][] => {
   return arr.reduce<T[][]>((acc, e, index) => {
     index % size !== 0 ? acc[acc.length - 1].push(e) : acc.push([e])
@@ -173,8 +181,15 @@ export const sortBy = <T extends Record<string, any>, K extends keyof T>(input: 
   })
 }
 
-export const swapItems = <T,>(a: T[], i: number, j: number): T[] => {
-  return (a[i] !== undefined && a[j] !== undefined && [...a.slice(0, i), a[j], ...a.slice(i + 1, j), a[i], ...a.slice(j + 1)]) || a
+export const swapItems = <T,>(target: T[], i: number, j: number): T[] => {
+  // return (a[i] !== undefined && a[j] !== undefined && [...a.slice(0, i), a[j], ...a.slice(i + 1, j), a[i], ...a.slice(j + 1)]) || a
+  if (target[i] === undefined || target[j] === undefined) {
+    return target
+  }
+
+  [target[i], target[j]] = [target[j], target[i]]
+
+  return target
 }
 
 export const transpose = <T,>(matrix: T[][]): T[][] => {
